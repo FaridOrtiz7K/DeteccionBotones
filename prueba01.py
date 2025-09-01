@@ -15,7 +15,7 @@ screenshot = pyautogui.screenshot(region=vm_region)
 img = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
 
 # Cargar template del botón
-template = cv2.imread('boton.png')
+template = cv2.imread('image.png')
 # Verificar si la imagen se cargó correctamente
 if template is None:
     raise ValueError("No se pudo cargar la imagen 'boton.png'. Verifica la ruta y el formato.")
@@ -27,7 +27,7 @@ result = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
 _, max_val, _, max_loc = cv2.minMaxLoc(result)
 
 # Umbral de confianza para la detección
-umbral_confianza = 0.8
+umbral_confianza = 0.6
 
 if max_val > umbral_confianza:
     # Calcular centro del botón en coordenadas globales
