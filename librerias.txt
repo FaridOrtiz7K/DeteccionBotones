@@ -1,0 +1,21 @@
+# PyAutoGUI para control del mouse y captura de pantalla
+pip install pyautogui
+
+# OpenCV para procesamiento de imágenes
+pip install opencv-python
+
+# NumPy para operaciones matemáticas (generalmente se instala con OpenCV)
+pip install numpy
+
+# Pillow para manipulación de imágenes
+pip install Pillow
+
+# Si estás en Windows, instala también pygetwindow para manejar ventanas
+pip install pygetwindow
+
+# Para Linux/Mac,可能需要instalar dependencias adicionales del sistema
+# Para Ubuntu/Debian:
+# sudo apt-get install python3-tk python3-dev scrot
+
+# Para Mac:
+# brew install scrot
