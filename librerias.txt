@@ -13,6 +13,9 @@ pip install Pillow
 # Si estás en Windows, instala también pygetwindow para manejar ventanas
 pip install pygetwindow
 
+#Para el uso de las teclas de la computadora
+pip install keyboard opencv-python pyautogui numpy
+
 # Para Linux/Mac,可能需要instalar dependencias adicionales del sistema
 # Para Ubuntu/Debian:
 # sudo apt-get install python3-tk python3-dev scrot
