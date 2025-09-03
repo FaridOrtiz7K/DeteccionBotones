@@ -22,6 +22,7 @@ class ImageSearchApp:
         self.delay_time = tk.DoubleVar(value=2.5)  # Tiempo de espera entre acciones
         self.current_lote = 0
         self.lotes_faltantes = 0
+        self.warning_shown = False  # Control para mostrar solo una advertencia
         self.image_paths = [
             "image1.png", "image2.png", "image3.png", 
             "image4.png", "image5.png", "image6.png"
@@ -111,10 +112,43 @@ class ImageSearchApp:
             return f"LT{lote_number}.KML"
         else:
             return f"{distrito}_LT{lote_number}.KML"
+            
+    def check_window_problems(self):
+        """Verifica si hay problemas con las ventanas y muestra una sola advertencia"""
+        try:
+            # Verificar si la ventana objetivo está cerrada
+            target_windows = [w for w in pyautogui.getAllWindows() if w.title]
+            if not target_windows:
+                if not self.warning_shown:
+                    self.warning_shown = True
+                    self.show_single_warning("La ventana de trabajo está cerrada. Por favor, ábrela para continuar.")
+                return False
+                
+            # Si no hay problemas, resetear el flag de advertencia
+            self.warning_shown = False
+            return True
+            
+        except Exception as e:
+            self.log_message(f"Error al verificar ventanas: {str(e)}")
+            return False
+            
+    def show_single_warning(self, message):
+        """Muestra una sola advertencia y pausa el proceso"""
+        # Pausar el proceso primero
+        if not self.is_paused:
+            self.pause_search()
+        
+        # Mostrar mensaje en el log
+        self.log_message(f"ADVERTENCIA: {message}")
+        self.log_message("Proceso pausado. Resuelva el problema y presione 'Reanudar'")
         
     def search_image(self, image_path):
         """Función que busca una imagen específica y realiza clic si la encuentra"""
         try:
+            # Primero verificar el estado de las ventanas
+            if not self.check_window_problems():
+                return False
+                
             # Obtener las dimensiones de toda la pantalla
             ancho_pantalla, alto_pantalla = pyautogui.size()
 
@@ -176,6 +210,11 @@ class ImageSearchApp:
                 if not self.is_running:
                     break
                     
+            # Verificar problemas de ventana antes de cada acción
+            if not self.check_window_problems():
+                self.pause_search()
+                break
+                    
             self.log_message(f"Buscando botón {i} de 6")
             success = self.search_image(image_path)
             
@@ -216,11 +255,16 @@ class ImageSearchApp:
             self.lotes_faltantes = lote_final - self.current_lote
             self.log_message(f"Procesando lote {self.current_lote} de {lote_final}")
             
+            # Verificar problemas de ventana antes de procesar
+            if not self.check_window_problems():
+                self.pause_search()
+                continue
+                    
             # Procesar el lote actual
             self.process_lote(self.current_lote)
             
             # Mostrar progreso
-            self.log_message(f"Lote {self.current_lote} completado. Lotres faltantes: {self.lotes_faltantes}")
+            self.log_message(f"Lote {self.current_lote} completado. Lotes faltantes: {self.lotes_faltantes}")
         
         self.is_running = False
         self.log_message("Proceso completado")
@@ -307,6 +351,7 @@ class ImageSearchApp:
             self.is_running = True
             self.is_paused = False
             self.pause_event.set()
+            self.warning_shown = False  # Resetear flag de advertencia
             self.log_message("Iniciando proceso de búsqueda...")
             self.log_message(f"Distrito: {self.distrito.get()}")
             self.log_message(f"Rango de lotes: {self.lote_inicial.get()} a {self.lote_final.get()}")
