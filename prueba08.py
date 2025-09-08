@@ -710,7 +710,7 @@ class ImageSearchController:
 # -------------------- APLICACIÓN PRINCIPAL --------------------
 if __name__ == "__main__":
     root = tk.Tk()
-    root.withdraw()  # Ocultar ventana principal hasta que se autentique
+    #root.withdraw()  # Ocultar ventana principal hasta que se autentique
     
     # Intentar cargar el icono
     try:
