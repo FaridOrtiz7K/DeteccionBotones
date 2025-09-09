@@ -539,6 +539,9 @@ class ImageSearchController:
         # Para el primer lote, hacer clic normal en b4
         if self.model.current_lote == self.model.lote_inicial and not self.model.alt_n_used:
             success = self.model.click_button(imagen, clicks, confianza, max_intentos=10)
+            self.view.log_message("Usando Alt+N para seleccionar siguiente elemento")
+            pyautogui.hotkey('alt', 'n')
+            time.sleep(1)
             if success:
                 self.model.alt_n_used = True
             return success
