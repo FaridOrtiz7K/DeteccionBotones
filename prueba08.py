@@ -38,8 +38,10 @@ class ImageSearchModel:
             ("img/b3.png", 1, 0.68),
             ("img/b4.png", 1, 0.68),
             ("img/b5.png", 1, 0.68),
+            ("img/b1.png", 1, 0.68),
             ("img/b6.png", 1, 0.68),
-            ("img/b7.png", 1, 0.68)
+            ("img/b7.png", 1, 0.68),
+            ("img/b8.png", 1, 0.68)
         ]
         
         # Cargar estado guardado si existe
