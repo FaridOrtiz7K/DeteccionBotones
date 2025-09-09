@@ -31,15 +31,17 @@ class ImageSearchModel:
         self.observers = []
         self.alt_n_used = False
         
-        # Secuencia predefinida de imágenes (oculta en la interfaz pero funcional)
+        # Secuencia predefinida de imágenes
         self.image_sequence = [
             ("img/b1.png", 1, 0.68),
             ("img/b2.png", 1, 0.68),
             ("img/b3.png", 1, 0.68),
             ("img/b4.png", 1, 0.68),
             ("img/b5.png", 1, 0.68),
+            ("img/b1.png", 1, 0.68),
             ("img/b6.png", 1, 0.68),
-            ("img/b7.png", 1, 0.68)
+            ("img/b7.png", 1, 0.68),
+            ("img/b8.png", 1, 0.68)
         ]
         
         # Cargar estado guardado si existe
@@ -118,18 +120,18 @@ class ImageSearchModel:
         self.notify_observers("current_lote_changed", lote)
         self.save_state()
     
-    def click_button(self, imagen, clicks=1, confianza_minima=0.6, max_intentos=10):
+    def wait_for_button(self, imagen, confianza_minima=0.6, max_intentos=30, intervalo=0.5):
         """
-        Busca un botón en pantalla y hace clic en él
+        Espera a que un botón esté visible en pantalla
         
         Args:
             imagen (str): Ruta de la imagen del botón a buscar
-            clicks (int): Número de clics a realizar
             confianza_minima (float): Umbral de confianza para la detección (0-1)
             max_intentos (int): Número máximo de intentos para encontrar el botón
+            intervalo (float): Tiempo entre intentos en segundos
         
         Returns:
-            bool: True si encontró el botón, False en caso contrario
+            tuple: (x, y) coordenadas del botón si se encuentra, None en caso contrario
         """
         intentos = 0
         while intentos < max_intentos and self.is_running:
@@ -137,7 +139,7 @@ class ImageSearchModel:
             if self.is_paused:
                 self.pause_event.wait()
                 if not self.is_running:
-                    return False
+                    return None
             
             # Obtener dimensiones de la pantalla
             ancho_pantalla, alto_pantalla = pyautogui.size()
@@ -151,7 +153,7 @@ class ImageSearchModel:
             template = cv2.imread(imagen)
             if template is None:
                 self.notify_observers("error", f"No se pudo cargar la imagen '{imagen}'. Verifica la ruta y el formato.")
-                return False
+                return None
 
             h, w = template.shape[:2]
 
@@ -164,20 +166,13 @@ class ImageSearchModel:
                 center_x = vm_region[0] + max_loc[0] + w//2
                 center_y = vm_region[1] + max_loc[1] + h//2
                 
-                # Esperar 2.5 segundos antes de hacer clic
-                time.sleep(2.5)
-                
-                # Realizar clic
-                pyautogui.moveTo(center_x, center_y)
-                pyautogui.click(clicks=clicks)
-                
                 self.notify_observers("image_found", {
                     "image": imagen,
                     "x": center_x,
                     "y": center_y,
                     "confidence": max_val
                 })
-                return True
+                return (center_x, center_y)
             else:
                 intentos += 1
                 self.notify_observers("image_not_found", {
@@ -185,8 +180,34 @@ class ImageSearchModel:
                     "confidence": max_val,
                     "intento": intentos
                 })
-                # Esperar un poco antes de intentar nuevamente
-                time.sleep(1)
+                # Esperar antes de intentar nuevamente
+                time.sleep(intervalo)
+        
+        return None
+    
+    def click_button(self, imagen, clicks=1, confianza_minima=0.6, max_intentos=30, intervalo=0.5):
+        """
+        Busca un botón en pantalla y hace clic en él, esperando hasta que esté visible
+        
+        Args:
+            imagen (str): Ruta de la imagen del botón a buscar
+            clicks (int): Número de clics a realizar
+            confianza_minima (float): Umbral de confianza para la detección (0-1)
+            max_intentos (int): Número máximo de intentos para encontrar el botón
+            intervalo (float): Tiempo entre intentos en segundos
+        
+        Returns:
+            bool: True si encontró el botón, False en caso contrario
+        """
+        
+        # Esperar a que el botón esté visible
+        button_pos = self.wait_for_button(imagen, confianza_minima, max_intentos, intervalo)
+        
+        if button_pos is not None:
+            # Realizar clic
+            pyautogui.moveTo(button_pos[0], button_pos[1])
+            pyautogui.click(clicks=clicks)
+            return True
         
         return False
 
@@ -393,9 +414,20 @@ class ImageSearchView(ttk.Frame):
         delay_spin.grid(row=0, column=5, padx=5)
         delay_spin.bind("<FocusOut>", lambda e: self.controller.update_delay_time(self.delay_time_var.get()))
         
+        # Información de secuencia predefinida
+        sequence_frame = ttk.LabelFrame(self, text="Secuencia Predefinida", padding="5")
+        sequence_frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
+        
+        # Mostrar la secuencia predefinida
+        sequence_text = "Secuencia predefinida:\n"
+        for i, (imagen, clicks, confianza) in enumerate(self.controller.model.image_sequence, 1):
+            sequence_text += f"{i}. {imagen} (clics: {clicks}, confianza: {confianza})\n"
+        
+        ttk.Label(sequence_frame, text=sequence_text).grid(row=0, column=0, sticky=tk.W, pady=5)
+        
         # Botones de control
         button_frame = ttk.Frame(self)
-        button_frame.grid(row=2, column=0, columnspan=2, pady=10)
+        button_frame.grid(row=3, column=0, columnspan=2, pady=10)
         
         self.start_button = ttk.Button(button_frame, text="Iniciar", command=self.controller.start_search)
         self.start_button.grid(row=0, column=0, padx=5)
@@ -406,14 +438,23 @@ class ImageSearchView(ttk.Frame):
         self.stop_button = ttk.Button(button_frame, text="Detener", command=self.controller.stop_search, state=tk.DISABLED)
         self.stop_button.grid(row=0, column=2, padx=5)
         
+        # Área de estado
+        status_frame = ttk.LabelFrame(self, text="Estado", padding="5")
+        status_frame.grid(row=4, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
+        
+        self.status_text = scrolledtext.ScrolledText(status_frame, height=10, width=70)
+        self.status_text.grid(row=0, column=0, sticky=(tk.W, tk.E))
+        
         # Configurar expansión de columnas
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
+        sequence_frame.columnconfigure(0, weight=1)
+        status_frame.columnconfigure(0, weight=1)
     
     def log_message(self, message):
-        """Añade un mensaje al área de estado (ahora oculto)"""
-        # Esta función se mantiene por compatibilidad pero no hace nada visible
-        pass
+        """Añade un mensaje al área de estado"""
+        self.status_text.insert(tk.END, f"{time.strftime('%H:%M:%S')} - {message}\n")
+        self.status_text.see(tk.END)
     
     def update_button_states(self, is_running, is_paused):
         """Actualiza el estado de los botones según el estado actual"""
@@ -462,7 +503,7 @@ class ImageSearchController:
         # Configurar la ventana principal
         self.root.deiconify()
         self.root.title("Búsqueda de Imágenes Automatizada")
-        self.root.geometry("600x200")  # Ventana más pequeña sin los elementos ocultos
+        self.root.geometry("800x600")
         
         # Centrar la ventana
         self.root.update_idletasks()
@@ -480,17 +521,13 @@ class ImageSearchController:
                 # Mostrar ventana de pausa con la información actual
                 self.view.show_pause_window(self.model.current_lote, self.model.lote_final)
         elif event == "image_found":
-            # Los mensajes ya no se muestran en la interfaz pero se mantienen en el código
-            pass
+            self.view.log_message(f"Botón '{data['image']}' encontrado en ({data['x']}, {data['y']}) - Confianza: {data['confidence']:.2f}")
         elif event == "image_not_found":
-            # Los mensajes ya no se muestran en la interfaz pero se mantienen en el código
-            pass
+            self.view.log_message(f"Botón '{data['image']}' no encontrado. Mejor coincidencia: {data['confidence']:.2f} (Intento {data.get('intento', 1)})")
         elif event == "error":
-            # Los mensajes de error se muestran como messagebox
-            messagebox.showerror("Error", data)
+            self.view.log_message(f"Error: {data}")
         elif event == "current_lote_changed":
-            # La información de progreso ya no se muestra en la interfaz
-            pass
+            self.view.log_message(f"Procesando lote {data} de {self.model.lote_final}")
     
     def update_lote_inicial(self, lote):
         try:
@@ -520,13 +557,13 @@ class ImageSearchController:
         """Maneja el comportamiento especial para la imagen b4"""
         # Para el primer lote, hacer clic normal en b4
         if self.model.current_lote == self.model.lote_inicial and not self.model.alt_n_used:
-            success = self.model.click_button(imagen, clicks, confianza, max_intentos=10)
+            success = self.model.click_button(imagen, clicks, confianza, max_intentos=30, intervalo=0.5)
             if success:
                 self.model.alt_n_used = True
             return success
         else:
             # Para lotes posteriores, usar Alt+N
-            # El mensaje ya no se muestra en la interfaz
+            self.view.log_message("Usando Alt+N para seleccionar siguiente elemento")
             pyautogui.hotkey('alt', 'n')
             time.sleep(1)  # Pequeña espera después de Alt+N
             return True
@@ -545,10 +582,10 @@ class ImageSearchController:
                 success = self.handle_b4_special_behavior(imagen, clicks, confianza)
             else:
                 # Realizar la búsqueda y clic normal para otras imágenes
-                success = self.model.click_button(imagen, clicks, confianza, max_intentos=10)
+                success = self.model.click_button(imagen, clicks, confianza, max_intentos=30, intervalo=0.5)
             
             if not success:
-                # El mensaje de error ya no se muestra en la interfaz
+                self.view.log_message(f"Error: No se pudo encontrar el botón '{imagen}' después de 30 intentos")
                 return False
             
             # Esperar 2 segundos entre imágenes (como en el ejemplo)
@@ -580,24 +617,26 @@ class ImageSearchController:
             else:
                 nombre_archivo = f"{self.model.distrito}_LT{current_lote}.KML"
             
-            # El mensaje de progreso ya no se muestra en la interfaz
+            self.view.log_message(f"Procesando archivo: {nombre_archivo}")
             
             # Realizar la secuencia completa
             success = self.run_sequence()
             
             if success:
                 # Presionar Enter 3 veces después de cada secuencia
+                self.view.log_message("Presionando Enter 3 veces")
                 pyautogui.press('enter', presses=3, interval=0.5)
                 time.sleep(1)
                 
                 # Cada 10 lotes, presionar 'S' para guardar
                 if current_lote % 10 == 0:
+                    self.view.log_message("Presionando 'S' para guardar cambios")
                     pyautogui.press('s')
                     time.sleep(1)  # Pequeña espera después de guardar
                 
-                # El mensaje de finalización ya no se muestra en la interfaz
+                self.view.log_message(f"Secuencia completada para lote {current_lote} de {lote_final}")
             else:
-                # El mensaje de interrupción ya no se muestra en la interfaz
+                self.view.log_message(f"Secuencia interrumpida para lote {current_lote} de {lote_final}")
                 break
             
             # Pasar al siguiente lote
@@ -605,9 +644,9 @@ class ImageSearchController:
             
             # Esperar el tiempo configurado entre lotes (si no es el último lote)
             if current_lote <= lote_final and self.model.is_running:
-                # El mensaje de espera ya no se muestra en la interfaz
+                self.view.log_message(f"Esperando {self.model.delay_time} segundos antes del próximo lote...")
                 
-                # Contar el tiempo de espera sin mostrar progreso
+                # Contar el tiempo de espera mostrando el progreso
                 for i in range(self.model.delay_time, 0, -1):
                     if not self.model.is_running:
                         break
@@ -615,10 +654,14 @@ class ImageSearchController:
                         self.model.pause_event.wait()
                         if not self.model.is_running:
                             break
+                    # Actualizar el mensaje cada segundo
+                    self.view.log_message(f"Tiempo restante: {i} segundos")
                     time.sleep(1)
+                    # Eliminar el mensaje anterior
+                    self.view.status_text.delete("end-2l", "end-1l")
         
         self.model.set_running(False)
-        # El mensaje de finalización ya no se muestra en la interfaz
+        self.view.log_message("Proceso completado")
     
     def start_search(self):
         """Inicia la búsqueda en un hilo separado"""
@@ -640,8 +683,15 @@ class ImageSearchController:
             self.model.set_running(True)
             self.model.set_paused(False)
             self.model.pause_event.set()
+            self.view.log_message("Iniciando proceso de búsqueda...")
+            self.view.log_message(f"Distrito: {self.model.distrito}")
+            self.view.log_message(f"Lotes: {self.model.lote_inicial} a {self.model.lote_final}")
+            self.view.log_message(f"Tiempo de espera entre lotes: {self.model.delay_time} segundos")
             
-            # Los mensajes de inicio ya no se muestran en la interfaz
+            # Mostrar la secuencia a ejecutar
+            self.view.log_message("Secuencia predefinida a ejecutar:")
+            for i, (imagen, clicks, confianza) in enumerate(self.model.image_sequence, 1):
+                self.view.log_message(f"  {i}. {imagen} (clics: {clicks}, confianza: {confianza})")
             
             # Iniciar el hilo para ejecutar los lotes
             self.search_thread = threading.Thread(target=self.run_lotes)
@@ -656,7 +706,7 @@ class ImageSearchController:
         if self.model.is_running and not self.model.is_paused:
             self.model.set_paused(True)
             self.model.pause_event.clear()
-            # El mensaje de pausa ya no se muestra en la interfaz
+            self.view.log_message("Búsqueda pausada (Presione ESC para reanudar)")
     
     def resume_search(self):
         """Reanuda la búsqueda"""
@@ -666,7 +716,7 @@ class ImageSearchController:
         if self.model.is_running and self.model.is_paused:
             self.model.set_paused(False)
             self.model.pause_event.set()
-            # El mensaje de reanudación ya no se muestra en la interfaz
+            self.view.log_message("Búsqueda reanudada")
     
     def stop_search(self):
         """Detiene la búsqueda"""
@@ -676,12 +726,13 @@ class ImageSearchController:
         self.model.set_running(False)
         self.model.set_paused(False)
         self.model.pause_event.set()  # Liberar la pausa si estaba activa
-        # El mensaje de detención ya no se muestra en la interfaz
+        self.view.log_message("Proceso detenido")
 
 
 # -------------------- APLICACIÓN PRINCIPAL --------------------
 if __name__ == "__main__":
     root = tk.Tk()
+    #root.withdraw()  # Ocultar ventana principal hasta que se autentique
     
     # Intentar cargar el icono
     try:
