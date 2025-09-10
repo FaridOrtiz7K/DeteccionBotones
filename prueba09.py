@@ -30,6 +30,7 @@ class ImageSearchModel:
         self.current_lote = 1
         self.observers = []
         self.alt_n_used = False
+        self.nombre_archivo = ""
         
         # Secuencia predefinida de imágenes
         self.image_sequence = [
@@ -553,14 +554,14 @@ class ImageSearchController:
         except ValueError:
             messagebox.showerror("Error", "El tiempo de espera debe ser un número válido")
     
-    def handle_b4_special_behavior(self, imagen, clicks, confianza):
+    def handle_b4_special_behavior(self, imagen, clicks, confianza, nombre_archivo):
         """Maneja el comportamiento especial para la imagen b4"""
         # Para el primer lote, hacer clic normal en b4
         if self.model.current_lote == self.model.lote_inicial and not self.model.alt_n_used:
             success = self.model.click_button(imagen, clicks, confianza, max_intentos=30, intervalo=0.5)
             pyautogui.hotkey('alt', 'n')
             time.sleep(1)  # Pequeña espera después de Alt+N
-            pyautogui.write(f'LT {self.current_lote}.kml')
+            pyautogui.write(nombre_archivo)
             time.sleep(1)
             if success:
                 self.model.alt_n_used = True
@@ -585,7 +586,7 @@ class ImageSearchController:
             
             # Manejar comportamiento especial para b4
             if "b4.png" in imagen:
-                success = self.handle_b4_special_behavior(imagen, clicks, confianza)
+                success = self.handle_b4_special_behavior(imagen, clicks, confianza, self.nombre_archivo)
             else:
                 # Realizar la búsqueda y clic normal para otras imágenes
                 success = self.model.click_button(imagen, clicks, confianza, max_intentos=30, intervalo=0.5)
@@ -619,11 +620,11 @@ class ImageSearchController:
             
             # Generar nombre de archivo según el distrito
             if self.model.distrito == "NINUGO":
-                nombre_archivo = f"LT{current_lote}.KML"
+                self.nombre_archivo = f"LT {current_lote}.KML"
             else:
-                nombre_archivo = f"{self.model.distrito}_LT{current_lote}.KML"
+                self.nombre_archivo = f"{self.model.distrito}_LT {current_lote}.KML"
             
-            self.view.log_message(f"Procesando archivo: {nombre_archivo}")
+            self.view.log_message(f"Procesando archivo: {self.nombre_archivo}")
             
             # Realizar la secuencia completa
             success = self.run_sequence()
