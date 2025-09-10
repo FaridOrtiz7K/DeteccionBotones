@@ -540,7 +540,9 @@ class ImageSearchController:
         pyautogui.write(self.nombre_archivo)
         pyautogui.write(self.current_lote)
         pyautogui.write('.kml')
-        time.sleep()
+        time.sleep(2)
+        pyautogui.press('enter')
+        time.sleep(2)
         if success:
             self.model.alt_n_used = True
         return success
