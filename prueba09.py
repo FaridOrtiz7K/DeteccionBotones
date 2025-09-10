@@ -38,7 +38,6 @@ class ImageSearchModel:
             ("img/b2.png", 1, 0.68),
             ("img/b3.png", 1, 0.68),
             ("img/b4.png", 1, 0.68),
-            ("img/b5.png", 1, 0.68),
             ("img/b1.png", 1, 0.68),
             ("img/b6.png", 1, 0.68),
             ("img/b7.png", 1, 0.68),
