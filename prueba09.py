@@ -560,6 +560,8 @@ class ImageSearchController:
             success = self.model.click_button(imagen, clicks, confianza, max_intentos=30, intervalo=0.5)
             pyautogui.hotkey('alt', 'n')
             time.sleep(1)  # Pequeña espera después de Alt+N
+            pyautogui.write(f'LT {self.current_lote}.kml')
+            time.sleep(1)
             if success:
                 self.model.alt_n_used = True
             return success
@@ -568,6 +570,8 @@ class ImageSearchController:
             self.view.log_message("Usando Alt+N para seleccionar siguiente elemento")
             pyautogui.hotkey('alt', 'n')
             time.sleep(1)  # Pequeña espera después de Alt+N
+            pyautogui.write(f'LT {self.current_lote}.kml')
+            time.sleep(1)
             return True
     
     def run_sequence(self):

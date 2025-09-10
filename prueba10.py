@@ -591,10 +591,13 @@ class ImageSearchController:
             pyautogui.hotkey('alt', 'n')
             time.sleep(0.5)
             
+            
             # Registrar el archivo seleccionado
             file_name = f"Archivo_{self.model.current_lote}_{i+1}"
             self.model.selected_files.append(file_name)
             self.view.log_message(f"Navegando a archivo: {file_name}")
+        pyautogui.write(f'LT {self.current_lote}.kml')
+        time.sleep(1)
     
     def handle_b4_special_behavior(self, imagen, clicks, confianza):
         """Maneja el comportamiento especial para la imagen b4"""
