@@ -30,7 +30,7 @@ class ImageSearchModel:
         self.current_lote = 1
         self.observers = []
         self.alt_n_used = False
-        self.selected_files = []  # Almacenar nombres de archivos seleccionados
+        self.no_distrito = False
         
         # Secuencia predefinida de imágenes
         self.image_sequence = [
@@ -58,6 +58,7 @@ class ImageSearchModel:
                     self.distrito = config.get('distrito', "")
                     self.delay_time = config.get('delay_time', 2)
                     self.current_lote = config.get('current_lote', 1)
+                    self.no_distrito = config.get('no_distrito', False)
         except Exception as e:
             print(f"Error al cargar configuración: {e}")
     
@@ -69,7 +70,8 @@ class ImageSearchModel:
                 'lote_final': self.lote_final,
                 'distrito': self.distrito,
                 'delay_time': self.delay_time,
-                'current_lote': self.current_lote
+                'current_lote': self.current_lote,
+                'no_distrito': self.no_distrito
             }
             with open(CONFIG_FILE, 'w') as f:
                 json.dump(config, f)
@@ -120,18 +122,23 @@ class ImageSearchModel:
         self.notify_observers("current_lote_changed", lote)
         self.save_state()
     
-    def wait_for_button(self, imagen, confianza_minima=0.6, max_intentos=30, intervalo=0.5):
+    def set_no_distrito(self, value):
+        self.no_distrito = value
+        self.notify_observers("no_distrito_changed", value)
+        self.save_state()
+    
+    def click_button(self, imagen, clicks=1, confianza_minima=0.6, max_intentos=10):
         """
-        Espera a que un botón esté visible en pantalla
+        Busca un botón en pantalla y hace clic en él
         
         Args:
             imagen (str): Ruta de la imagen del botón a buscar
+            clicks (int): Número de clics a realizar
             confianza_minima (float): Umbral de confianza para la detección (0-1)
             max_intentos (int): Número máximo de intentos para encontrar el botón
-            intervalo (float): Tiempo entre intentos en segundos
         
         Returns:
-            tuple: (x, y) coordenadas del botón si se encuentra, None en caso contrario
+            bool: True si encontró el botón, False en caso contrario
         """
         intentos = 0
         while intentos < max_intentos and self.is_running:
@@ -139,7 +146,7 @@ class ImageSearchModel:
             if self.is_paused:
                 self.pause_event.wait()
                 if not self.is_running:
-                    return None
+                    return False
             
             # Obtener dimensiones de la pantalla
             ancho_pantalla, alto_pantalla = pyautogui.size()
@@ -153,7 +160,7 @@ class ImageSearchModel:
             template = cv2.imread(imagen)
             if template is None:
                 self.notify_observers("error", f"No se pudo cargar la imagen '{imagen}'. Verifica la ruta y el formato.")
-                return None
+                return False
 
             h, w = template.shape[:2]
 
@@ -166,13 +173,20 @@ class ImageSearchModel:
                 center_x = vm_region[0] + max_loc[0] + w//2
                 center_y = vm_region[1] + max_loc[1] + h//2
                 
+                # Esperar 2.5 segundos antes de hacer clic
+                time.sleep(2.5)
+                
+                # Realizar clic
+                pyautogui.moveTo(center_x, center_y)
+                pyautogui.click(clicks=clicks)
+                
                 self.notify_observers("image_found", {
                     "image": imagen,
                     "x": center_x,
                     "y": center_y,
                     "confidence": max_val
                 })
-                return (center_x, center_y)
+                return True
             else:
                 intentos += 1
                 self.notify_observers("image_not_found", {
@@ -180,34 +194,8 @@ class ImageSearchModel:
                     "confidence": max_val,
                     "intento": intentos
                 })
-                # Esperar antes de intentar nuevamente
-                time.sleep(intervalo)
-        
-        return None
-    
-    def click_button(self, imagen, clicks=1, confianza_minima=0.6, max_intentos=30, intervalo=0.5):
-        """
-        Busca un botón en pantalla y hace clic en él, esperando hasta que esté visible
-        
-        Args:
-            imagen (str): Ruta de la imagen del botón a buscar
-            clicks (int): Número de clics a realizar
-            confianza_minima (float): Umbral de confianza para la detección (0-1)
-            max_intentos (int): Número máximo de intentos para encontrar el botón
-            intervalo (float): Tiempo entre intentos en segundos
-        
-        Returns:
-            bool: True si encontró el botón, False en caso contrario
-        """
-        
-        # Esperar a que el botón esté visible
-        button_pos = self.wait_for_button(imagen, confianza_minima, max_intentos, intervalo)
-        
-        if button_pos is not None:
-            # Realizar clic
-            pyautogui.moveTo(button_pos[0], button_pos[1])
-            pyautogui.click(clicks=clicks)
-            return True
+                # Esperar un poco antes de intentar nuevamente
+                time.sleep(1)
         
         return False
 
@@ -382,6 +370,7 @@ class ImageSearchView(ttk.Frame):
         self.lote_final_var = tk.IntVar(value=self.controller.model.lote_final)
         self.distrito_var = tk.StringVar(value=self.controller.model.distrito)
         self.delay_time_var = tk.IntVar(value=self.controller.model.delay_time)
+        self.no_distrito_var = tk.BooleanVar(value=self.controller.model.no_distrito)
         
         self.create_widgets()
     
@@ -394,6 +383,12 @@ class ImageSearchView(ttk.Frame):
         distrito_entry = ttk.Entry(distrito_frame, textvariable=self.distrito_var, width=20)
         distrito_entry.grid(row=0, column=1, padx=5)
         distrito_entry.bind("<FocusOut>", lambda e: self.controller.update_distrito(self.distrito_var.get()))
+        
+        # Checkbox para indicar si no tiene distrito
+        no_distrito_check = ttk.Checkbutton(distrito_frame, text="No tiene distrito", 
+                                           variable=self.no_distrito_var,
+                                           command=lambda: self.controller.update_no_distrito(self.no_distrito_var.get()))
+        no_distrito_check.grid(row=1, column=0, columnspan=2, sticky=tk.W, padx=5, pady=5)
         
         # Configuración de lotes
         lote_frame = ttk.LabelFrame(self, text="Configuración de Lotes", padding="5")
@@ -528,6 +523,8 @@ class ImageSearchController:
             self.view.log_message(f"Error: {data}")
         elif event == "current_lote_changed":
             self.view.log_message(f"Procesando lote {data} de {self.model.lote_final}")
+        elif event == "no_distrito_changed":
+            self.view.log_message(f"Opción 'No tiene distrito' cambiada a: {data}")
     
     def update_lote_inicial(self, lote):
         try:
@@ -553,63 +550,47 @@ class ImageSearchController:
         except ValueError:
             messagebox.showerror("Error", "El tiempo de espera debe ser un número válido")
     
-    def select_first_file(self):
-        """Selecciona el primer archivo en el diálogo de apertura"""
-        # Esperar a que el diálogo esté completamente abierto
-        time.sleep(1)
-        
-        # Presionar TAB para navegar a la lista de archivos
-        pyautogui.press('tab')
-        time.sleep(0.5)
-        
-        # Presionar flecha abajo para asegurarse de que está en el primer elemento
-        pyautogui.press('down')
-        time.sleep(0.5)
-        
-        # Presionar ENTER para seleccionar el primer archivo
-        pyautogui.press('enter')
-        time.sleep(1)
-        
-        # Registrar el archivo seleccionado (podría implementarse OCR para obtener el nombre real)
-        file_name = f"Archivo_{self.model.current_lote}"
-        self.model.selected_files.append(file_name)
-        self.view.log_message(f"Archivo seleccionado: {file_name}")
-    
-    def navigate_with_alt_n(self, times):
-        """Navega por los archivos usando Alt+N"""
-        for i in range(times):
-            if not self.model.is_running:
-                break
-                
-            if self.model.is_paused:
-                self.model.pause_event.wait()
-                if not self.model.is_running:
-                    break
-            
-            # Presionar Alt+N para seleccionar el siguiente archivo
-            pyautogui.hotkey('alt', 'n')
-            time.sleep(0.5)
-            
-            
-            # Registrar el archivo seleccionado
-            file_name = f"Archivo_{self.model.current_lote}_{i+1}"
-            self.model.selected_files.append(file_name)
-            self.view.log_message(f"Navegando a archivo: {file_name}")
-        pyautogui.write(f'LT {self.current_lote}.kml')
-        time.sleep(1)
+    def update_no_distrito(self, value):
+        self.model.set_no_distrito(value)
     
     def handle_b4_special_behavior(self, imagen, clicks, confianza):
         """Maneja el comportamiento especial para la imagen b4"""
-        # Para el primer lote, hacer clic normal en b4 y seleccionar el primer archivo
+        # Determinar el nombre del archivo según si tiene distrito o no
+        if self.model.no_distrito:
+            nombre_archivo = f'LT{self.model.current_lote}.kml'
+        else:
+            nombre_archivo = f'{self.model.distrito}_LT{self.model.current_lote}.kml'
+
+        # Para el primer lote, hacer clic normal en b4
         if self.model.current_lote == self.model.lote_inicial and not self.model.alt_n_used:
-            success = self.model.click_button(imagen, clicks, confianza, max_intentos=30, intervalo=0.5)
+            success = self.model.click_button(imagen, clicks, confianza, max_intentos=10)
+            # Agregar tiempo de espera antes de Alt+N
+            time.sleep(2.5)  # Espera de 2.5 segundos
+            self.view.log_message("Usando Alt+N para seleccionar siguiente elemento")
+            pyautogui.hotkey('alt', 'n')
+            # Esperar un breve momento antes de escribir
+            time.sleep(0.5)
+            pyautogui.write(nombre_archivo)
+            # Presionar Enter para confirmar
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(1)
             if success:
-                self.select_first_file()
                 self.model.alt_n_used = True
             return success
         else:
-            # Para lotes posteriores, usar Alt+N para navegar
-            self.navigate_with_alt_n(1)
+            # Para lotes posteriores, usar Alt+N con tiempo de espera
+            # Agregar tiempo de espera antes de Alt+N
+            time.sleep(2.5)  # Espera de 2.5 segundos
+            self.view.log_message("Usando Alt+N para seleccionar siguiente elemento")
+            pyautogui.hotkey('alt', 'n')
+            # Esperar un breve momento antes de escribir
+            time.sleep(0.5)
+            pyautogui.write(nombre_archivo)
+            # Presionar Enter para confirmar
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(1)
             return True
     
     def run_sequence(self):
@@ -626,10 +607,10 @@ class ImageSearchController:
                 success = self.handle_b4_special_behavior(imagen, clicks, confianza)
             else:
                 # Realizar la búsqueda y clic normal para otras imágenes
-                success = self.model.click_button(imagen, clicks, confianza, max_intentos=30, intervalo=0.5)
+                success = self.model.click_button(imagen, clicks, confianza, max_intentos=10)
             
             if not success:
-                self.view.log_message(f"Error: No se pudo encontrar el botón '{imagen}' después de 30 intentos")
+                self.view.log_message(f"Error: No se pudo encontrar el botón '{imagen}' después de 10 intentos")
                 return False
             
             # Esperar 2 segundos entre imágenes (como en el ejemplo)
@@ -656,7 +637,7 @@ class ImageSearchController:
             self.model.set_current_lote(current_lote)
             
             # Generar nombre de archivo según el distrito
-            if self.model.distrito == "NINUGO":
+            if self.model.no_distrito:
                 nombre_archivo = f"LT{current_lote}.KML"
             else:
                 nombre_archivo = f"{self.model.distrito}_LT{current_lote}.KML"
@@ -706,11 +687,6 @@ class ImageSearchController:
         
         self.model.set_running(False)
         self.view.log_message("Proceso completado")
-        
-        # Mostrar resumen de archivos seleccionados
-        self.view.log_message("Resumen de archivos seleccionados:")
-        for i, file_name in enumerate(self.model.selected_files, 1):
-            self.view.log_message(f"{i}. {file_name}")
     
     def start_search(self):
         """Inicia la búsqueda en un hilo separado"""
@@ -718,9 +694,9 @@ class ImageSearchController:
             messagebox.showerror("Error", "Debe iniciar sesión primero.")
             return
             
-        # Validar que el distrito no esté vacío
-        if not self.model.distrito:
-            messagebox.showerror("Error", "Debe ingresar un distrito.")
+        # Validar que el distrito no esté vacío si no está marcada la opción "No tiene distrito"
+        if not self.model.no_distrito and not self.model.distrito:
+            messagebox.showerror("Error", "Debe ingresar un distrito o marcar la opción 'No tiene distrito'.")
             return
             
         # Validar que el lote inicial no sea mayor al lote final
@@ -733,7 +709,10 @@ class ImageSearchController:
             self.model.set_paused(False)
             self.model.pause_event.set()
             self.view.log_message("Iniciando proceso de búsqueda...")
-            self.view.log_message(f"Distrito: {self.model.distrito}")
+            if self.model.no_distrito:
+                self.view.log_message("Distrito: No tiene distrito (usando LT)")
+            else:
+                self.view.log_message(f"Distrito: {self.model.distrito}")
             self.view.log_message(f"Lotes: {self.model.lote_inicial} a {self.model.lote_final}")
             self.view.log_message(f"Tiempo de espera entre lotes: {self.model.delay_time} segundos")
             
