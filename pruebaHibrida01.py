@@ -109,7 +109,7 @@ if coordenadas_ventana:
     
     # Iniciar AHK si no está corriendo
     try:
-        subprocess.Popen(['AutoHotkey.exe', 'ahk_script.ahk'])
+        subprocess.Popen(['AutoHotkeyU64.exe', 'ahk_script.ahk'])
         time.sleep(2)
     except:
         print("AutoHotkey no encontrado, asegúrate de tenerlo instalado")
