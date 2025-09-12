@@ -20,14 +20,14 @@ Loop {
         Sleep, 300
         
         ; Limpiar campo
-        Send, ^a
-        Sleep, 100
-        Send, {Delete}
-        Sleep, 100
+        ;Send, ^a
+        ;Sleep, 100
+        ;Send, {Delete}
+        ;Sleep, 100
         
         ; Escribir nombre de archivo (método confiable)
         SendInput, %nombre_archivo%
-        Sleep, 300
+        Sleep, 800
         
         ; Presionar Enter
         Send, {Enter}
