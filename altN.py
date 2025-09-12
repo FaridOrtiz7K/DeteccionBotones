@@ -1,8 +1,8 @@
 import pyautogui
 import time
 time.sleep(1)
-pyautogui.hotkey('ctrl', 'o')  # Abrir diálogo de abrir archivo
-time.sleep(1)
+#pyautogui.hotkey('ctrl', 'o')  # Abrir diálogo de abrir archivo
+time.sleep(3)
 nombre_archivo = "LT "
 for n in range(1, 2):  # Cambiar el rango según la cantidad de archivos que desees crear
     pyautogui.write(nombre_archivo)  # Escribir nombre de archivo
