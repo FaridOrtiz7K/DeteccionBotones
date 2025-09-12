@@ -100,7 +100,7 @@ if coordenadas_ventana:
     
     # Calcular coordenadas del campo de texto
     x_campo = x_ventana + 294
-    y_campo = y_ventana + 497
+    y_campo = y_ventana + 500
     print(f"Coordenadas campo texto: x={x_campo}, y={y_campo}")
     
     # Ejecutar AutoHotkey si no está corriendo
