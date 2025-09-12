@@ -87,7 +87,7 @@ Loop {
     with open("ahk_script.ahk", "w", encoding="utf-8") as f:
         f.write(ahk_script)
     print("Script de AutoHotkey creado automáticamente")
-    
+
 # Esperar inicial
 time.sleep(2)
 
@@ -99,8 +99,8 @@ if coordenadas_ventana:
     print(f"Coordenadas ventana: x={x_ventana}, y={y_ventana}")
     
     # Calcular coordenadas del campo de texto
-    x_campo = x_ventana + 223
-    y_campo = y_ventana + 405
+    x_campo = x_ventana + 294
+    y_campo = y_ventana + 448
     print(f"Coordenadas campo texto: x={x_campo}, y={y_campo}")
     
     # Ejecutar AutoHotkey si no está corriendo
