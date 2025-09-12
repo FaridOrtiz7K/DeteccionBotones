@@ -11,7 +11,7 @@ def encontrar_ventana_archivo():
     pantalla = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
     
     # Cargar template de la ventana de archivo
-    template = cv2.imread('cargarArchivo.png')
+    template = cv2.imread('img/cargarArchivo.png')
     if template is None:
         print("Error: No se pudo cargar la imagen 'cargarArchivo.png'")
         return None
@@ -21,7 +21,7 @@ def encontrar_ventana_archivo():
     _, max_val, _, max_loc = cv2.minMaxLoc(result)
     
     # Umbral de confianza
-    confianza_minima = 0.8
+    confianza_minima = 0.6
     if max_val < confianza_minima:
         print(f"Ventana no encontrada. Mejor coincidencia: {max_val:.2f}")
         return None
