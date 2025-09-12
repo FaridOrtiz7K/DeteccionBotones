@@ -89,7 +89,7 @@ Loop {
     print("Script de AutoHotkey creado automáticamente")
 
 # Esperar inicial
-time.sleep(2)
+time.sleep(3)
 
 # Buscar la ventana de archivo
 coordenadas_ventana = encontrar_ventana_archivo()
@@ -100,7 +100,7 @@ if coordenadas_ventana:
     
     # Calcular coordenadas del campo de texto
     x_campo = x_ventana + 294
-    y_campo = y_ventana + 448
+    y_campo = y_ventana + 497
     print(f"Coordenadas campo texto: x={x_campo}, y={y_campo}")
     
     # Ejecutar AutoHotkey si no está corriendo
