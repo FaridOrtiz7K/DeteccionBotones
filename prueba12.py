@@ -9,6 +9,7 @@ from PIL import Image, ImageTk
 import keyboard
 import os
 import json
+import subprocess
 
 # -------------------- CONFIGURACIÓN --------------------
 CONFIG_FILE = "config.json"
@@ -26,6 +27,7 @@ class ImageSearchModel:
         self.lote_inicial = 1
         self.lote_final = 1
         self.distrito = ""
+        self.nombre_archivo = ""
         self.delay_time = 2
         self.current_lote = 1
         self.observers = []
@@ -553,46 +555,131 @@ class ImageSearchController:
     def update_no_distrito(self, value):
         self.model.set_no_distrito(value)
     
+    def encontrar_ventana_archivo(self):
+        """Busca la ventana de archivo usando template matching"""
+        # Capturar pantalla completa
+        screenshot = pyautogui.screenshot()
+        pantalla = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+        
+        # Cargar template de la ventana de archivo
+        template = cv2.imread('img/cargarArchivo.png')
+        if template is None:
+            print("Error: No se pudo cargar la imagen 'cargarArchivo.png'")
+            return None
+        
+        # Realizar template matching
+        result = cv2.matchTemplate(pantalla, template, cv2.TM_CCOEFF_NORMED)
+        _, max_val, _, max_loc = cv2.minMaxLoc(result)
+        
+        # Umbral de confianza
+        confianza_minima = 0.6
+        if max_val < confianza_minima:
+            print(f"Ventana no encontrada. Mejor coincidencia: {max_val:.2f}")
+            return None
+        
+        print(f"Ventana encontrada con confianza: {max_val:.2f}")
+        return max_loc  # Devuelve las coordenadas (x, y) de la esquina superior izquierda
+
+    def ejecutar_acciones_ahk(self, x_campo, y_campo, nombre_archivo):
+        """Envía comandos a AutoHotkey mediante archivo temporal"""
+        # Crear archivo de comandos para AHK
+        comando = f"{x_campo},{y_campo},{nombre_archivo}"
+        
+        with open("ahk_command.txt", "w") as f:
+            f.write(comando)
+        
+        print(f"Comando enviado a AHK: {comando}")
+
+    def crear_script_ahk(self):
+        """Crea automáticamente el script de AutoHotkey"""
+        ahk_script = """
+    #Persistent
+    #SingleInstance force
+
+    ; Script de AutoHotkey para manejar acciones de UI
+    Loop {
+        ; Esperar comandos de Python
+        FileRead, comando, ahk_command.txt
+        if (ErrorLevel = 0) {
+            FileDelete, ahk_command.txt
+            
+            ; Parsear comando: x,y,filename
+            Array := StrSplit(comando, ",")
+            x_campo := Array[1]
+            y_campo := Array[2]
+            nombre_archivo := Array[3]
+            
+            ; Ejecutar acciones
+            Click, %x_campo% %y_campo%
+            Sleep, 300
+            
+            ; Limpiar campo
+            Send, ^a
+            Sleep, 100
+            Send, {Delete}
+            Sleep, 100
+            
+            ; Escribir nombre de archivo (método confiable)
+            SendInput, %nombre_archivo%
+            Sleep, 300
+            
+            ; Presionar Enter
+            Send, {Enter}
+            Sleep, 1000
+            
+            ; Confirmación para Python
+            FileAppend, done, ahk_done.txt
+            FileDelete, ahk_done.txt
+        }
+        Sleep, 500  ; Revisar cada medio segundo
+    }
+    """
+        with open("ahk_script.ahk", "w", encoding="utf-8") as f:
+            f.write(ahk_script)
+        print("Script de AutoHotkey creado automáticamente")
+
     def handle_b4_special_behavior(self, imagen, clicks, confianza):
         """Maneja el comportamiento especial para la imagen b4"""
-        # Determinar el nombre del archivo según si tiene distrito o no
-        if self.model.no_distrito:
-            nombre_archivo = f'LT{self.model.current_lote}.kml'
-        else:
-            nombre_archivo = f'{self.model.distrito}_LT{self.model.current_lote}.kml'
+        # Precionamos el boton b4 (Documentos)
+        success = self.model.click_button(imagen, clicks, confianza, max_intentos=10)
+        
+        # Esperar despues de precionar el boton
+        time.sleep(3)
 
-        # Para el primer lote, hacer clic normal en b4
-        if self.model.current_lote == self.model.lote_inicial and not self.model.alt_n_used:
-            success = self.model.click_button(imagen, clicks, confianza, max_intentos=10)
-            # Agregar tiempo de espera antes de Alt+N
-            time.sleep(2.5)  # Espera de 2.5 segundos
-            self.view.log_message("Usando Alt+N para seleccionar siguiente elemento")
-            pyautogui.hotkey('alt', 'n')
-            # Esperar un breve momento antes de escribir
-            time.sleep(0.5)
-            pyautogui.write(nombre_archivo)
-            # Presionar Enter para confirmar
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(1)
-            if success:
-                self.model.alt_n_used = True
-            return success
+        # Buscar la ventana de archivo
+        coordenadas_ventana = self.encontrar_ventana_archivo()
+
+        if coordenadas_ventana:
+            x_ventana, y_ventana = coordenadas_ventana
+            print(f"Coordenadas ventana: x={x_ventana}, y={y_ventana}")
+            
+            # Calcular coordenadas del campo de texto
+            x_campo = x_ventana + 294
+            y_campo = y_ventana + 500
+            print(f"Coordenadas campo texto: x={x_campo}, y={y_campo}")
+            
+            # Ejecutar AutoHotkey si no está corriendo
+            if not os.path.exists("ahk_script.ahk"):
+                self.crear_script_ahk()  # Crear el script automáticamente
+            
+            # Iniciar AHK si no está corriendo
+            try:
+                subprocess.Popen(['AutoHotkeyU64.exe', 'ahk_script.ahk'])
+                time.sleep(2)
+            except:
+                print("AutoHotkey no encontrado, asegúrate de tenerlo instalado")
+            
+            # Enviar comandos a AHK
+
+            self.ejecutar_acciones_ahk(x_campo, y_campo, self.nombre_archivo)
+            time.sleep(10)  # Esperar a que AHK complete la acción
+                
         else:
-            # Para lotes posteriores, usar Alt+N con tiempo de espera
-            # Agregar tiempo de espera antes de Alt+N
-            time.sleep(2.5)  # Espera de 2.5 segundos
-            self.view.log_message("Usando Alt+N para seleccionar siguiente elemento")
-            pyautogui.hotkey('alt', 'n')
-            # Esperar un breve momento antes de escribir
-            time.sleep(0.5)
-            pyautogui.write(nombre_archivo)
-            # Presionar Enter para confirmar
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(1)
-            return True
-    
+            print("No se pudo encontrar la ventana de archivo.")
+        if success:
+            self.model.alt_n_used = True
+        return success
+        
     def run_sequence(self):
         """Ejecuta la secuencia completa de imágenes"""
         for imagen, clicks, confianza in self.model.image_sequence:
@@ -638,11 +725,11 @@ class ImageSearchController:
             
             # Generar nombre de archivo según el distrito
             if self.model.no_distrito:
-                nombre_archivo = f"LT{current_lote}.KML"
+                self.nombre_archivo = f"LT {current_lote}.KML"
             else:
-                nombre_archivo = f"{self.model.distrito}_LT{current_lote}.KML"
+                self.nombre_archivo = f"{self.model.distrito} LT {current_lote}.KML"
             
-            self.view.log_message(f"Procesando archivo: {nombre_archivo}")
+            self.view.log_message(f"Procesando archivo: {self.nombre_archivo}")
             
             # Realizar la secuencia completa
             success = self.run_sequence()

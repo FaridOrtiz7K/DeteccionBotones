@@ -17,7 +17,7 @@ Loop {
         
         ; Ejecutar acciones
         Click, %x_campo% %y_campo%
-        Sleep, 300
+        Sleep, 200
         
         ; Limpiar campo
         ;Send, ^a
@@ -27,11 +27,11 @@ Loop {
         
         ; Escribir nombre de archivo (método confiable)
         SendInput, %nombre_archivo%
-        Sleep, 800
+        Sleep, 600
         
         ; Presionar Enter
         Send, {Enter}
-        Sleep, 1000
+        Sleep, 200
         
         ; Confirmación para Python
         FileAppend, done, ahk_done.txt
