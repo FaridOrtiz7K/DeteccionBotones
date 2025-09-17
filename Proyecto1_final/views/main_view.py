@@ -18,7 +18,12 @@ class ImageSearchView(ttk.Frame):
         self.delay_time_var = tk.IntVar(value=self.controller.model.delay_time)
         self.no_distrito_var = tk.BooleanVar(value=self.controller.model.no_distrito)
         
+        # Referencia al entry de distrito para poder deshabilitarlo
+        self.distrito_entry = None
+        
         self.create_widgets()
+        # Actualizar estado inicial del campo distrito
+        self.update_distrito_field_state()
     
     def create_widgets(self):
         # Configuración de distrito
@@ -26,14 +31,16 @@ class ImageSearchView(ttk.Frame):
         distrito_frame.grid(row=0, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
         
         ttk.Label(distrito_frame, text="Distrito:").grid(row=0, column=0, sticky=tk.W, padx=5)
-        distrito_entry = ttk.Entry(distrito_frame, textvariable=self.distrito_var, width=20)
-        distrito_entry.grid(row=0, column=1, padx=5)
-        distrito_entry.bind("<FocusOut>", lambda e: self.controller.update_distrito(self.distrito_var.get()))
+        
+        # Guardar referencia al entry de distrito
+        self.distrito_entry = ttk.Entry(distrito_frame, textvariable=self.distrito_var, width=20)
+        self.distrito_entry.grid(row=0, column=1, padx=5)
+        self.distrito_entry.bind("<FocusOut>", lambda e: self.controller.update_distrito(self.distrito_var.get()))
         
         # Checkbox para indicar si no tiene distrito
         no_distrito_check = ttk.Checkbutton(distrito_frame, text="No tiene distrito", 
                                            variable=self.no_distrito_var,
-                                           command=lambda: self.controller.update_no_distrito(self.no_distrito_var.get()))
+                                           command=self.on_no_distrito_changed)
         no_distrito_check.grid(row=1, column=0, columnspan=2, sticky=tk.W, padx=5, pady=5)
         
         # Configuración de lotes
@@ -79,6 +86,27 @@ class ImageSearchView(ttk.Frame):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
         status_frame.columnconfigure(0, weight=1)
+    
+    def on_no_distrito_changed(self):
+        """Maneja el cambio en el checkbox de 'No tiene distrito'"""
+        # Actualizar el modelo
+        self.controller.update_no_distrito(self.no_distrito_var.get())
+        
+        # Actualizar el estado del campo distrito
+        self.update_distrito_field_state()
+    
+    def update_distrito_field_state(self):
+        """Actualiza el estado del campo de distrito basado en el checkbox"""
+        if self.no_distrito_var.get():
+            # Deshabilitar el campo de distrito y cambiar apariencia
+            self.distrito_entry.config(state='disabled', background='#f0f0f0', foreground='#666666')
+            # Limpiar el campo si tiene contenido
+            if self.distrito_var.get():
+                self.distrito_var.set("")
+                self.controller.update_distrito("")
+        else:
+            # Habilitar el campo de distrito y restaurar apariencia
+            self.distrito_entry.config(state='normal', background='white', foreground='black')
     
     def log_message(self, message):
         """Añade un mensaje al área de estado"""

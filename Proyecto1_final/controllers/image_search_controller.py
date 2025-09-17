@@ -387,3 +387,17 @@ class ImageSearchController:
             self.model.pause_condition.notify_all()
         self.ahk_manager.stop_ahk()
         self.view.log_message("Proceso detenido")
+
+    def update_no_distrito(self, value):
+        """Actualiza el estado de 'no distrito'"""
+        self.model.no_distrito = value
+        
+        # Si se activa "no distrito", limpiar el campo de distrito
+        if value and self.model.distrito:
+            self.model.distrito = ""
+            # Actualizar la vista si existe
+            if hasattr(self, 'view') and self.view:
+                self.view.distrito_var.set("")
+        
+        # Guardar en configuración
+        self.model.config_manager.set('no_distrito', value)
