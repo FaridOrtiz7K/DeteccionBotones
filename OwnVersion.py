@@ -15,7 +15,7 @@ import subprocess
 CONFIG_FILE = "config.json"
 DEFAULT_CREDENTIALS = {
     "username": "admin",
-    "password": "password123"
+    "password": "123"
 }
 
 # -------------------- MODELO --------------------
@@ -766,9 +766,9 @@ class ImageSearchController:
             
             # Generar nombre de archivo según el distrito
             if self.model.no_distrito:
-                nombre_archivo = f"LT{current_lote}.KML"
+                nombre_archivo = f"LT {current_lote}.KML"
             else:
-                nombre_archivo = f"{self.model.distrito}_LT{current_lote}.KML"
+                nombre_archivo = f"{self.model.distrito}_LT {current_lote}.KML"
             
             self.view.log_message(f"Procesando archivo: {nombre_archivo}")
             
