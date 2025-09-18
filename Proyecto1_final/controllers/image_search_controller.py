@@ -403,6 +403,6 @@ class ImageSearchController:
         self.model.config_manager.set('no_distrito', value)
         
     # def update_error(self, event, data=None):
-    #      if event == "error_alert":
-    #          # Mostrar diálogo de error con sonido
-    #          self.show_error_dialog(data["message"])
+    #  if event == "error_alert":
+    #      # Mostrar diálogo de error con sonido
+    #      self.show_error_dialog(data["message"])

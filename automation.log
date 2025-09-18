@@ -90,3 +90,22 @@
 2025-09-18 10:15:27,585 - views.main_view - INFO - Procesando lote 3 de 5
 2025-09-18 10:15:27,594 - views.main_view - INFO - Procesando archivo: LT 3.KML
 2025-09-18 10:15:29,433 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 2)
+2025-09-18 11:33:02,976 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 11:33:02,977 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 11:33:16,634 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:33:16,639 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:33:17,247 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:33:17,249 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:33:31,791 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:33:33,046 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:56:03,153 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 11:56:03,158 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 11:56:39,869 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 11:56:39,870 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 11:56:48,711 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-18 11:56:52,848 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:56:52,853 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: False
+2025-09-18 11:56:52,858 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:56:53,859 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:56:53,871 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: True
+2025-09-18 11:56:53,876 - utils.config_manager - INFO - Configuración guardada correctamente

@@ -15,6 +15,7 @@ class ImageSearchModel:
     def __init__(self):
         self.config_manager = ConfigManager()
         self.config_manager.load()
+        # self.error_sound_enabled = True  # Siempre activo, sin opción de desactivar
         
         self.is_running = False
         self.is_paused = False
@@ -60,18 +61,18 @@ class ImageSearchModel:
         self.notify_observers("paused_changed", paused)
 
     # def trigger_error_alert(self, message):
-    #      """Activa la alerta de error con sonido"""
-    #      if self.error_sound_enabled and not self.error_alert_active:
-    #          self.error_alert_active = True
-    #          error_data = {
-    #              "message": message,
-    #              "sound_enabled": self.error_sound_enabled
-    #          }
-    #          self.notify_observers("error_alert", error_data)
-    
+    #  """Activa la alerta de error con sonido"""
+    #  if self.error_sound_enabled and not self.error_alert_active:
+    #      self.error_alert_active = True
+    #      error_data = {
+    #          "message": message,
+    #          "sound_enabled": self.error_sound_enabled
+    #      }
+    #      self.notify_observers("error_alert", error_data)
+
     # def stop_error_alert(self):
-    #      """Detiene la alerta de error"""
-    #      self.error_alert_active = False
+    #     """Detiene la alerta de error"""
+    #     self.error_alert_active = False
     
     # Propiedades para acceso directo a configuraciones comunes
     @property
@@ -210,8 +211,8 @@ class ImageSearchModel:
                 })
             # Si llegamos aquí, es porque se superó el máximo de intentos
         # if self.is_running:
-        #      error_msg = f"No se pudo encontrar la imagen '{imagen}' después de {max_intentos} intentos"
-        #      self.trigger_error_alert(error_msg)
+        #       error_msg = f"No se pudo encontrar la imagen '{imagen}' después de {max_intentos} intentos"
+        #       self.trigger_error_alert(error_msg)
         
         
         return False
