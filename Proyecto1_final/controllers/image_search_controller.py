@@ -263,9 +263,9 @@ class ImageSearchController:
                 
                 # Generar nombre de archivo según el distrito
                 if self.model.no_distrito:
-                    self.nombre_archivo = f"LT {current_lote}.KML"
+                    self.nombre_archivo = f"LT {current_lote}.kml"
                 else:
-                    self.nombre_archivo = f"{self.model.distrito}_LT {current_lote}.KML"
+                    self.nombre_archivo = f"{self.model.distrito}_LT {current_lote}.kml"
                 
                 self.view.log_message(f"Procesando archivo: {self.nombre_archivo}")
                 
