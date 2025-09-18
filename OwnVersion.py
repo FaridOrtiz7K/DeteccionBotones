@@ -685,17 +685,17 @@ class ImageSearchController:
         """Maneja el comportamiento especial para la imagen b4 usando AHK"""
         # Determinar el nombre del archivo según si tiene distrito o no
         if self.model.no_distrito:
-            nombre_archivo = f'LT{self.model.current_lote}.kml'
+            nombre_archivo = f'LT {self.model.current_lote}.kml'
         else:
-            nombre_archivo = f'{self.model.distrito}_LT{self.model.current_lote}.kml'
+            nombre_archivo = f'{self.model.distrito}_LT {self.model.current_lote}.kml'
 
         # Para el primer lote, hacer clic normal en b4
         if self.model.current_lote == self.model.lote_inicial and not self.model.alt_n_used:
-            success = self.model.click_button(imagen, clicks, confianza, max_intentos=10)
+            success = self.model.click_button(imagen, clicks, confianza, max_intentos=20)
             if success:
                 self.model.alt_n_used = True
                 # Después del clic, esperar a que aparezca la ventana de archivo
-                time.sleep(2.5)
+                time.sleep(3.5)
                 # Buscar la ventana de archivo
                 ventana_pos = self.model.encontrar_ventana_archivo()
                 if ventana_pos is None:
