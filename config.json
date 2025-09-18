@@ -1,6 +1,6 @@
 {
-    "lote_inicial": 3,
-    "lote_final": 5,
+    "lote_inicial": 1,
+    "lote_final": 2,
     "distrito": "",
     "delay_time": 1,
     "current_lote": 3,

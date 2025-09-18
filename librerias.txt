@@ -25,3 +25,16 @@ pip install psutil
 
 # Para Mac:
 # brew install scrot
+
+{
+    "lote_inicial": 3,
+    "lote_final": 5,
+    "distrito": "",
+    "delay_time": 1,
+    "current_lote": 3,
+    "no_distrito": true,
+    "confianza_minima": 0.68,
+    "max_intentos": 30,
+    "username": "admin",
+    "password": "123"
+}

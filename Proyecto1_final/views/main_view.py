@@ -11,6 +11,7 @@ class ImageSearchView(ttk.Frame):
         super().__init__(parent, padding="10")
         self.controller = controller
         self.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+
         
         # Variables para los controles
         self.lote_inicial_var = tk.IntVar(value=self.controller.model.lote_inicial)
@@ -87,6 +88,14 @@ class ImageSearchView(ttk.Frame):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
         status_frame.columnconfigure(0, weight=1)
+
+        # #Mensaje de error 
+        # sound_frame = ttk.LabelFrame(self, text="Opciones de Sonido", padding="5")
+        # sound_frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
+ 
+        # ttk.Checkbutton(sound_frame, text="Activar sonido de error", 
+        #          variable=self.error_sound_var,
+        #          command=self.on_error_sound_changed).grid(row=0, column=0, sticky=tk.W, padx=5)
     
     def on_no_distrito_changed(self):
         """Maneja el cambio en el checkbox de 'No tiene distrito'"""
