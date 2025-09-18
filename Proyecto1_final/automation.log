@@ -668,3 +668,27 @@
 2025-09-17 16:21:26,480 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b1.png' después de 1 intentos
 2025-09-17 16:21:26,484 - views.main_view - INFO - Secuencia interrumpida para lote 1 de 462
 2025-09-17 16:21:26,487 - views.main_view - INFO - Proceso completado
+2025-09-18 11:52:32,319 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 11:52:32,337 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 11:52:41,443 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-18 11:53:09,943 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-09-18 11:53:09,943 - views.main_view - INFO - Distrito: No tiene distrito (usando LT)
+2025-09-18 11:53:09,944 - views.main_view - INFO - Lotes: 1 a 462
+2025-09-18 11:53:09,944 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-09-18 11:53:09,944 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-09-18 11:53:09,945 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-09-18 11:53:09,945 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-09-18 11:53:09,945 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-09-18 11:53:09,945 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-09-18 11:53:09,945 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-09-18 11:53:09,946 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-09-18 11:53:09,946 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-09-18 11:53:09,946 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-09-18 11:53:09,947 - views.main_view - INFO - Procesando archivo: LT 1.kml
+2025-09-18 11:53:11,831 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.53 (Intento 2)
+2025-09-18 11:53:12,299 - views.main_view - INFO - Búsqueda pausada (Presione ESC para reanudar)
+2025-09-18 11:53:13,605 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.53 (Intento 3)
+2025-09-18 11:53:16,385 - views.main_view - INFO - Proceso detenido
+2025-09-18 11:53:16,387 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b1.png' después de 1 intentos
+2025-09-18 11:53:16,394 - views.main_view - INFO - Secuencia interrumpida para lote 1 de 462
+2025-09-18 11:53:16,401 - views.main_view - INFO - Proceso completado

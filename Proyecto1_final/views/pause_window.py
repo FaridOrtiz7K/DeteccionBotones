@@ -22,6 +22,9 @@ class PauseWindow(tk.Toplevel):
         y = parent.winfo_y() + (parent.winfo_height() // 2) - (self.winfo_height() // 2)
         self.geometry(f"+{x}+{y}")
         
+        #hacer que la ventana esté siempre encima
+        self.attributes("-topmost", True)
+        
         # Configurar el protocolo de cierre
         self.protocol("WM_DELETE_WINDOW", self.on_close)
         
