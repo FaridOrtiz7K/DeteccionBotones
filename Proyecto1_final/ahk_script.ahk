@@ -27,11 +27,11 @@ Loop {
         
         ; Escribir nombre de archivo (método confiable)
         SendInput, %nombre_archivo%
-        Sleep, 300
+        Sleep, 400
         
         ; Presionar Enter
         Send, {Enter}
-        Sleep, 1000
+        Sleep, 600
         
         ; Confirmación para Python
         FileAppend, done, ahk_done.txt
