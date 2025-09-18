@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 import os
 import logging
+# import winsound
 from utils.config_manager import ConfigManager
 
 logger = logging.getLogger(__name__)
@@ -21,10 +22,12 @@ class ImageSearchModel:
         self.pause_condition = threading.Condition()
         self.observers = []
         self.alt_n_used = False
+        # self.error_alert_active = False
+        # self.error_sound_enabled = True  # Siempre activado según tu solicitud
         
         # Secuencia predefinida de imágenes
         self.image_sequence = [
-            ("img/b1.png", 1, self.config_manager.get("confianza_minima", 0.68)),
+            ("img/b1.png", 2, self.config_manager.get("confianza_minima", 0.68)),
             ("img/b2.png", 1, self.config_manager.get("confianza_minima", 0.68)),
             ("img/b3.png", 1, self.config_manager.get("confianza_minima", 0.68)),
             ("img/b4.png", 1, self.config_manager.get("confianza_minima", 0.68)),
@@ -55,6 +58,20 @@ class ImageSearchModel:
     def set_paused(self, paused):
         self.is_paused = paused
         self.notify_observers("paused_changed", paused)
+
+    # def trigger_error_alert(self, message):
+    #      """Activa la alerta de error con sonido"""
+    #      if self.error_sound_enabled and not self.error_alert_active:
+    #          self.error_alert_active = True
+    #          error_data = {
+    #              "message": message,
+    #              "sound_enabled": self.error_sound_enabled
+    #          }
+    #          self.notify_observers("error_alert", error_data)
+    
+    # def stop_error_alert(self):
+    #      """Detiene la alerta de error"""
+    #      self.error_alert_active = False
     
     # Propiedades para acceso directo a configuraciones comunes
     @property
@@ -126,7 +143,8 @@ class ImageSearchModel:
             confianza_minima = self.confianza_minima
             
         intentos = 1
-        tiempo_entre_intentos = 1
+        tiempo_entre_intentos = 1.5
+        # max_intentos = 30  # Número máximo de intentos antes de considerar error
         tiempo_entre_lotes = 10
         
         while self.is_running:
@@ -190,5 +208,10 @@ class ImageSearchModel:
                     "confidence": max_val,
                     "intento": intentos
                 })
+            # Si llegamos aquí, es porque se superó el máximo de intentos
+        # if self.is_running:
+        #      error_msg = f"No se pudo encontrar la imagen '{imagen}' después de {max_intentos} intentos"
+        #      self.trigger_error_alert(error_msg)
+        
         
         return False

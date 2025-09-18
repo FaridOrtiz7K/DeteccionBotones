@@ -1,0 +1,92 @@
+2025-09-18 09:00:50,563 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 09:00:50,565 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 09:02:12,578 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:02:12,614 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-18 09:02:17,711 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:02:17,717 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: False
+2025-09-18 09:02:17,723 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:02:19,378 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:02:19,379 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: True
+2025-09-18 09:02:19,387 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:02:20,640 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:02:20,652 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: False
+2025-09-18 09:02:20,663 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:03:12,820 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:03:12,825 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: True
+2025-09-18 09:03:12,834 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:03:13,850 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:03:13,862 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: False
+2025-09-18 09:03:13,879 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:05:42,919 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 09:05:42,935 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 09:42:13,963 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 09:42:13,965 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 09:49:28,371 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 09:49:28,372 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 09:53:37,714 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 09:53:37,715 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 09:53:47,216 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-18 09:53:49,193 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 09:53:49,200 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: True
+2025-09-18 09:53:49,221 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 10:05:57,710 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 10:05:57,713 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 10:12:39,241 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 10:12:39,241 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 10:12:52,060 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-18 10:12:53,411 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 10:12:53,414 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: False
+2025-09-18 10:12:53,417 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 10:12:53,836 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 10:12:53,841 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: True
+2025-09-18 10:12:53,849 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 10:13:39,016 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 10:13:39,075 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-09-18 10:13:39,075 - views.main_view - INFO - Distrito: No tiene distrito (usando LT)
+2025-09-18 10:13:39,079 - views.main_view - INFO - Lotes: 1 a 2
+2025-09-18 10:13:39,081 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-09-18 10:13:39,082 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-09-18 10:13:39,091 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-09-18 10:13:39,091 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-09-18 10:13:39,091 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-09-18 10:13:39,102 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-09-18 10:13:39,115 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-09-18 10:13:39,118 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-09-18 10:13:39,122 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-09-18 10:13:39,124 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-09-18 10:13:39,131 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 10:13:39,144 - views.main_view - INFO - Procesando lote 1 de 2
+2025-09-18 10:13:39,148 - views.main_view - INFO - Procesando archivo: LT 1.KML
+2025-09-18 10:13:41,008 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.40 (Intento 2)
+2025-09-18 10:13:42,965 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.40 (Intento 3)
+2025-09-18 10:13:44,871 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.40 (Intento 4)
+2025-09-18 10:13:46,821 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.40 (Intento 5)
+2025-09-18 10:13:48,780 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.40 (Intento 6)
+2025-09-18 10:13:50,582 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.40 (Intento 7)
+2025-09-18 10:13:52,528 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.40 (Intento 8)
+2025-09-18 10:13:54,370 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.40 (Intento 9)
+2025-09-18 10:13:56,307 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.40 (Intento 10)
+2025-09-18 10:13:56,623 - models.image_search_model - INFO - Intento 10: Mejor coincidencia: 0.40
+2025-09-18 10:14:02,913 - views.main_view - INFO - Proceso detenido
+2025-09-18 10:15:14,466 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 10:15:14,486 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 10:15:21,283 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-18 10:15:25,566 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 10:15:27,451 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 10:15:27,530 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-09-18 10:15:27,532 - views.main_view - INFO - Distrito: No tiene distrito (usando LT)
+2025-09-18 10:15:27,532 - views.main_view - INFO - Lotes: 3 a 5
+2025-09-18 10:15:27,536 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-09-18 10:15:27,537 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-09-18 10:15:27,538 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-09-18 10:15:27,540 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-09-18 10:15:27,541 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-09-18 10:15:27,548 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-09-18 10:15:27,553 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-09-18 10:15:27,556 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-09-18 10:15:27,560 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-09-18 10:15:27,563 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-09-18 10:15:27,572 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 10:15:27,585 - views.main_view - INFO - Procesando lote 3 de 5
+2025-09-18 10:15:27,594 - views.main_view - INFO - Procesando archivo: LT 3.KML
+2025-09-18 10:15:29,433 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 2)

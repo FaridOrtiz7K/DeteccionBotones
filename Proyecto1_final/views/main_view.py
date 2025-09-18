@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext
 import time
 import logging
+#from alert_view import ErrorDialog
 
 logger = logging.getLogger(__name__)
 
@@ -131,3 +132,7 @@ class ImageSearchView(ttk.Frame):
         """Muestra la ventana de pausa"""
         from views.pause_window import PauseWindow
         PauseWindow(self.master, self.controller, current_lote, total_lotes)
+    
+    # def show_error_dialog(self, message):
+    #      """Muestra un diálogo de error con sonido"""
+    #     ErrorDialog(self, message)

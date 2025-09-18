@@ -265,7 +265,7 @@ class ImageSearchController:
                 if self.model.no_distrito:
                     self.nombre_archivo = f"LT {current_lote}.KML"
                 else:
-                    self.nombre_archivo = f"{self.model.distrito} LT {current_lote}.KML"
+                    self.nombre_archivo = f"{self.model.distrito}_LT {current_lote}.KML"
                 
                 self.view.log_message(f"Procesando archivo: {self.nombre_archivo}")
                 
@@ -401,3 +401,8 @@ class ImageSearchController:
         
         # Guardar en configuración
         self.model.config_manager.set('no_distrito', value)
+        
+    # def update_error(self, event, data=None):
+    #      if event == "error_alert":
+    #          # Mostrar diálogo de error con sonido
+    #          self.show_error_dialog(data["message"])
