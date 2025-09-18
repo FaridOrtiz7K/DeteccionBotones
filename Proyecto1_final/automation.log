@@ -692,3 +692,41 @@
 2025-09-18 11:53:16,387 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b1.png' después de 1 intentos
 2025-09-18 11:53:16,394 - views.main_view - INFO - Secuencia interrumpida para lote 1 de 462
 2025-09-18 11:53:16,401 - views.main_view - INFO - Proceso completado
+2025-09-18 11:55:23,731 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 11:55:23,731 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 11:55:31,857 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-18 11:55:34,888 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:55:34,889 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: False
+2025-09-18 11:55:34,890 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:55:35,803 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:55:35,804 - views.main_view - INFO - Opción 'No tiene distrito' cambiada a: True
+2025-09-18 11:55:35,805 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-18 11:55:52,645 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 11:55:52,647 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 11:56:07,009 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 11:56:07,010 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 11:56:13,988 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-18 11:57:11,393 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-18 11:57:11,394 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-18 11:57:20,834 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-18 11:57:23,770 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-09-18 11:57:23,770 - views.main_view - INFO - Distrito: No tiene distrito (usando LT)
+2025-09-18 11:57:23,771 - views.main_view - INFO - Lotes: 1 a 462
+2025-09-18 11:57:23,771 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-09-18 11:57:23,771 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-09-18 11:57:23,771 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-09-18 11:57:23,772 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-09-18 11:57:23,772 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-09-18 11:57:23,772 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-09-18 11:57:23,773 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-09-18 11:57:23,774 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-09-18 11:57:23,774 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-09-18 11:57:23,775 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-09-18 11:57:23,776 - views.main_view - INFO - Procesando archivo: LT 1.kml
+2025-09-18 11:57:25,578 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.53 (Intento 2)
+2025-09-18 11:57:26,813 - views.main_view - INFO - Búsqueda pausada (Presione ESC para reanudar)
+2025-09-18 11:57:27,349 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.53 (Intento 3)
+2025-09-18 11:57:29,998 - views.main_view - INFO - Proceso detenido
+2025-09-18 11:57:30,000 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b1.png' después de 1 intentos
+2025-09-18 11:57:30,004 - views.main_view - INFO - Secuencia interrumpida para lote 1 de 462
+2025-09-18 11:57:30,009 - views.main_view - INFO - Proceso completado
