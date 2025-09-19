@@ -9,6 +9,7 @@ import keyboard
 import logging
 from models.image_search_model import ImageSearchModel
 from utils.ahk_manager import AHKManager
+import tkinter.messagebox as messagebox
 
 logger = logging.getLogger(__name__)
 
@@ -104,7 +105,7 @@ class ImageSearchController:
             lote = int(lote)
             self.model.lote_final = lote
         except ValueError:
-            logger.error("El lote final debe ser un número válido")
+            logger.error("El lote final debe ser a número válido")
     
     def update_distrito(self, distrito):
         self.model.distrito = distrito
@@ -312,6 +313,15 @@ class ImageSearchController:
                         # Eliminar el mensaje anterior
                         self.view.status_text.delete("end-2l", "end-1l")
             
+            # Después de completar todos los lotes
+            if self.model.is_running:  # Solo si se completó naturalmente (no detenido)
+                self.view.log_message("Presionando Ctrl+S para guardar todos los cambios")
+                pyautogui.hotkey('ctrl', 's')
+                time.sleep(1)  # Esperar un momento después de guardar
+                
+                # Mostrar mensaje emergente
+                messagebox.showinfo("Proceso Completado", "El proceso ha terminado exitosamente.")
+            
             self.model.set_running(False)
             self.view.log_message("Proceso completado")
             
@@ -403,6 +413,6 @@ class ImageSearchController:
         self.model.config_manager.set('no_distrito', value)
         
     # def update_error(self, event, data=None):
-    #  if event == "error_alert":
-    #      # Mostrar diálogo de error con sonido
-    #      self.show_error_dialog(data["message"])
+    #      if event == "error_alert":
+    #          # Mostrar diálogo de error con sonido
+    #          self.show_error_dialog(data["message"])

@@ -1,9 +1,9 @@
 {
     "lote_inicial": 1,
-    "lote_final": 2,
+    "lote_final": 1,
     "distrito": "",
     "delay_time": 1,
-    "current_lote": 3,
+    "current_lote": 1,
     "no_distrito": true,
     "confianza_minima": 0.68,
     "max_intentos": 30,
