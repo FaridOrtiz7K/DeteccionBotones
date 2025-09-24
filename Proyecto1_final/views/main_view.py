@@ -27,9 +27,9 @@ class ImageSearchView(ttk.Frame):
                                   command=self.controller.open_config_window)
         config_button.pack(side=tk.LEFT)
         
-        # Mostrar el patrón actual
-        self.patron_actual_var = tk.StringVar(value=f"Formato actual: {self.controller.model.patron_texto}")
-        ttk.Label(config_frame, textvariable=self.patron_actual_var, 
+        # Mostrar el formato actual
+        self.fromato_actual_var = tk.StringVar(value=f"Formato actual: {self.controller.model.formato_texto}")
+        ttk.Label(config_frame, textvariable=self.fromato_actual_var, 
                  font=('Arial', 9, 'italic')).pack(side=tk.LEFT, padx=(10, 0))
         
         # Configuración de lotes
@@ -91,9 +91,9 @@ class ImageSearchView(ttk.Frame):
         self.status_text.see(tk.END)
         logger.info(message)
         
-        # Actualizar el patrón actual si el mensaje contiene información del patrón
-        if "Patrón de texto actualizado" in message or "Usando patrón" in message:
-            self.patron_actual_var.set(f"Patrón actual: {self.controller.model.patron_texto}")
+        # Actualizar el formato actual si el mensaje contiene información del formato
+        if "Formato de texto actualizado" in message or "Usando Formato" in message:
+            self.fromato_actual_var.set(f"Formato actual: {self.controller.model.formato_texto}")
     
     def update_button_states(self, is_running, is_paused):
         """Actualiza el estado de los botones según el estado actual"""

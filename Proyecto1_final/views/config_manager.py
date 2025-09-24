@@ -16,7 +16,7 @@ class ConfigManager:
             "max_intentos": 30,
             "username": "admin",
             "password": "123",
-            "patron_texto": "LT"  # Nuevo campo para el patrón de texto
+            "formato_texto": "LT"  # Nuevo campo para el formato de texto
         }
         self.config = self.default_config.copy()
         

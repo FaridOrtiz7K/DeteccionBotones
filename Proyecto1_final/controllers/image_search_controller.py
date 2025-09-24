@@ -88,7 +88,7 @@ class ImageSearchController:
             self.view.log_message(f"Error: {data}")
         elif event == "current_lote_changed":
             self.view.log_message(f"Procesando lote {data} de {self.model.lote_final}")
-        elif event == "patron_texto_changed":
+        elif event == "formato_texto_changed":
             self.view.log_message(f"Patrón de texto actualizado a: {data}")
     
     def update_lote_inicial(self, lote):
@@ -112,9 +112,9 @@ class ImageSearchController:
         except ValueError:
             logger.error("El tiempo de espera debe ser un número válido")
     
-    def update_patron_texto(self, patron):
+    def update_formato_texto(self, formato):
         """Actualiza el patrón de texto para los nombres de archivo"""
-        self.model.patron_texto = patron
+        self.model.formato_texto = formato
     
     def open_config_window(self):
         """Abre la ventana de configuración"""
@@ -267,11 +267,11 @@ class ImageSearchController:
                 self.model.alt_n_used = False
                 
                 # Generar nombre de archivo usando el patrón configurado
-                patron_texto = self.model.patron_texto
-                self.nombre_archivo = f"{patron_texto} {current_lote}.kml"
+                formato_texto = self.model.formato_texto
+                self.nombre_archivo = f"{formato_texto} {current_lote}.kml"
                 
                 self.view.log_message(f"Procesando archivo: {self.nombre_archivo}")
-                self.view.log_message(f"Usando patrón: {patron_texto}")
+                self.view.log_message(f"Usando formato: {formato_texto}")
                 
                 # Realizar la secuencia completa
                 success = self.run_sequence()
@@ -352,7 +352,7 @@ class ImageSearchController:
             with self.model.pause_condition:
                 self.model.pause_condition.notify_all()
             self.view.log_message("Iniciando proceso de búsqueda...")
-            self.view.log_message(f"Formato para el texto: {self.model.patron_texto}")
+            self.view.log_message(f"Formato para el texto: {self.model.formato_texto}")
             self.view.log_message(f"Lotes: {self.model.lote_inicial} a {self.model.lote_final}")
             self.view.log_message(f"Tiempo de espera entre lotes: {self.model.delay_time} segundos")
             

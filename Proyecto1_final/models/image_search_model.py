@@ -90,13 +90,13 @@ class ImageSearchModel:
         self.set_configurable("current_lote", value)
     
     @property
-    def patron_texto(self):
+    def formato_texto(self):
         """Nueva propiedad para el patrón de texto personalizable"""
-        return self.config_manager.get("patron_texto", "LT")
+        return self.config_manager.get("formato_texto", "LT")
     
-    @patron_texto.setter
-    def patron_texto(self, value):
-        self.set_configurable("patron_texto", value)
+    @formato_texto.setter
+    def formato_texto(self, value):
+        self.set_configurable("formato_texto", value)
     
     @property
     def archivo_prefix(self):

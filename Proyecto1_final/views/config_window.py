@@ -16,8 +16,8 @@ class ConfigWindow(tk.Toplevel):
         self.transient(parent)
         self.grab_set()
         
-        # Variable para el patrón de texto
-        self.patron_texto_var = tk.StringVar(value=self.controller.model.patron_texto)
+        # Variable para el formato de texto
+        self.formato_texto_var = tk.StringVar(value=self.controller.model.formato_texto)
         
         self.create_widgets()
         self.load_current_settings()
@@ -36,10 +36,10 @@ class ConfigWindow(tk.Toplevel):
         ttk.Label(main_frame, text="Configuración del Formato para el Texto", 
                  font=('Arial', 12, 'bold')).grid(row=0, column=0, columnspan=2, pady=(0, 10))
         
-        # Campo para el patrón de texto
-        ttk.Label(main_frame, text="Patrón de texto:").grid(row=1, column=0, sticky=tk.W, pady=5)
-        patron_entry = ttk.Entry(main_frame, textvariable=self.patron_texto_var, width=30)
-        patron_entry.grid(row=1, column=1, sticky=(tk.W, tk.E), pady=5, padx=(5, 0))
+        # Campo para el formato de texto
+        ttk.Label(main_frame, text="Formato de texto:").grid(row=1, column=0, sticky=tk.W, pady=5)
+        fromato_entry = ttk.Entry(main_frame, textvariable=self.formato_texto_var, width=30)
+        fromato_entry.grid(row=1, column=1, sticky=(tk.W, tk.E), pady=5, padx=(5, 0))
         
         # Texto de ayuda
         help_text = "Este texto se usará para generar los nombres de archivo KML.\nEjemplos: 'LT', 'ALM', 'Zona'"
@@ -60,19 +60,19 @@ class ConfigWindow(tk.Toplevel):
     
     def load_current_settings(self):
         """Carga la configuración actual del modelo"""
-        self.patron_texto_var.set(self.controller.model.patron_texto)
+        self.formato_texto_var.set(self.controller.model.formato_texto)
     
     def guardar_configuracion(self):
         """Guarda la configuración"""
         try:
-            nuevo_patron = self.patron_texto_var.get().strip()
+            nuevo_fromato = self.formato_texto_var.get().strip()
             
-            if not nuevo_patron:
+            if not nuevo_fromato:
                 messagebox.showerror("Error", "El formato para el texto no puede estar vacío")
                 return
             
             # Actualizar el modelo
-            self.controller.update_patron_texto(nuevo_patron)
+            self.controller.update_formato_texto(nuevo_fromato)
             
             messagebox.showinfo("Éxito", "Configuración guardada correctamente")
             self.destroy()
@@ -83,5 +83,5 @@ class ConfigWindow(tk.Toplevel):
     
     def restablecer_predeterminado(self):
         """Restablece los valores predeterminados"""
-        self.patron_texto_var.set("LT")
+        self.formato_texto_var.set("LT")
         messagebox.showinfo("Información", "Valores restablecidos a 'LT'")
