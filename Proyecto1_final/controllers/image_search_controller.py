@@ -34,9 +34,7 @@ class ImageSearchController:
         """Valida todas las entradas antes de iniciar"""
         errors = []
         
-        if not self.model.no_distrito and not self.model.distrito.strip():
-            errors.append("Debe ingresar un distrito o marcar 'No tiene distrito'")
-        
+        # Validación simplificada - ya no se requiere distrito
         if self.model.lote_inicial > self.model.lote_final:
             errors.append("El lote inicial no puede ser mayor al lote final")
         
@@ -90,8 +88,8 @@ class ImageSearchController:
             self.view.log_message(f"Error: {data}")
         elif event == "current_lote_changed":
             self.view.log_message(f"Procesando lote {data} de {self.model.lote_final}")
-        elif event == "no_distrito_changed":
-            self.view.log_message(f"Opción 'No tiene distrito' cambiada a: {data}")
+        elif event == "patron_texto_changed":
+            self.view.log_message(f"Patrón de texto actualizado a: {data}")
     
     def update_lote_inicial(self, lote):
         try:
@@ -105,10 +103,7 @@ class ImageSearchController:
             lote = int(lote)
             self.model.lote_final = lote
         except ValueError:
-            logger.error("El lote final debe ser a número válido")
-    
-    def update_distrito(self, distrito):
-        self.model.distrito = distrito
+            logger.error("El lote final debe ser un número válido")
     
     def update_delay_time(self, time):
         try:
@@ -117,8 +112,17 @@ class ImageSearchController:
         except ValueError:
             logger.error("El tiempo de espera debe ser un número válido")
     
-    def update_no_distrito(self, value):
-        self.model.no_distrito = value
+    def update_patron_texto(self, patron):
+        """Actualiza el patrón de texto para los nombres de archivo"""
+        self.model.patron_texto = patron
+    
+    def open_config_window(self):
+        """Abre la ventana de configuración"""
+        from views.config_window import ConfigWindow
+        if hasattr(self, 'config_window') and self.config_window.winfo_exists():
+            self.config_window.lift()
+        else:
+            self.config_window = ConfigWindow(self.root, self)
     
     def encontrar_ventana_archivo(self):
         """Busca la ventana de archivo usando template matching con reintentos inteligentes"""
@@ -262,13 +266,12 @@ class ImageSearchController:
                 # Reiniciar flag de Alt+N para cada lote
                 self.model.alt_n_used = False
                 
-                # Generar nombre de archivo según el distrito
-                if self.model.no_distrito:
-                    self.nombre_archivo = f"LT {current_lote}.kml"
-                else:
-                    self.nombre_archivo = f"{self.model.distrito}_LT {current_lote}.kml"
+                # Generar nombre de archivo usando el patrón configurado
+                patron_texto = self.model.patron_texto
+                self.nombre_archivo = f"{patron_texto} {current_lote}.kml"
                 
                 self.view.log_message(f"Procesando archivo: {self.nombre_archivo}")
+                self.view.log_message(f"Usando patrón: {patron_texto}")
                 
                 # Realizar la secuencia completa
                 success = self.run_sequence()
@@ -336,7 +339,7 @@ class ImageSearchController:
             self.view.log_message("Error: Debe iniciar sesión primero.")
             return
             
-        # Validar inputs
+        # Validar inputs (validación simplificada sin distrito)
         errors = self.validate_inputs()
         if errors:
             for error in errors:
@@ -349,10 +352,7 @@ class ImageSearchController:
             with self.model.pause_condition:
                 self.model.pause_condition.notify_all()
             self.view.log_message("Iniciando proceso de búsqueda...")
-            if self.model.no_distrito:
-                self.view.log_message("Distrito: No tiene distrito (usando LT)")
-            else:
-                self.view.log_message(f"Distrito: {self.model.distrito}")
+            self.view.log_message(f"Formato para el texto: {self.model.patron_texto}")
             self.view.log_message(f"Lotes: {self.model.lote_inicial} a {self.model.lote_final}")
             self.view.log_message(f"Tiempo de espera entre lotes: {self.model.delay_time} segundos")
             
@@ -397,22 +397,3 @@ class ImageSearchController:
             self.model.pause_condition.notify_all()
         self.ahk_manager.stop_ahk()
         self.view.log_message("Proceso detenido")
-
-    def update_no_distrito(self, value):
-        """Actualiza el estado de 'no distrito'"""
-        self.model.no_distrito = value
-        
-        # Si se activa "no distrito", limpiar el campo de distrito
-        if value and self.model.distrito:
-            self.model.distrito = ""
-            # Actualizar la vista si existe
-            if hasattr(self, 'view') and self.view:
-                self.view.distrito_var.set("")
-        
-        # Guardar en configuración
-        self.model.config_manager.set('no_distrito', value)
-        
-    # def update_error(self, event, data=None):
-    #      if event == "error_alert":
-    #          # Mostrar diálogo de error con sonido
-    #          self.show_error_dialog(data["message"])

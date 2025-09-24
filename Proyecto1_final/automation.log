@@ -730,3 +730,67 @@
 2025-09-18 11:57:30,000 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b1.png' después de 1 intentos
 2025-09-18 11:57:30,004 - views.main_view - INFO - Secuencia interrumpida para lote 1 de 462
 2025-09-18 11:57:30,009 - views.main_view - INFO - Proceso completado
+2025-09-24 11:41:07,178 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 11:41:07,179 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 11:46:00,207 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 11:46:00,221 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 11:46:28,607 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-24 11:46:28,608 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-24 11:46:54,200 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-24 11:46:54,201 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-24 11:52:26,257 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 11:52:26,257 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 11:52:32,824 - controllers.image_search_controller - ERROR - Error inicializando vista principal: 'NoneType' object has no attribute 'config'
+2025-09-24 11:52:58,222 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-24 12:03:59,265 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 12:03:59,266 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 12:04:12,721 - controllers.image_search_controller - INFO - Vista principal inicializada correctamente
+2025-09-24 12:04:12,722 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-24 12:04:16,113 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-09-24 12:04:16,114 - views.main_view - INFO - Formato de archivo: LT 1.kml
+2025-09-24 12:04:16,114 - views.main_view - INFO - Lotes: 1 a 462
+2025-09-24 12:04:16,115 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-09-24 12:04:16,115 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-09-24 12:04:16,115 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-09-24 12:04:16,115 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:16,116 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:16,116 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:16,116 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:16,116 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:16,116 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:16,117 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:16,117 - views.main_view - INFO - Procesando archivo: LT 1.kml
+2025-09-24 12:04:17,875 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 2)
+2025-09-24 12:04:19,590 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 3)
+2025-09-24 12:04:21,295 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 4)
+2025-09-24 12:04:21,358 - views.main_view - INFO - Proceso detenido
+2025-09-24 12:04:23,010 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 5)
+2025-09-24 12:04:23,015 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b1.png' después de 1 intentos
+2025-09-24 12:04:23,017 - views.main_view - INFO - Secuencia interrumpida para lote 1 de 462
+2025-09-24 12:04:23,023 - views.main_view - INFO - Proceso completado
+2025-09-24 12:04:29,753 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-24 12:04:29,754 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-24 12:04:33,361 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-09-24 12:04:33,362 - views.main_view - INFO - Formato de archivo: ml 1.kml
+2025-09-24 12:04:33,363 - views.main_view - INFO - Lotes: 1 a 462
+2025-09-24 12:04:33,365 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-09-24 12:04:33,365 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-09-24 12:04:33,366 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-09-24 12:04:33,367 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:33,368 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:33,368 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:33,369 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:33,369 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:33,369 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:33,370 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-09-24 12:04:33,371 - views.main_view - INFO - Procesando archivo: ml 1.kml
+2025-09-24 12:04:35,084 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 2)
+2025-09-24 12:04:36,784 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 3)
+2025-09-24 12:04:38,496 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 4)
+2025-09-24 12:04:38,782 - views.main_view - INFO - Proceso detenido
+2025-09-24 12:04:40,205 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 5)
+2025-09-24 12:04:40,209 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b1.png' después de 1 intentos
+2025-09-24 12:04:40,213 - views.main_view - INFO - Secuencia interrumpida para lote 1 de 462
+2025-09-24 12:04:40,217 - views.main_view - INFO - Proceso completado
+2025-09-24 12:04:45,020 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-24 12:04:45,021 - utils.config_manager - INFO - Configuración guardada correctamente

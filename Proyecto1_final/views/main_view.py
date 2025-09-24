@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext
 import time
 import logging
-#from alert_view import ErrorDialog
 
 logger = logging.getLogger(__name__)
 
@@ -12,69 +11,66 @@ class ImageSearchView(ttk.Frame):
         self.controller = controller
         self.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
-        
         # Variables para los controles
         self.lote_inicial_var = tk.IntVar(value=self.controller.model.lote_inicial)
         self.lote_final_var = tk.IntVar(value=self.controller.model.lote_final)
-        self.distrito_var = tk.StringVar(value=self.controller.model.distrito)
         self.delay_time_var = tk.IntVar(value=self.controller.model.delay_time)
-        self.no_distrito_var = tk.BooleanVar(value=self.controller.model.no_distrito)
-        
-        # Referencia al entry de distrito para poder deshabilitarlo
-        self.distrito_entry = None
         
         self.create_widgets()
-        # Actualizar estado inicial del campo distrito
-        self.update_distrito_field_state()
     
     def create_widgets(self):
-        # Configuración de distrito
-        distrito_frame = ttk.LabelFrame(self, text="Configuración de Distrito", padding="5")
-        distrito_frame.grid(row=0, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
+        # Botón de configuración (reemplaza la casilla de distrito)
+        config_frame = ttk.Frame(self)
+        config_frame.grid(row=0, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
         
-        ttk.Label(distrito_frame, text="Distrito:").grid(row=0, column=0, sticky=tk.W, padx=5)
+        config_button = ttk.Button(config_frame, text="⚙️ Configuración", 
+                                  command=self.controller.open_config_window)
+        config_button.pack(side=tk.LEFT)
         
-        # Guardar referencia al entry de distrito
-        self.distrito_entry = ttk.Entry(distrito_frame, textvariable=self.distrito_var, width=20)
-        self.distrito_entry.grid(row=0, column=1, padx=5)
-        self.distrito_entry.bind("<FocusOut>", lambda e: self.controller.update_distrito(self.distrito_var.get()))
-        
-        # Checkbox para indicar si no tiene distrito
-        no_distrito_check = ttk.Checkbutton(distrito_frame, text="No tiene distrito", 
-                                           variable=self.no_distrito_var,
-                                           command=self.on_no_distrito_changed)
-        no_distrito_check.grid(row=1, column=0, columnspan=2, sticky=tk.W, padx=5, pady=5)
+        # Mostrar el patrón actual
+        self.patron_actual_var = tk.StringVar(value=f"Formato actual: {self.controller.model.patron_texto}")
+        ttk.Label(config_frame, textvariable=self.patron_actual_var, 
+                 font=('Arial', 9, 'italic')).pack(side=tk.LEFT, padx=(10, 0))
         
         # Configuración de lotes
         lote_frame = ttk.LabelFrame(self, text="Configuración de Lotes", padding="5")
         lote_frame.grid(row=1, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
         
         ttk.Label(lote_frame, text="Lote inicial:").grid(row=0, column=0, sticky=tk.W, padx=5)
-        lote_inicial_spin = ttk.Spinbox(lote_frame, from_=1, to=1000, textvariable=self.lote_inicial_var, width=10)
+        lote_inicial_spin = ttk.Spinbox(lote_frame, from_=1, to=1000, 
+                                       textvariable=self.lote_inicial_var, width=10)
         lote_inicial_spin.grid(row=0, column=1, padx=5)
-        lote_inicial_spin.bind("<FocusOut>", lambda e: self.controller.update_lote_inicial(self.lote_inicial_var.get()))
+        lote_inicial_spin.bind("<FocusOut>", 
+                              lambda e: self.controller.update_lote_inicial(self.lote_inicial_var.get()))
         
         ttk.Label(lote_frame, text="Lote final:").grid(row=0, column=2, sticky=tk.W, padx=5)
-        lote_final_spin = ttk.Spinbox(lote_frame, from_=1, to=1000, textvariable=self.lote_final_var, width=10)
+        lote_final_spin = ttk.Spinbox(lote_frame, from_=1, to=1000, 
+                                     textvariable=self.lote_final_var, width=10)
         lote_final_spin.grid(row=0, column=3, padx=5)
-        lote_final_spin.bind("<FocusOut>", lambda e: self.controller.update_lote_final(self.lote_final_var.get()))
+        lote_final_spin.bind("<FocusOut>", 
+                           lambda e: self.controller.update_lote_final(self.lote_final_var.get()))
         
         ttk.Label(lote_frame, text="Tiempo de espera (segundos):").grid(row=0, column=4, sticky=tk.W, padx=5)
-        delay_spin = ttk.Spinbox(lote_frame, from_=1, to=60, textvariable=self.delay_time_var, width=5)
+        delay_spin = ttk.Spinbox(lote_frame, from_=1, to=60, 
+                                textvariable=self.delay_time_var, width=5)
         delay_spin.grid(row=0, column=5, padx=5)
-        delay_spin.bind("<FocusOut>", lambda e: self.controller.update_delay_time(self.delay_time_var.get()))
+        delay_spin.bind("<FocusOut>", 
+                       lambda e: self.controller.update_delay_time(self.delay_time_var.get()))
         
         # Botones de control
         button_frame = ttk.Frame(self)
         button_frame.grid(row=3, column=0, columnspan=2, pady=10)
         
-        self.start_button = ttk.Button(button_frame, text="Iniciar", command=self.controller.start_search)
+        self.start_button = ttk.Button(button_frame, text="Iniciar", 
+                                      command=self.controller.start_search)
         self.start_button.grid(row=0, column=0, padx=5)
         
-        self.pause_button = ttk.Button(button_frame, text="Pausar", command=self.controller.pause_search, state=tk.DISABLED)
+        self.pause_button = ttk.Button(button_frame, text="Pausar", 
+                                      command=self.controller.pause_search, state=tk.DISABLED)
         self.pause_button.grid(row=0, column=1, padx=5)
         
-        self.stop_button = ttk.Button(button_frame, text="Detener", command=self.controller.stop_search, state=tk.DISABLED)
+        self.stop_button = ttk.Button(button_frame, text="Detener", 
+                                     command=self.controller.stop_search, state=tk.DISABLED)
         self.stop_button.grid(row=0, column=2, padx=5)
         
         # Área de estado
@@ -88,41 +84,16 @@ class ImageSearchView(ttk.Frame):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
         status_frame.columnconfigure(0, weight=1)
-
-        # #Mensaje de error 
-        # sound_frame = ttk.LabelFrame(self, text="Opciones de Sonido", padding="5")
-        # sound_frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=5)
- 
-        # ttk.Checkbutton(sound_frame, text="Activar sonido de error", 
-        #          variable=self.error_sound_var,
-        #          command=self.on_error_sound_changed).grid(row=0, column=0, sticky=tk.W, padx=5)
-    
-    def on_no_distrito_changed(self):
-        """Maneja el cambio en el checkbox de 'No tiene distrito'"""
-        # Actualizar el modelo
-        self.controller.update_no_distrito(self.no_distrito_var.get())
-        
-        # Actualizar el estado del campo distrito
-        self.update_distrito_field_state()
-    
-    def update_distrito_field_state(self):
-        """Actualiza el estado del campo de distrito basado en el checkbox"""
-        if self.no_distrito_var.get():
-            # Deshabilitar el campo de distrito y cambiar apariencia
-            self.distrito_entry.config(state='disabled', background='#f0f0f0', foreground='#666666')
-            # Limpiar el campo si tiene contenido
-            if self.distrito_var.get():
-                self.distrito_var.set("")
-                self.controller.update_distrito("")
-        else:
-            # Habilitar el campo de distrito y restaurar apariencia
-            self.distrito_entry.config(state='normal', background='white', foreground='black')
     
     def log_message(self, message):
         """Añade un mensaje al área de estado"""
         self.status_text.insert(tk.END, f"{time.strftime('%H:%M:%S')} - {message}\n")
         self.status_text.see(tk.END)
         logger.info(message)
+        
+        # Actualizar el patrón actual si el mensaje contiene información del patrón
+        if "Patrón de texto actualizado" in message or "Usando patrón" in message:
+            self.patron_actual_var.set(f"Patrón actual: {self.controller.model.patron_texto}")
     
     def update_button_states(self, is_running, is_paused):
         """Actualiza el estado de los botones según el estado actual"""
@@ -141,7 +112,3 @@ class ImageSearchView(ttk.Frame):
         """Muestra la ventana de pausa"""
         from views.pause_window import PauseWindow
         PauseWindow(self.master, self.controller, current_lote, total_lotes)
-    
-    # def show_error_dialog(self, message):
-    #      """Muestra un diálogo de error con sonido"""
-    #     ErrorDialog(self, message)

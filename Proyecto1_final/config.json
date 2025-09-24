@@ -8,5 +8,7 @@
     "confianza_minima": 0.68,
     "max_intentos": 30,
     "username": "admin",
-    "password": "123"
+    "password": "123",
+    "archivo_prefix": "LT",
+    "archivo_formato": "{prefix} {lote}.kml"
 }

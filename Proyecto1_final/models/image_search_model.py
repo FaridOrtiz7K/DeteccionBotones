@@ -6,7 +6,6 @@ import numpy as np
 from PIL import Image
 import os
 import logging
-# import winsound
 from utils.config_manager import ConfigManager
 
 logger = logging.getLogger(__name__)
@@ -15,7 +14,6 @@ class ImageSearchModel:
     def __init__(self):
         self.config_manager = ConfigManager()
         self.config_manager.load()
-        # self.error_sound_enabled = True  # Siempre activo, sin opción de desactivar
         
         self.is_running = False
         self.is_paused = False
@@ -23,8 +21,6 @@ class ImageSearchModel:
         self.pause_condition = threading.Condition()
         self.observers = []
         self.alt_n_used = False
-        # self.error_alert_active = False
-        # self.error_sound_enabled = True  # Siempre activado según tu solicitud
         
         # Secuencia predefinida de imágenes
         self.image_sequence = [
@@ -60,20 +56,6 @@ class ImageSearchModel:
         self.is_paused = paused
         self.notify_observers("paused_changed", paused)
 
-    # def trigger_error_alert(self, message):
-    #  """Activa la alerta de error con sonido"""
-    #  if self.error_sound_enabled and not self.error_alert_active:
-    #      self.error_alert_active = True
-    #      error_data = {
-    #          "message": message,
-    #          "sound_enabled": self.error_sound_enabled
-    #      }
-    #      self.notify_observers("error_alert", error_data)
-
-    # def stop_error_alert(self):
-    #     """Detiene la alerta de error"""
-    #     self.error_alert_active = False
-    
     # Propiedades para acceso directo a configuraciones comunes
     @property
     def lote_inicial(self):
@@ -92,14 +74,6 @@ class ImageSearchModel:
         self.set_configurable("lote_final", value)
     
     @property
-    def distrito(self):
-        return self.config_manager.get("distrito", "")
-    
-    @distrito.setter
-    def distrito(self, value):
-        self.set_configurable("distrito", value)
-    
-    @property
     def delay_time(self):
         return self.config_manager.get("delay_time", 2)
     
@@ -116,14 +90,35 @@ class ImageSearchModel:
         self.set_configurable("current_lote", value)
     
     @property
-    def no_distrito(self):
-        return self.config_manager.get("no_distrito", False)
+    def patron_texto(self):
+        """Nueva propiedad para el patrón de texto personalizable"""
+        return self.config_manager.get("patron_texto", "LT")
     
-    @no_distrito.setter
-    def no_distrito(self, value):
-        self.set_configurable("no_distrito", value)
+    @patron_texto.setter
+    def patron_texto(self, value):
+        self.set_configurable("patron_texto", value)
     
-    
+    @property
+    def archivo_prefix(self):
+        return self.config_manager.get("archivo_prefix", "LT")
+
+    @property
+    def archivo_formato(self):
+        return self.config_manager.get("archivo_formato", "{prefix} {lote}.kml")
+
+    def generar_nombre_archivo(self, lote_actual):
+        """Genera el nombre de archivo según el formato configurado"""
+        try:
+            formato = self.archivo_formato
+            nombre = formato.replace("{prefix}", self.archivo_prefix)
+            nombre = nombre.replace("{lote}", str(lote_actual))
+            nombre = nombre.replace("{lote_inicial}", str(self.lote_inicial))
+            nombre = nombre.replace("{lote_final}", str(self.lote_final))
+            return nombre
+        except Exception as e:
+            # Fallback a formato por defecto
+            return f"LT {lote_actual}.kml"
+
     @property
     def confianza_minima(self):
         return self.config_manager.get("confianza_minima", 0.68)
@@ -145,7 +140,6 @@ class ImageSearchModel:
             
         intentos = 1
         tiempo_entre_intentos = 1.5
-        # max_intentos = 30  # Número máximo de intentos antes de considerar error
         tiempo_entre_lotes = 10
         
         while self.is_running:
@@ -209,10 +203,5 @@ class ImageSearchModel:
                     "confidence": max_val,
                     "intento": intentos
                 })
-            # Si llegamos aquí, es porque se superó el máximo de intentos
-        # if self.is_running:
-        #       error_msg = f"No se pudo encontrar la imagen '{imagen}' después de {max_intentos} intentos"
-        #       self.trigger_error_alert(error_msg)
-        
         
         return False

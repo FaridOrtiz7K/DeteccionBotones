@@ -170,3 +170,71 @@
 2025-09-18 12:13:49,239 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b1.png' después de 1 intentos
 2025-09-18 12:13:49,251 - views.main_view - INFO - Secuencia interrumpida para lote 1 de 1
 2025-09-18 12:13:49,269 - views.main_view - INFO - Proceso completado
+2025-09-24 12:14:12,671 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 12:14:12,688 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 12:17:10,957 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 12:17:10,958 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 12:17:28,928 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-24 12:17:58,949 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-24 12:17:58,987 - views.main_view - INFO - Patrón de texto actualizado a: RA
+2025-09-24 12:18:03,815 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-09-24 12:18:03,818 - views.main_view - INFO - Patrón de texto: RA
+2025-09-24 12:18:03,821 - views.main_view - INFO - Lotes: 1 a 1
+2025-09-24 12:18:03,823 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-09-24 12:18:03,823 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-09-24 12:18:03,828 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-09-24 12:18:03,830 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-09-24 12:18:03,832 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-09-24 12:18:03,835 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-09-24 12:18:03,835 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-09-24 12:18:03,849 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-09-24 12:18:03,853 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-09-24 12:18:03,859 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-09-24 12:18:03,869 - views.main_view - INFO - Procesando archivo: RA 1.kml
+2025-09-24 12:18:03,897 - views.main_view - INFO - Usando patrón: RA
+2025-09-24 12:18:05,787 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 2)
+2025-09-24 12:18:07,523 - views.main_view - INFO - Proceso detenido
+2025-09-24 12:18:07,647 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 3)
+2025-09-24 12:18:07,706 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b1.png' después de 1 intentos
+2025-09-24 12:18:07,728 - views.main_view - INFO - Secuencia interrumpida para lote 1 de 1
+2025-09-24 12:18:07,754 - views.main_view - INFO - Proceso completado
+2025-09-24 12:20:22,078 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 12:20:22,081 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 12:20:46,528 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-24 12:20:48,458 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-09-24 12:20:48,465 - views.main_view - INFO - Patrón de texto: RA
+2025-09-24 12:20:48,468 - views.main_view - INFO - Lotes: 1 a 1
+2025-09-24 12:20:48,477 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-09-24 12:20:48,484 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-09-24 12:20:48,492 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-09-24 12:20:48,497 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-09-24 12:20:48,502 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-09-24 12:20:48,507 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-09-24 12:20:48,513 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-09-24 12:20:48,517 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-09-24 12:20:48,523 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-09-24 12:20:48,527 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-09-24 12:20:48,535 - views.main_view - INFO - Procesando archivo: RA 1.kml
+2025-09-24 12:20:48,557 - views.main_view - INFO - Usando patrón: RA
+2025-09-24 12:20:50,326 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 2)
+2025-09-24 12:20:51,474 - views.main_view - INFO - Búsqueda pausada (Presione ESC para reanudar)
+2025-09-24 12:20:52,327 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 3)
+2025-09-24 12:20:53,555 - views.main_view - INFO - Proceso detenido
+2025-09-24 12:20:53,564 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b1.png' después de 1 intentos
+2025-09-24 12:20:53,583 - views.main_view - INFO - Secuencia interrumpida para lote 1 de 1
+2025-09-24 12:20:53,609 - views.main_view - INFO - Proceso completado
+2025-09-24 12:20:56,796 - views.main_view - INFO - Proceso detenido
+2025-09-24 12:21:15,385 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-09-24 12:21:15,394 - views.main_view - INFO - Patrón de texto actualizado a: LT
+2025-09-24 12:30:08,274 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 12:30:08,275 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 12:30:15,946 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-24 12:38:36,314 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 12:38:36,316 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 12:38:44,024 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-24 12:43:30,545 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 12:43:30,546 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 12:43:44,454 - views.login_window - INFO - Usuario autenticado correctamente
+2025-09-24 12:47:20,201 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-09-24 12:47:20,202 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-09-24 12:47:27,589 - views.login_window - INFO - Usuario autenticado correctamente
