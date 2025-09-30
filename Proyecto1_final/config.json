@@ -1,8 +1,8 @@
 {
-    "lote_inicial": 1,
-    "lote_final": 462,
+    "lote_inicial": 27,
+    "lote_final": 465,
     "delay_time": 1,
-    "current_lote": 1,
+    "current_lote": 47,
     "confianza_minima": 0.68,
     "max_intentos": 30,
     "username": "admin",
