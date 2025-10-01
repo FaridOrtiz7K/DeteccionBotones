@@ -23,11 +23,11 @@ Loop {
         Send, ^a
         Sleep, 100
         Send, {Delete}
-        Sleep, 100
+        Sleep, 200
         
         ; Escribir nombre de archivo (método confiable)
         SendInput, %nombre_archivo%
-        Sleep, 400
+        Sleep, 550
         
         ; Presionar Enter
         Send, {Enter}

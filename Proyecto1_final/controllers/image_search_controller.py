@@ -176,45 +176,6 @@ class ImageSearchController:
 
         return None
 
-    def detectar_ventana_error(self):
-        """
-        Detecta la ventana de error y presiona Enter para cerrarla
-        Returns:
-            bool: True si encontró la ventana de error, False en caso contrario
-        """
-        try:
-            # Cargar template de la ventana de error
-            template = cv2.imread('img/error.png')  # Necesitarás crear esta imagen
-            if template is None:
-                logger.error("No se pudo cargar la imagen 'error.png'")
-                return False
-            
-            # Capturar pantalla completa
-            screenshot = pyautogui.screenshot()
-            pantalla = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
-            
-            # Realizar template matching
-            result = cv2.matchTemplate(pantalla, template, cv2.TM_CCOEFF_NORMED)
-            _, max_val, _, max_loc = cv2.minMaxLoc(result)
-            
-            confianza_minima = 0.6  # Puedes ajustar este valor
-            
-            if max_val >= confianza_minima:
-                logger.info(f"Ventana de error detectada con confianza: {max_val:.2f}")
-                
-                # Presionar Enter para cerrar la ventana de error
-                pyautogui.press('enter')
-                time.sleep(1)  # Esperar a que se cierre la ventana
-                
-                self.view.log_message("Ventana de error detectada y cerrada")
-                return True
-            else:
-                return False
-                
-        except Exception as e:
-            logger.error(f"Error al detectar ventana de error: {e}")
-            return False
-
     def handle_b4_special_behavior(self, imagen, clicks, confianza):
         """Maneja el comportamiento especial para la imagen b4"""
         # Precionamos el boton b4 (Documentos)
@@ -254,31 +215,15 @@ class ImageSearchController:
         return success
         
     def run_sequence(self):
-        """Ejecuta la secuencia completa de imágenes con detección de error"""
-        intentos_error = 0
-        
+        """Ejecuta la secuencia completa de imágenes"""
         for imagen, clicks, confianza in self.model.image_sequence:
             # Verificar si está pausado
             if self.model.is_paused:
                 with self.model.pause_condition:
                     while self.model.is_paused and self.model.is_running:
                         self.model.pause_condition.wait()
-                if not self.model.is_running:
+                if not self.model.is_running:  # Verificar si se detuvo durante la pausa
                     return False
-            
-            # ANTES de cada botón, verificar error
-            if intentos_error < self.model.max_intentos_error:
-                if self.detectar_ventana_error():
-                    intentos_error += 1
-                    self.view.log_message(f"Intento de error {intentos_error}/{self.model.max_intentos_error}")
-                    
-                    # Si supera los intentos máximos, pasar al siguiente lote
-                    if intentos_error >= self.model.max_intentos_error:
-                        self.view.log_message("Máximo de intentos de error alcanzado. Pasando al siguiente lote.")
-                        return False
-                    
-                    # Volver al inicio del ciclo para el mismo lote
-                    return self.run_sequence()  # Reiniciar la secuencia
             
             # Manejar comportamiento especial para b4
             if "b4.png" in imagen:
@@ -288,10 +233,10 @@ class ImageSearchController:
                 success = self.model.click_button(imagen, clicks, confianza)
             
             if not success:
-                self.view.log_message(f"Error: No se pudo encontrar el botón '{imagen}'")
+                self.view.log_message(f"Error: No se pudo encontrar el botón '{imagen}' después de {self.model.current_lote} intentos")
                 return False
             
-            # Esperar 2 segundos entre imágenes
+            # Esperar 2 segundos entre imágenes (como en el ejemplo)
             if imagen != self.model.image_sequence[-1][0] and self.model.is_running:
                 time.sleep(2)
         
@@ -300,6 +245,7 @@ class ImageSearchController:
     def run_lotes(self):
         """Ejecuta los lotes de búsqueda con mejor manejo de estado"""
         try:
+            # Siempre comenzar desde el lote inicial configurado
             current_lote = self.model.lote_inicial
             lote_final = self.model.lote_final
             
@@ -343,11 +289,12 @@ class ImageSearchController:
                         time.sleep(1)  # Pequeña espera después de guardar
                     
                     self.view.log_message(f"Secuencia completada para lote {current_lote} de {lote_final}")
-                    current_lote += 1  # Solo incrementar si fue exitoso
                 else:
-                    # Si falló por errores, pasar al siguiente lote
-                    self.view.log_message(f"Pasando al siguiente lote después de errores en lote {current_lote}")
-                    current_lote += 1
+                    self.view.log_message(f"Secuencia interrumpida para lote {current_lote} de {lote_final}")
+                    break
+                
+                # Pasar al siguiente lote
+                current_lote += 1
                 
                 # Esperar el tiempo configurado entre lotes (si no es el último lote)
                 if current_lote <= lote_final and self.model.is_running:
