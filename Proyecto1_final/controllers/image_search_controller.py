@@ -254,10 +254,10 @@ class ImageSearchController:
         return success
         
     def run_sequence(self):
-        """Ejecuta la secuencia completa de imágenes con detección de error"""
+        """Ejecuta la secuencia completa de imágenes con detección de error DESPUÉS del botón 6"""
         intentos_error = 0
         
-        for imagen, clicks, confianza in self.model.image_sequence:
+        for i, (imagen, clicks, confianza) in enumerate(self.model.image_sequence):
             # Verificar si está pausado
             if self.model.is_paused:
                 with self.model.pause_condition:
@@ -265,20 +265,6 @@ class ImageSearchController:
                         self.model.pause_condition.wait()
                 if not self.model.is_running:
                     return False
-            
-            # ANTES de cada botón, verificar error
-            if intentos_error < self.model.max_intentos_error:
-                if self.detectar_ventana_error():
-                    intentos_error += 1
-                    self.view.log_message(f"Intento de error {intentos_error}/{self.model.max_intentos_error}")
-                    
-                    # Si supera los intentos máximos, pasar al siguiente lote
-                    if intentos_error >= self.model.max_intentos_error:
-                        self.view.log_message("Máximo de intentos de error alcanzado. Pasando al siguiente lote.")
-                        return False
-                    
-                    # Volver al inicio del ciclo para el mismo lote
-                    return self.run_sequence()  # Reiniciar la secuencia
             
             # Manejar comportamiento especial para b4
             if "b4.png" in imagen:
@@ -291,8 +277,33 @@ class ImageSearchController:
                 self.view.log_message(f"Error: No se pudo encontrar el botón '{imagen}'")
                 return False
             
-            # Esperar 2 segundos entre imágenes
-            if imagen != self.model.image_sequence[-1][0] and self.model.is_running:
+            # DETECCIÓN DE ERROR ESPECÍFICAMENTE DESPUÉS DEL BOTÓN 6
+            if "b6.png" in imagen:
+                self.view.log_message("Botón 6 presionado - verificando ventana de error...")
+                
+                # Esperar un momento para que aparezca la ventana de error si va a aparecer
+                time.sleep(3)
+                
+                # Verificar ventana de error hasta 30 intentos
+                while intentos_error < self.model.max_intentos_error and self.model.is_running:
+                    if self.detectar_ventana_error():
+                        intentos_error += 1
+                        self.view.log_message(f"Intento de error {intentos_error}/{self.model.max_intentos_error}")
+                        
+                        # Si supera los intentos máximos, pasar al siguiente lote
+                        if intentos_error >= self.model.max_intentos_error:
+                            self.view.log_message("Máximo de intentos de error alcanzado. Pasando al siguiente lote.")
+                            return False
+                        
+                        # Volver al inicio del ciclo para el mismo lote
+                        self.view.log_message("Reiniciando secuencia desde el inicio...")
+                        return self.run_sequence()  # Reiniciar la secuencia
+                    else:
+                        # No se detectó error, continuar con la secuencia normal
+                        break
+            
+            # Esperar 2 segundos entre imágenes (excepto después de b6 donde ya esperamos)
+            if imagen != self.model.image_sequence[-1][0] and "b6.png" not in imagen and self.model.is_running:
                 time.sleep(2)
         
         return True
