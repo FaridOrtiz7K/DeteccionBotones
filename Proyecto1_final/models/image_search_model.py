@@ -33,6 +33,8 @@ class ImageSearchModel:
             ("img/b7.png", 1, self.config_manager.get("confianza_minima", 0.68)),
             ("img/b8.png", 1, self.config_manager.get("confianza_minima", 0.68))
         ]
+    # Agregar esta propiedad para el manejo de intentos de error
+        self.max_intentos_error = 30
     
     def add_observer(self, observer):
         self.observers.append(observer)
