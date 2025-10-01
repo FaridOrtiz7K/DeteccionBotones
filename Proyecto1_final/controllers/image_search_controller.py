@@ -90,6 +90,8 @@ class ImageSearchController:
             self.view.log_message(f"Procesando lote {data} de {self.model.lote_final}")
         elif event == "formato_texto_changed":
             self.view.log_message(f"Patrón de texto actualizado a: {data}")
+        elif event == "process_restarted":
+            self.view.log_message(f"Proceso reiniciado - Pasando al siguiente lote: {data}")
     
     def update_lote_inicial(self, lote):
         try:
@@ -176,6 +178,57 @@ class ImageSearchController:
 
         return None
 
+    def detectar_imagen_error(self, imagen_error="img/b9.png", confianza_minima=0.7):
+        """
+        Detecta si aparece una imagen específica que indica un error
+        Retorna True si detecta la imagen de error, False en caso contrario
+        """
+        try:
+            # Cargar la imagen de error
+            template = cv2.imread(imagen_error)
+            if template is None:
+                logger.warning(f"No se pudo cargar la imagen de error: {imagen_error}")
+                return False
+            
+            # Capturar pantalla
+            screenshot = pyautogui.screenshot()
+            pantalla = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+            
+            # Realizar template matching
+            result = cv2.matchTemplate(pantalla, template, cv2.TM_CCOEFF_NORMED)
+            _, max_val, _, _ = cv2.minMaxLoc(result)
+            
+            if max_val >= confianza_minima:
+                logger.info(f"Imagen de error detectada con confianza: {max_val:.2f}")
+                return True
+            else:
+                return False
+                
+        except Exception as e:
+            logger.error(f"Error al detectar imagen de error: {e}")
+            return False
+
+    def manejar_error_y_continuar(self):
+        """
+        Maneja el error detectado: presiona Enter y retorna True para indicar
+        que el proceso debe continuar con el siguiente lote
+        """
+        try:
+            self.view.log_message("Error detectado - Presionando Enter para continuar...")
+            
+            # Presionar Enter para cerrar el mensaje de error
+            pyautogui.press('enter')
+            time.sleep(1)  # Esperar a que se procese el Enter
+            
+            # Notificar que el proceso se reinició
+            self.model.notify_observers("process_restarted", self.model.current_lote + 1)
+            
+            return True  # Indicar que se debe continuar con el siguiente lote
+            
+        except Exception as e:
+            logger.error(f"Error al manejar el error: {e}")
+            return False
+
     def handle_b4_special_behavior(self, imagen, clicks, confianza):
         """Maneja el comportamiento especial para la imagen b4"""
         # Precionamos el boton b4 (Documentos)
@@ -215,7 +268,7 @@ class ImageSearchController:
         return success
         
     def run_sequence(self):
-        """Ejecuta la secuencia completa de imágenes"""
+        """Ejecuta la secuencia completa de imágenes con detección de errores"""
         for imagen, clicks, confianza in self.model.image_sequence:
             # Verificar si está pausado
             if self.model.is_paused:
@@ -225,12 +278,24 @@ class ImageSearchController:
                 if not self.model.is_running:  # Verificar si se detuvo durante la pausa
                     return False
             
+            # Verificar si aparece la imagen de error antes de cada paso
+            if self.detectar_imagen_error():
+                self.view.log_message("Error detectado en la secuencia - Reiniciando proceso...")
+                if self.manejar_error_y_continuar():
+                    return False  # Indicar que la secuencia falló y debe pasar al siguiente lote
+            
             # Manejar comportamiento especial para b4
             if "b4.png" in imagen:
                 success = self.handle_b4_special_behavior(imagen, clicks, confianza)
             else:
                 # Realizar la búsqueda y clic normal para otras imágenes
                 success = self.model.click_button(imagen, clicks, confianza)
+            
+            # Verificar si aparece la imagen de error después de cada paso
+            if self.detectar_imagen_error():
+                self.view.log_message("Error detectado después de la acción - Reiniciando proceso...")
+                if self.manejar_error_y_continuar():
+                    return False  # Indicar que la secuencia falló y debe pasar al siguiente lote
             
             if not success:
                 self.view.log_message(f"Error: No se pudo encontrar el botón '{imagen}' después de {self.model.current_lote} intentos")
@@ -289,12 +354,15 @@ class ImageSearchController:
                         time.sleep(1)  # Pequeña espera después de guardar
                     
                     self.view.log_message(f"Secuencia completada para lote {current_lote} de {lote_final}")
+                    
+                    # Pasar al siguiente lote solo si fue exitoso
+                    current_lote += 1
+                    
                 else:
-                    self.view.log_message(f"Secuencia interrumpida para lote {current_lote} de {lote_final}")
-                    break
-                
-                # Pasar al siguiente lote
-                current_lote += 1
+                    # Si la secuencia falló por error detectado, pasar al siguiente lote
+                    self.view.log_message(f"Secuencia interrumpida para lote {current_lote} - Pasando al siguiente lote")
+                    current_lote += 1
+                    continue  # Continuar con el siguiente lote sin esperar
                 
                 # Esperar el tiempo configurado entre lotes (si no es el último lote)
                 if current_lote <= lote_final and self.model.is_running:
