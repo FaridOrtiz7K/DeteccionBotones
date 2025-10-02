@@ -305,6 +305,9 @@ class ImageSearchController:
             # Esperar 2 segundos entre imágenes (excepto después de b6 donde ya esperamos)
             if imagen != self.model.image_sequence[-1][0] and "b6.png" not in imagen and self.model.is_running:
                 time.sleep(2)
+            self.view.log_message("Presionando Enter 2 veces")
+            pyautogui.press('enter', presses=2, interval=0.5)
+            time.sleep(1)
         
         return True
     
@@ -343,10 +346,11 @@ class ImageSearchController:
                 
                 if success:
                     # Presionar Enter 3 veces después de cada secuencia
+                    """
                     self.view.log_message("Presionando Enter 3 veces")
                     pyautogui.press('enter', presses=3, interval=0.5)
                     time.sleep(1)
-                    
+                    """
                     # Cada 10 lotes, presionar 'S' para guardar
                     if current_lote % 10 == 0:
                         self.view.log_message("Presionando 'S' para guardar cambios")
