@@ -1,4 +1,6 @@
 import pyautogui
+import time
+time.sleep(3)  # Tiempo para cambiar a la ventana correcta
 print("Presionando Enter una vez")
 pyautogui.press('enter')
 print("Presionando Enter dos veces")
