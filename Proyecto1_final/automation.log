@@ -19582,3 +19582,561 @@
 2025-10-02 08:08:10,063 - views.main_view - INFO - Secuencia completada para lote 262 de 262
 2025-10-02 08:08:10,072 - views.main_view - INFO - Presionando Ctrl+S para guardar todos los cambios
 2025-10-02 08:57:32,630 - views.main_view - INFO - Proceso completado
+2025-10-02 11:19:03,764 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-10-02 11:19:03,765 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-10-02 11:19:22,777 - views.login_window - INFO - Usuario autenticado correctamente
+2025-10-02 11:19:42,831 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-10-02 11:19:42,972 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-10-02 11:19:42,972 - views.main_view - INFO - Formato para el texto: LT
+2025-10-02 11:19:42,973 - views.main_view - INFO - Lotes: 196 a 262
+2025-10-02 11:19:42,974 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-10-02 11:19:42,975 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-10-02 11:19:42,976 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-10-02 11:19:42,976 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-10-02 11:19:42,977 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-10-02 11:19:42,978 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-10-02 11:19:42,980 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-10-02 11:19:42,981 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-10-02 11:19:42,983 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-10-02 11:19:42,985 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-10-02 11:19:42,991 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-10-02 11:19:43,004 - views.main_view - INFO - Procesando lote 196 de 262
+2025-10-02 11:19:43,008 - views.main_view - INFO - Procesando archivo: LT 196.kml
+2025-10-02 11:19:43,011 - views.main_view - INFO - Usando formato: LT
+2025-10-02 11:19:46,074 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:19:51,103 - views.main_view - INFO - Botón 'img/b2.png' encontrado en (1388, 595) - Confianza: 1.00
+2025-10-02 11:19:56,156 - views.main_view - INFO - Botón 'img/b3.png' encontrado en (1412, 634) - Confianza: 1.00
+2025-10-02 11:20:00,011 - views.main_view - INFO - Botón 'img/b4.png' no encontrado. Mejor coincidencia: 0.48 (Intento 2)
+2025-10-02 11:20:03,065 - views.main_view - INFO - Botón 'img/b4.png' encontrado en (1115, 654) - Confianza: 0.96
+2025-10-02 11:20:06,346 - controllers.image_search_controller - INFO - Ventana encontrada con confianza: 1.00
+2025-10-02 11:20:06,348 - controllers.image_search_controller - INFO - Coordenadas ventana: x=1040, y=330
+2025-10-02 11:20:06,348 - controllers.image_search_controller - INFO - Coordenadas campo texto: x=1334, y=830
+2025-10-02 11:20:08,358 - utils.ahk_manager - INFO - AutoHotkey iniciado correctamente
+2025-10-02 11:20:08,360 - utils.ahk_manager - INFO - Comando enviado a AHK: 1334,830,LT 196.kml
+2025-10-02 11:20:11,631 - views.main_view - INFO - Búsqueda pausada (Presione ESC para reanudar)
+2025-10-02 11:20:22,301 - utils.ahk_manager - INFO - AutoHotkey detenido correctamente
+2025-10-02 11:20:22,316 - views.main_view - INFO - Proceso detenido
+2025-10-02 11:20:22,321 - views.main_view - INFO - Pasando al siguiente lote después de errores en lote 196
+2025-10-02 11:20:22,333 - views.main_view - INFO - Proceso completado
+2025-10-02 11:21:33,814 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-10-02 11:21:33,823 - views.main_view - INFO - Formato para el texto: LT
+2025-10-02 11:21:33,828 - views.main_view - INFO - Lotes: 196 a 262
+2025-10-02 11:21:33,836 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-10-02 11:21:33,838 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-10-02 11:21:33,839 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-10-02 11:21:33,841 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-10-02 11:21:33,843 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-10-02 11:21:33,845 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-10-02 11:21:33,847 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-10-02 11:21:33,849 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-10-02 11:21:33,851 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-10-02 11:21:33,853 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-10-02 11:21:33,855 - views.main_view - INFO - Procesando archivo: LT 196.kml
+2025-10-02 11:21:33,869 - views.main_view - INFO - Usando formato: LT
+2025-10-02 11:21:36,869 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:21:41,886 - views.main_view - INFO - Botón 'img/b2.png' encontrado en (1388, 595) - Confianza: 1.00
+2025-10-02 11:21:46,944 - views.main_view - INFO - Botón 'img/b3.png' encontrado en (1412, 634) - Confianza: 0.89
+2025-10-02 11:21:50,770 - views.main_view - INFO - Botón 'img/b4.png' no encontrado. Mejor coincidencia: 0.48 (Intento 2)
+2025-10-02 11:21:53,814 - views.main_view - INFO - Botón 'img/b4.png' encontrado en (1115, 654) - Confianza: 0.96
+2025-10-02 11:21:57,101 - controllers.image_search_controller - INFO - Ventana encontrada con confianza: 1.00
+2025-10-02 11:21:57,103 - controllers.image_search_controller - INFO - Coordenadas ventana: x=1040, y=330
+2025-10-02 11:21:57,103 - controllers.image_search_controller - INFO - Coordenadas campo texto: x=1334, y=830
+2025-10-02 11:21:59,118 - utils.ahk_manager - INFO - AutoHotkey iniciado correctamente
+2025-10-02 11:21:59,124 - utils.ahk_manager - INFO - Comando enviado a AHK: 1334,830,LT 196.kml
+2025-10-02 11:22:14,177 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 0.87
+2025-10-02 11:22:19,211 - views.main_view - INFO - Botón 'img/b6.png' encontrado en (1397, 665) - Confianza: 1.00
+2025-10-02 11:22:19,227 - views.main_view - INFO - Botón 6 presionado - verificando ventana de error...
+2025-10-02 11:22:22,230 - controllers.image_search_controller - ERROR - No se pudo cargar la imagen 'b9.png'
+2025-10-02 11:22:25,280 - views.main_view - INFO - Botón 'img/b7.png' encontrado en (1251, 186) - Confianza: 1.00
+2025-10-02 11:22:30,326 - views.main_view - INFO - Botón 'img/b8.png' encontrado en (1261, 404) - Confianza: 0.83
+2025-10-02 11:22:30,342 - views.main_view - INFO - Presionando Enter 2 veces
+2025-10-02 11:22:32,481 - views.main_view - INFO - Secuencia completada para lote 196 de 262
+2025-10-02 11:22:32,492 - views.main_view - INFO - Esperando 1 segundos antes del próximo lote...
+2025-10-02 11:22:32,500 - views.main_view - INFO - Tiempo restante: 1 segundos
+2025-10-02 11:22:33,509 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-10-02 11:22:33,516 - views.main_view - INFO - Procesando lote 197 de 262
+2025-10-02 11:22:33,524 - views.main_view - INFO - Procesando archivo: LT 197.kml
+2025-10-02 11:22:33,537 - views.main_view - INFO - Usando formato: LT
+2025-10-02 11:22:36,576 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:22:41,583 - views.main_view - INFO - Botón 'img/b2.png' encontrado en (1388, 595) - Confianza: 1.00
+2025-10-02 11:22:46,626 - views.main_view - INFO - Botón 'img/b3.png' encontrado en (1412, 634) - Confianza: 0.89
+2025-10-02 11:22:50,481 - views.main_view - INFO - Botón 'img/b4.png' no encontrado. Mejor coincidencia: 0.48 (Intento 2)
+2025-10-02 11:22:53,529 - views.main_view - INFO - Botón 'img/b4.png' encontrado en (1115, 654) - Confianza: 1.00
+2025-10-02 11:22:56,821 - controllers.image_search_controller - INFO - Ventana encontrada con confianza: 0.84
+2025-10-02 11:22:56,822 - controllers.image_search_controller - INFO - Coordenadas ventana: x=1040, y=330
+2025-10-02 11:22:56,823 - controllers.image_search_controller - INFO - Coordenadas campo texto: x=1334, y=830
+2025-10-02 11:22:56,825 - utils.ahk_manager - INFO - Comando enviado a AHK: 1334,830,LT 197.kml
+2025-10-02 11:23:11,833 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:23:16,891 - views.main_view - INFO - Botón 'img/b6.png' encontrado en (1397, 665) - Confianza: 1.00
+2025-10-02 11:23:16,903 - views.main_view - INFO - Botón 6 presionado - verificando ventana de error...
+2025-10-02 11:23:19,905 - controllers.image_search_controller - ERROR - No se pudo cargar la imagen 'b9.png'
+2025-10-02 11:23:22,914 - views.main_view - INFO - Botón 'img/b7.png' encontrado en (1251, 186) - Confianza: 0.80
+2025-10-02 11:23:26,762 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 2)
+2025-10-02 11:23:28,582 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 3)
+2025-10-02 11:23:30,423 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 4)
+2025-10-02 11:23:32,230 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 5)
+2025-10-02 11:23:34,035 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 6)
+2025-10-02 11:23:35,858 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 7)
+2025-10-02 11:23:37,688 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 8)
+2025-10-02 11:23:39,513 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 9)
+2025-10-02 11:23:41,329 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 10)
+2025-10-02 11:23:41,637 - models.image_search_model - INFO - Intento 10: Mejor coincidencia: 0.60
+2025-10-02 11:23:51,655 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 11)
+2025-10-02 11:23:53,453 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 12)
+2025-10-02 11:23:55,254 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 13)
+2025-10-02 11:23:57,071 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 14)
+2025-10-02 11:23:58,863 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 15)
+2025-10-02 11:24:00,680 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 16)
+2025-10-02 11:24:02,516 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 17)
+2025-10-02 11:24:04,362 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 18)
+2025-10-02 11:24:06,221 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 19)
+2025-10-02 11:24:08,049 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 20)
+2025-10-02 11:24:08,342 - models.image_search_model - INFO - Intento 20: Mejor coincidencia: 0.36
+2025-10-02 11:24:18,360 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 21)
+2025-10-02 11:24:20,164 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 22)
+2025-10-02 11:24:22,010 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 23)
+2025-10-02 11:24:23,814 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 24)
+2025-10-02 11:24:25,625 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 25)
+2025-10-02 11:24:27,452 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 26)
+2025-10-02 11:24:29,296 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 27)
+2025-10-02 11:24:31,105 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 28)
+2025-10-02 11:24:32,940 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 29)
+2025-10-02 11:24:34,747 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 30)
+2025-10-02 11:24:35,042 - models.image_search_model - INFO - Intento 30: Mejor coincidencia: 0.36
+2025-10-02 11:24:45,054 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 31)
+2025-10-02 11:24:46,848 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 32)
+2025-10-02 11:24:48,685 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 33)
+2025-10-02 11:24:50,472 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.41 (Intento 34)
+2025-10-02 11:24:52,269 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.41 (Intento 35)
+2025-10-02 11:24:54,066 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.39 (Intento 36)
+2025-10-02 11:24:55,871 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 37)
+2025-10-02 11:24:57,676 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 38)
+2025-10-02 11:24:59,492 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 39)
+2025-10-02 11:25:01,298 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.38 (Intento 40)
+2025-10-02 11:25:01,583 - models.image_search_model - INFO - Intento 40: Mejor coincidencia: 0.38
+2025-10-02 11:25:11,607 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.38 (Intento 41)
+2025-10-02 11:25:13,421 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 42)
+2025-10-02 11:25:15,206 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 43)
+2025-10-02 11:25:17,020 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 44)
+2025-10-02 11:25:18,832 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.38 (Intento 45)
+2025-10-02 11:25:20,630 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 46)
+2025-10-02 11:25:22,454 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 47)
+2025-10-02 11:25:24,263 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 48)
+2025-10-02 11:25:26,107 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 49)
+2025-10-02 11:25:27,951 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.38 (Intento 50)
+2025-10-02 11:25:28,249 - models.image_search_model - INFO - Intento 50: Mejor coincidencia: 0.56
+2025-10-02 11:25:38,270 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 51)
+2025-10-02 11:25:40,119 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 52)
+2025-10-02 11:25:41,925 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 53)
+2025-10-02 11:25:43,727 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.38 (Intento 54)
+2025-10-02 11:25:44,784 - utils.ahk_manager - INFO - AutoHotkey detenido correctamente
+2025-10-02 11:25:44,791 - views.main_view - INFO - Proceso detenido
+2025-10-02 11:25:45,553 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.38 (Intento 55)
+2025-10-02 11:25:45,573 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b8.png'
+2025-10-02 11:25:45,585 - views.main_view - INFO - Pasando al siguiente lote después de errores en lote 197
+2025-10-02 11:25:45,608 - views.main_view - INFO - Proceso completado
+2025-10-02 11:26:30,339 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-10-02 11:26:30,457 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-10-02 11:26:30,466 - views.main_view - INFO - Formato para el texto: LT
+2025-10-02 11:26:30,471 - views.main_view - INFO - Lotes: 195 a 262
+2025-10-02 11:26:30,475 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-10-02 11:26:30,485 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-10-02 11:26:30,488 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-10-02 11:26:30,491 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-10-02 11:26:30,494 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-10-02 11:26:30,497 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-10-02 11:26:30,500 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-10-02 11:26:30,502 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-10-02 11:26:30,505 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-10-02 11:26:30,509 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-10-02 11:26:30,556 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-10-02 11:26:30,563 - views.main_view - INFO - Procesando lote 195 de 262
+2025-10-02 11:26:30,565 - views.main_view - INFO - Procesando archivo: LT 195.kml
+2025-10-02 11:26:30,567 - views.main_view - INFO - Usando formato: LT
+2025-10-02 11:26:33,560 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:26:38,587 - views.main_view - INFO - Botón 'img/b2.png' encontrado en (1388, 595) - Confianza: 1.00
+2025-10-02 11:26:43,592 - views.main_view - INFO - Botón 'img/b3.png' encontrado en (1412, 634) - Confianza: 0.89
+2025-10-02 11:26:48,656 - views.main_view - INFO - Botón 'img/b4.png' encontrado en (1115, 654) - Confianza: 1.00
+2025-10-02 11:26:51,952 - controllers.image_search_controller - INFO - Ventana encontrada con confianza: 1.00
+2025-10-02 11:26:51,953 - controllers.image_search_controller - INFO - Coordenadas ventana: x=1040, y=330
+2025-10-02 11:26:51,954 - controllers.image_search_controller - INFO - Coordenadas campo texto: x=1334, y=830
+2025-10-02 11:26:53,964 - utils.ahk_manager - INFO - AutoHotkey iniciado correctamente
+2025-10-02 11:26:53,970 - utils.ahk_manager - INFO - Comando enviado a AHK: 1334,830,LT 195.kml
+2025-10-02 11:27:08,974 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:27:13,995 - views.main_view - INFO - Botón 'img/b6.png' encontrado en (1397, 665) - Confianza: 1.00
+2025-10-02 11:27:14,012 - views.main_view - INFO - Botón 6 presionado - verificando ventana de error...
+2025-10-02 11:27:17,014 - controllers.image_search_controller - ERROR - No se pudo cargar la imagen 'b9.png'
+2025-10-02 11:27:20,053 - views.main_view - INFO - Botón 'img/b7.png' encontrado en (1251, 186) - Confianza: 1.00
+2025-10-02 11:27:25,039 - views.main_view - INFO - Botón 'img/b8.png' encontrado en (1261, 404) - Confianza: 0.83
+2025-10-02 11:27:25,046 - views.main_view - INFO - Presionando Enter 2 veces
+2025-10-02 11:27:27,163 - views.main_view - INFO - Secuencia completada para lote 195 de 262
+2025-10-02 11:27:27,174 - views.main_view - INFO - Esperando 1 segundos antes del próximo lote...
+2025-10-02 11:27:27,184 - views.main_view - INFO - Tiempo restante: 1 segundos
+2025-10-02 11:27:28,194 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-10-02 11:27:28,201 - views.main_view - INFO - Procesando lote 196 de 262
+2025-10-02 11:27:28,211 - views.main_view - INFO - Procesando archivo: LT 196.kml
+2025-10-02 11:27:28,224 - views.main_view - INFO - Usando formato: LT
+2025-10-02 11:27:31,220 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:27:36,230 - views.main_view - INFO - Botón 'img/b2.png' encontrado en (1388, 595) - Confianza: 1.00
+2025-10-02 11:27:41,259 - views.main_view - INFO - Botón 'img/b3.png' encontrado en (1412, 634) - Confianza: 0.89
+2025-10-02 11:27:46,317 - views.main_view - INFO - Botón 'img/b4.png' encontrado en (1115, 654) - Confianza: 1.00
+2025-10-02 11:27:49,622 - controllers.image_search_controller - INFO - Ventana encontrada con confianza: 1.00
+2025-10-02 11:27:49,625 - controllers.image_search_controller - INFO - Coordenadas ventana: x=1040, y=330
+2025-10-02 11:27:49,625 - controllers.image_search_controller - INFO - Coordenadas campo texto: x=1334, y=830
+2025-10-02 11:27:49,628 - utils.ahk_manager - INFO - Comando enviado a AHK: 1334,830,LT 196.kml
+2025-10-02 11:28:04,666 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 0.87
+2025-10-02 11:28:09,688 - views.main_view - INFO - Botón 'img/b6.png' encontrado en (1397, 665) - Confianza: 1.00
+2025-10-02 11:28:09,697 - views.main_view - INFO - Botón 6 presionado - verificando ventana de error...
+2025-10-02 11:28:12,699 - controllers.image_search_controller - ERROR - No se pudo cargar la imagen 'b9.png'
+2025-10-02 11:28:15,703 - views.main_view - INFO - Botón 'img/b7.png' encontrado en (1251, 186) - Confianza: 0.80
+2025-10-02 11:28:19,522 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 2)
+2025-10-02 11:28:21,322 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 3)
+2025-10-02 11:28:23,131 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 4)
+2025-10-02 11:28:24,963 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 5)
+2025-10-02 11:28:26,755 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 6)
+2025-10-02 11:28:28,575 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 7)
+2025-10-02 11:28:30,370 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 8)
+2025-10-02 11:28:32,182 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 9)
+2025-10-02 11:28:33,974 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 10)
+2025-10-02 11:28:34,281 - models.image_search_model - INFO - Intento 10: Mejor coincidencia: 0.60
+2025-10-02 11:28:44,299 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 11)
+2025-10-02 11:28:46,134 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 12)
+2025-10-02 11:28:47,946 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 13)
+2025-10-02 11:28:49,756 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 14)
+2025-10-02 11:28:51,581 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 15)
+2025-10-02 11:28:53,391 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 16)
+2025-10-02 11:28:55,186 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 17)
+2025-10-02 11:28:56,996 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 18)
+2025-10-02 11:28:58,836 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 19)
+2025-10-02 11:29:00,675 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 20)
+2025-10-02 11:29:00,983 - models.image_search_model - INFO - Intento 20: Mejor coincidencia: 0.36
+2025-10-02 11:29:10,999 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 21)
+2025-10-02 11:29:12,820 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 22)
+2025-10-02 11:29:14,624 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 23)
+2025-10-02 11:29:16,436 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 24)
+2025-10-02 11:29:18,280 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 25)
+2025-10-02 11:29:20,081 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 26)
+2025-10-02 11:29:21,880 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 27)
+2025-10-02 11:29:23,683 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 28)
+2025-10-02 11:29:25,479 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 29)
+2025-10-02 11:29:27,290 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 30)
+2025-10-02 11:29:27,573 - models.image_search_model - INFO - Intento 30: Mejor coincidencia: 0.36
+2025-10-02 11:29:37,583 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 31)
+2025-10-02 11:29:39,387 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 32)
+2025-10-02 11:29:41,203 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 33)
+2025-10-02 11:29:43,009 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 34)
+2025-10-02 11:29:44,833 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 35)
+2025-10-02 11:29:46,676 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 36)
+2025-10-02 11:29:48,482 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 37)
+2025-10-02 11:29:50,333 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 38)
+2025-10-02 11:29:52,158 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 39)
+2025-10-02 11:29:53,995 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 40)
+2025-10-02 11:29:54,294 - models.image_search_model - INFO - Intento 40: Mejor coincidencia: 0.36
+2025-10-02 11:30:04,311 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 41)
+2025-10-02 11:30:06,125 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 42)
+2025-10-02 11:30:07,930 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 43)
+2025-10-02 11:30:09,731 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 44)
+2025-10-02 11:30:11,523 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 45)
+2025-10-02 11:30:13,336 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 46)
+2025-10-02 11:30:15,176 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 47)
+2025-10-02 11:30:16,998 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 48)
+2025-10-02 11:30:18,815 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 49)
+2025-10-02 11:30:20,597 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 50)
+2025-10-02 11:30:20,889 - models.image_search_model - INFO - Intento 50: Mejor coincidencia: 0.36
+2025-10-02 11:30:30,906 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 51)
+2025-10-02 11:30:32,706 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 52)
+2025-10-02 11:30:34,544 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 53)
+2025-10-02 11:30:36,378 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 54)
+2025-10-02 11:30:38,173 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 55)
+2025-10-02 11:30:39,979 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 56)
+2025-10-02 11:30:41,815 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 57)
+2025-10-02 11:30:43,640 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 58)
+2025-10-02 11:30:45,455 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 59)
+2025-10-02 11:30:47,315 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 60)
+2025-10-02 11:30:47,595 - models.image_search_model - INFO - Intento 60: Mejor coincidencia: 0.36
+2025-10-02 11:30:50,273 - views.main_view - INFO - Búsqueda pausada (Presione ESC para reanudar)
+2025-10-02 11:30:57,608 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 61)
+2025-10-02 11:31:07,834 - utils.ahk_manager - INFO - AutoHotkey detenido correctamente
+2025-10-02 11:31:07,847 - views.main_view - INFO - Proceso detenido
+2025-10-02 11:31:07,859 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b8.png'
+2025-10-02 11:31:07,880 - views.main_view - INFO - Pasando al siguiente lote después de errores en lote 196
+2025-10-02 11:31:07,894 - views.main_view - INFO - Proceso completado
+2025-10-02 11:31:38,054 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-10-02 11:31:38,055 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-10-02 11:31:46,562 - views.login_window - INFO - Usuario autenticado correctamente
+2025-10-02 11:32:18,526 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-10-02 11:32:18,528 - views.main_view - INFO - Formato para el texto: LT
+2025-10-02 11:32:18,530 - views.main_view - INFO - Lotes: 195 a 262
+2025-10-02 11:32:18,531 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-10-02 11:32:18,532 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-10-02 11:32:18,533 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-10-02 11:32:18,534 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-10-02 11:32:18,536 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-10-02 11:32:18,537 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-10-02 11:32:18,542 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-10-02 11:32:18,545 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-10-02 11:32:18,548 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-10-02 11:32:18,552 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-10-02 11:32:18,563 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-10-02 11:32:18,571 - views.main_view - INFO - Procesando lote 195 de 262
+2025-10-02 11:32:18,579 - views.main_view - INFO - Procesando archivo: LT 195.kml
+2025-10-02 11:32:18,582 - views.main_view - INFO - Usando formato: LT
+2025-10-02 11:32:21,593 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:32:26,638 - views.main_view - INFO - Botón 'img/b2.png' encontrado en (1388, 595) - Confianza: 1.00
+2025-10-02 11:32:31,663 - views.main_view - INFO - Botón 'img/b3.png' encontrado en (1412, 634) - Confianza: 0.89
+2025-10-02 11:32:35,489 - views.main_view - INFO - Botón 'img/b4.png' no encontrado. Mejor coincidencia: 0.48 (Intento 2)
+2025-10-02 11:32:38,549 - views.main_view - INFO - Botón 'img/b4.png' encontrado en (1115, 654) - Confianza: 1.00
+2025-10-02 11:32:41,869 - controllers.image_search_controller - INFO - Ventana encontrada con confianza: 1.00
+2025-10-02 11:32:41,871 - controllers.image_search_controller - INFO - Coordenadas ventana: x=1040, y=330
+2025-10-02 11:32:41,871 - controllers.image_search_controller - INFO - Coordenadas campo texto: x=1334, y=830
+2025-10-02 11:32:43,886 - utils.ahk_manager - INFO - AutoHotkey iniciado correctamente
+2025-10-02 11:32:43,893 - utils.ahk_manager - INFO - Comando enviado a AHK: 1334,830,LT 195.kml
+2025-10-02 11:32:58,895 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:33:03,910 - views.main_view - INFO - Botón 'img/b6.png' encontrado en (1397, 665) - Confianza: 1.00
+2025-10-02 11:33:03,918 - views.main_view - INFO - Botón 6 presionado - verificando ventana de error...
+2025-10-02 11:33:06,920 - controllers.image_search_controller - ERROR - No se pudo cargar la imagen 'b9.png'
+2025-10-02 11:33:09,944 - views.main_view - INFO - Botón 'img/b7.png' encontrado en (1251, 186) - Confianza: 0.86
+2025-10-02 11:33:13,793 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 2)
+2025-10-02 11:33:15,594 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 3)
+2025-10-02 11:33:17,404 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 4)
+2025-10-02 11:33:19,226 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 5)
+2025-10-02 11:33:21,048 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 6)
+2025-10-02 11:33:22,844 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 7)
+2025-10-02 11:33:24,629 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 8)
+2025-10-02 11:33:26,467 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 9)
+2025-10-02 11:33:28,265 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 10)
+2025-10-02 11:33:28,583 - models.image_search_model - INFO - Intento 10: Mejor coincidencia: 0.60
+2025-10-02 11:33:38,600 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 11)
+2025-10-02 11:33:40,436 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 12)
+2025-10-02 11:33:42,242 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 13)
+2025-10-02 11:33:44,081 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 14)
+2025-10-02 11:33:45,921 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 15)
+2025-10-02 11:33:47,763 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 16)
+2025-10-02 11:33:49,571 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 17)
+2025-10-02 11:33:51,390 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 18)
+2025-10-02 11:33:53,191 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 19)
+2025-10-02 11:33:54,971 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 20)
+2025-10-02 11:33:55,297 - models.image_search_model - INFO - Intento 20: Mejor coincidencia: 0.36
+2025-10-02 11:34:05,314 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 21)
+2025-10-02 11:34:07,118 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 22)
+2025-10-02 11:34:08,978 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 23)
+2025-10-02 11:34:10,772 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 24)
+2025-10-02 11:34:12,563 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 25)
+2025-10-02 11:34:14,377 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 26)
+2025-10-02 11:34:16,171 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 27)
+2025-10-02 11:34:17,987 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 28)
+2025-10-02 11:34:19,791 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 29)
+2025-10-02 11:34:21,570 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 30)
+2025-10-02 11:34:21,863 - models.image_search_model - INFO - Intento 30: Mejor coincidencia: 0.36
+2025-10-02 11:34:31,883 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 31)
+2025-10-02 11:34:33,713 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 32)
+2025-10-02 11:34:35,498 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 33)
+2025-10-02 11:34:37,283 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 34)
+2025-10-02 11:34:39,118 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 35)
+2025-10-02 11:34:40,963 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 36)
+2025-10-02 11:34:42,760 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 37)
+2025-10-02 11:34:44,606 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 38)
+2025-10-02 11:34:46,423 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 39)
+2025-10-02 11:34:48,253 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 40)
+2025-10-02 11:34:48,563 - models.image_search_model - INFO - Intento 40: Mejor coincidencia: 0.56
+2025-10-02 11:34:58,574 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 41)
+2025-10-02 11:35:00,393 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 42)
+2025-10-02 11:35:02,207 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 43)
+2025-10-02 11:35:04,011 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 44)
+2025-10-02 11:35:05,816 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 45)
+2025-10-02 11:35:07,664 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 46)
+2025-10-02 11:35:09,479 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 47)
+2025-10-02 11:35:11,294 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 48)
+2025-10-02 11:35:13,126 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 49)
+2025-10-02 11:35:14,946 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 50)
+2025-10-02 11:35:15,229 - models.image_search_model - INFO - Intento 50: Mejor coincidencia: 0.55
+2025-10-02 11:35:25,246 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 51)
+2025-10-02 11:35:27,111 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 52)
+2025-10-02 11:35:28,919 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 53)
+2025-10-02 11:35:30,724 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 54)
+2025-10-02 11:35:32,510 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 55)
+2025-10-02 11:35:34,322 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 56)
+2025-10-02 11:35:36,148 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 57)
+2025-10-02 11:35:37,963 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 58)
+2025-10-02 11:35:39,781 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 59)
+2025-10-02 11:35:41,574 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 60)
+2025-10-02 11:35:41,892 - models.image_search_model - INFO - Intento 60: Mejor coincidencia: 0.55
+2025-10-02 11:35:51,905 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.55 (Intento 61)
+2025-10-02 11:35:53,726 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 62)
+2025-10-02 11:35:55,563 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 63)
+2025-10-02 11:35:57,358 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 64)
+2025-10-02 11:35:59,139 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 65)
+2025-10-02 11:36:00,940 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 66)
+2025-10-02 11:36:02,764 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 67)
+2025-10-02 11:36:04,625 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 68)
+2025-10-02 11:36:06,446 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 69)
+2025-10-02 11:36:08,241 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 70)
+2025-10-02 11:36:08,538 - models.image_search_model - INFO - Intento 70: Mejor coincidencia: 0.60
+2025-10-02 11:36:18,544 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 71)
+2025-10-02 11:36:20,335 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 72)
+2025-10-02 11:36:22,181 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 73)
+2025-10-02 11:36:23,976 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 74)
+2025-10-02 11:36:25,799 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 75)
+2025-10-02 11:36:27,601 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 76)
+2025-10-02 11:36:29,421 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 77)
+2025-10-02 11:36:31,223 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 78)
+2025-10-02 11:36:33,046 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 79)
+2025-10-02 11:36:34,870 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 80)
+2025-10-02 11:36:35,159 - models.image_search_model - INFO - Intento 80: Mejor coincidencia: 0.60
+2025-10-02 11:36:45,173 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 81)
+2025-10-02 11:36:47,002 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 82)
+2025-10-02 11:36:48,813 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 83)
+2025-10-02 11:36:50,642 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 84)
+2025-10-02 11:36:52,430 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 85)
+2025-10-02 11:36:53,331 - views.main_view - INFO - Búsqueda pausada (Presione ESC para reanudar)
+2025-10-02 11:36:54,231 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 86)
+2025-10-02 11:40:55,686 - utils.ahk_manager - INFO - AutoHotkey detenido correctamente
+2025-10-02 11:40:55,691 - views.main_view - INFO - Proceso detenido
+2025-10-02 11:40:55,697 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b8.png'
+2025-10-02 11:40:55,711 - views.main_view - INFO - Pasando al siguiente lote después de errores en lote 195
+2025-10-02 11:40:55,718 - views.main_view - INFO - Proceso completado
+2025-10-02 11:42:25,435 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-10-02 11:42:25,436 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-10-02 11:42:37,864 - views.login_window - INFO - Usuario autenticado correctamente
+2025-10-02 11:42:40,633 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-10-02 11:42:40,634 - views.main_view - INFO - Formato para el texto: LT
+2025-10-02 11:42:40,636 - views.main_view - INFO - Lotes: 195 a 262
+2025-10-02 11:42:40,637 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-10-02 11:42:40,638 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-10-02 11:42:40,639 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-10-02 11:42:40,641 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-10-02 11:42:40,642 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-10-02 11:42:40,643 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-10-02 11:42:40,644 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-10-02 11:42:40,647 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-10-02 11:42:40,648 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-10-02 11:42:40,650 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-10-02 11:42:40,653 - views.main_view - INFO - Procesando archivo: LT 195.kml
+2025-10-02 11:42:40,664 - views.main_view - INFO - Usando formato: LT
+2025-10-02 11:42:43,702 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:42:48,713 - views.main_view - INFO - Botón 'img/b2.png' encontrado en (1388, 595) - Confianza: 1.00
+2025-10-02 11:42:53,771 - views.main_view - INFO - Botón 'img/b3.png' encontrado en (1412, 634) - Confianza: 0.89
+2025-10-02 11:42:58,855 - views.main_view - INFO - Botón 'img/b4.png' encontrado en (1115, 654) - Confianza: 1.00
+2025-10-02 11:43:02,151 - controllers.image_search_controller - INFO - Ventana encontrada con confianza: 1.00
+2025-10-02 11:43:02,153 - controllers.image_search_controller - INFO - Coordenadas ventana: x=1040, y=330
+2025-10-02 11:43:02,153 - controllers.image_search_controller - INFO - Coordenadas campo texto: x=1334, y=830
+2025-10-02 11:43:04,167 - utils.ahk_manager - INFO - AutoHotkey iniciado correctamente
+2025-10-02 11:43:04,174 - utils.ahk_manager - INFO - Comando enviado a AHK: 1334,830,LT 195.kml
+2025-10-02 11:43:19,215 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 0.87
+2025-10-02 11:43:24,236 - views.main_view - INFO - Botón 'img/b6.png' encontrado en (1397, 665) - Confianza: 1.00
+2025-10-02 11:43:24,253 - views.main_view - INFO - Botón 6 presionado - verificando ventana de error...
+2025-10-02 11:43:27,258 - controllers.image_search_controller - ERROR - No se pudo cargar la imagen 'b9.png'
+2025-10-02 11:43:30,280 - views.main_view - INFO - Botón 'img/b7.png' encontrado en (1251, 186) - Confianza: 1.00
+2025-10-02 11:43:35,295 - views.main_view - INFO - Botón 'img/b8.png' encontrado en (1261, 404) - Confianza: 0.83
+2025-10-02 11:43:35,309 - views.main_view - INFO - Presionando Enter 2 veces
+2025-10-02 11:43:37,419 - views.main_view - INFO - Secuencia completada para lote 195 de 262
+2025-10-02 11:43:37,422 - views.main_view - INFO - Esperando 1 segundos antes del próximo lote...
+2025-10-02 11:43:37,424 - views.main_view - INFO - Tiempo restante: 1 segundos
+2025-10-02 11:43:38,433 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-10-02 11:43:38,440 - views.main_view - INFO - Procesando lote 196 de 262
+2025-10-02 11:43:38,450 - views.main_view - INFO - Procesando archivo: LT 196.kml
+2025-10-02 11:43:38,457 - views.main_view - INFO - Usando formato: LT
+2025-10-02 11:43:41,518 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 0.99
+2025-10-02 11:43:46,559 - views.main_view - INFO - Botón 'img/b2.png' encontrado en (1388, 595) - Confianza: 1.00
+2025-10-02 11:43:51,567 - views.main_view - INFO - Botón 'img/b3.png' encontrado en (1412, 634) - Confianza: 0.89
+2025-10-02 11:43:55,421 - views.main_view - INFO - Botón 'img/b4.png' no encontrado. Mejor coincidencia: 0.48 (Intento 2)
+2025-10-02 11:43:58,481 - views.main_view - INFO - Botón 'img/b4.png' encontrado en (1115, 654) - Confianza: 1.00
+2025-10-02 11:44:01,781 - controllers.image_search_controller - INFO - Ventana encontrada con confianza: 1.00
+2025-10-02 11:44:01,783 - controllers.image_search_controller - INFO - Coordenadas ventana: x=1040, y=330
+2025-10-02 11:44:01,784 - controllers.image_search_controller - INFO - Coordenadas campo texto: x=1334, y=830
+2025-10-02 11:44:01,786 - utils.ahk_manager - INFO - Comando enviado a AHK: 1334,830,LT 196.kml
+2025-10-02 11:44:16,828 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 0.87
+2025-10-02 11:44:21,877 - views.main_view - INFO - Botón 'img/b6.png' encontrado en (1397, 665) - Confianza: 1.00
+2025-10-02 11:44:21,892 - views.main_view - INFO - Botón 6 presionado - verificando ventana de error...
+2025-10-02 11:44:24,895 - controllers.image_search_controller - ERROR - No se pudo cargar la imagen 'b9.png'
+2025-10-02 11:44:27,927 - views.main_view - INFO - Botón 'img/b7.png' encontrado en (1251, 186) - Confianza: 0.80
+2025-10-02 11:44:31,746 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 2)
+2025-10-02 11:44:33,548 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 3)
+2025-10-02 11:44:35,360 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 4)
+2025-10-02 11:44:37,175 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 5)
+2025-10-02 11:44:38,984 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 6)
+2025-10-02 11:44:40,820 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 7)
+2025-10-02 11:44:42,646 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 8)
+2025-10-02 11:44:44,479 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 9)
+2025-10-02 11:44:46,299 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 10)
+2025-10-02 11:44:46,562 - models.image_search_model - INFO - Intento 10: Mejor coincidencia: 0.60
+2025-10-02 11:44:56,579 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 11)
+2025-10-02 11:44:58,412 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 12)
+2025-10-02 11:45:00,221 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 13)
+2025-10-02 11:45:02,035 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 14)
+2025-10-02 11:45:03,818 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 15)
+2025-10-02 11:45:05,632 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 16)
+2025-10-02 11:45:07,432 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 17)
+2025-10-02 11:45:09,243 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 18)
+2025-10-02 11:45:11,087 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 19)
+2025-10-02 11:45:12,918 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 20)
+2025-10-02 11:45:13,197 - models.image_search_model - INFO - Intento 20: Mejor coincidencia: 0.36
+2025-10-02 11:45:23,219 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 21)
+2025-10-02 11:45:25,017 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 22)
+2025-10-02 11:45:26,835 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 23)
+2025-10-02 11:45:28,648 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 24)
+2025-10-02 11:45:30,447 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 25)
+2025-10-02 11:45:32,231 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 26)
+2025-10-02 11:45:34,053 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 27)
+2025-10-02 11:45:35,856 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 28)
+2025-10-02 11:45:37,672 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 29)
+2025-10-02 11:45:39,490 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 30)
+2025-10-02 11:45:39,791 - models.image_search_model - INFO - Intento 30: Mejor coincidencia: 0.36
+2025-10-02 11:45:49,809 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 31)
+2025-10-02 11:45:51,623 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 32)
+2025-10-02 11:45:53,448 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 33)
+2025-10-02 11:45:55,254 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 34)
+2025-10-02 11:45:57,069 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.38 (Intento 35)
+2025-10-02 11:45:58,880 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 36)
+2025-10-02 11:46:00,695 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 37)
+2025-10-02 11:46:02,502 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 38)
+2025-10-02 11:46:04,363 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 39)
+2025-10-02 11:46:06,207 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 40)
+2025-10-02 11:46:06,494 - models.image_search_model - INFO - Intento 40: Mejor coincidencia: 0.56
+2025-10-02 11:46:08,270 - views.main_view - INFO - Búsqueda pausada (Presione ESC para reanudar)
+2025-10-02 11:46:16,499 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.56 (Intento 41)
+2025-10-02 11:46:26,505 - utils.ahk_manager - INFO - AutoHotkey detenido correctamente
+2025-10-02 11:46:26,515 - views.main_view - INFO - Proceso detenido
+2025-10-02 11:46:26,523 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b8.png'
+2025-10-02 11:46:26,533 - views.main_view - INFO - Pasando al siguiente lote después de errores en lote 196
+2025-10-02 11:46:26,545 - views.main_view - INFO - Proceso completado
+2025-10-02 11:47:37,831 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-10-02 11:47:37,832 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-10-02 11:47:43,758 - views.login_window - INFO - Usuario autenticado correctamente
+2025-10-02 11:47:59,102 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-10-02 11:47:59,102 - views.main_view - INFO - Formato para el texto: LT
+2025-10-02 11:47:59,102 - views.main_view - INFO - Lotes: 195 a 262
+2025-10-02 11:47:59,103 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-10-02 11:47:59,103 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-10-02 11:47:59,103 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-10-02 11:47:59,104 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-10-02 11:47:59,104 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-10-02 11:47:59,104 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-10-02 11:47:59,105 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-10-02 11:47:59,106 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-10-02 11:47:59,106 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-10-02 11:47:59,107 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-10-02 11:47:59,110 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-10-02 11:47:59,188 - views.main_view - INFO - Procesando lote 195 de 262
+2025-10-02 11:47:59,191 - views.main_view - INFO - Procesando archivo: LT 195.kml
+2025-10-02 11:47:59,192 - views.main_view - INFO - Usando formato: LT
+2025-10-02 11:48:02,195 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:48:07,186 - views.main_view - INFO - Botón 'img/b2.png' encontrado en (1388, 595) - Confianza: 1.00
+2025-10-02 11:48:12,197 - views.main_view - INFO - Botón 'img/b3.png' encontrado en (1412, 634) - Confianza: 0.89
+2025-10-02 11:48:17,242 - views.main_view - INFO - Botón 'img/b4.png' encontrado en (1115, 654) - Confianza: 1.00
+2025-10-02 11:48:20,520 - controllers.image_search_controller - INFO - Ventana encontrada con confianza: 1.00
+2025-10-02 11:48:20,522 - controllers.image_search_controller - INFO - Coordenadas ventana: x=1040, y=330
+2025-10-02 11:48:20,522 - controllers.image_search_controller - INFO - Coordenadas campo texto: x=1334, y=830
+2025-10-02 11:48:22,530 - utils.ahk_manager - INFO - AutoHotkey iniciado correctamente
+2025-10-02 11:48:22,987 - utils.ahk_manager - INFO - Comando enviado a AHK: 1334,830,LT 195.kml
+2025-10-02 11:48:38,048 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 0.87
+2025-10-02 11:48:43,115 - views.main_view - INFO - Botón 'img/b6.png' encontrado en (1397, 665) - Confianza: 1.00
+2025-10-02 11:48:43,133 - views.main_view - INFO - Botón 6 presionado - verificando ventana de error...
+2025-10-02 11:48:46,135 - controllers.image_search_controller - ERROR - No se pudo cargar la imagen 'b9.png'
+2025-10-02 11:48:49,173 - views.main_view - INFO - Botón 'img/b7.png' encontrado en (1251, 186) - Confianza: 0.86
+2025-10-02 11:48:53,002 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 2)
+2025-10-02 11:48:54,811 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 3)
+2025-10-02 11:48:56,625 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 4)
+2025-10-02 11:48:58,391 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 5)
+2025-10-02 11:48:58,974 - views.main_view - INFO - Búsqueda pausada (Presione ESC para reanudar)
+2025-10-02 11:49:00,162 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 6)
