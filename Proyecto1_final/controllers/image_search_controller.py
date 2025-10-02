@@ -184,9 +184,9 @@ class ImageSearchController:
         """
         try:
             # Cargar template de la ventana de error
-            template = cv2.imread('img/error.png')  # Necesitarás crear esta imagen
+            template = cv2.imread('img/b9.png')  
             if template is None:
-                logger.error("No se pudo cargar la imagen 'error.png'")
+                logger.error("No se pudo cargar la imagen 'b9.png'")
                 return False
             
             # Capturar pantalla completa
