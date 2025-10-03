@@ -382,7 +382,7 @@ class ImageSearchController:
                 
                 # Realizar la secuencia completa con manejo de errores B9
                 success = self.run_sequence()
-                
+                current_lote += 1 # Incrementar lote después de cada intento
                 if success:
                     # Cada 10 lotes, presionar 'S' para guardar
                     if current_lote % 10 == 0:
@@ -391,11 +391,10 @@ class ImageSearchController:
                         time.sleep(1)  # Pequeña espera después de guardar
                     
                     self.view.log_message(f"Secuencia completada para lote {current_lote} de {lote_final}")
-                    current_lote += 1  # Solo incrementar si fue exitoso
+                    
                 else:
                     # Si falló por errores B9 persistentes, pasar al siguiente lote
                     self.view.log_message(f"Pasando al siguiente lote después de errores B9 persistentes en lote {current_lote}")
-                    current_lote += 1
                 
                 # Esperar el tiempo configurado entre lotes (si no es el último lote)
                 if current_lote <= lote_final and self.model.is_running:
