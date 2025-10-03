@@ -20140,3 +20140,63 @@
 2025-10-02 11:48:58,391 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 5)
 2025-10-02 11:48:58,974 - views.main_view - INFO - Búsqueda pausada (Presione ESC para reanudar)
 2025-10-02 11:49:00,162 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.36 (Intento 6)
+2025-10-02 11:51:23,583 - utils.ahk_manager - INFO - AutoHotkey detenido correctamente
+2025-10-02 11:51:23,595 - views.main_view - INFO - Proceso detenido
+2025-10-02 11:51:23,602 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b8.png'
+2025-10-02 11:51:23,612 - views.main_view - INFO - Pasando al siguiente lote después de errores en lote 195
+2025-10-02 11:51:23,622 - views.main_view - INFO - Proceso completado
+2025-10-02 11:51:37,767 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-10-02 11:51:37,767 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-10-02 11:51:45,400 - views.login_window - INFO - Usuario autenticado correctamente
+2025-10-02 11:51:54,789 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-10-02 11:51:54,790 - views.main_view - INFO - Formato para el texto: LT
+2025-10-02 11:51:54,792 - views.main_view - INFO - Lotes: 195 a 262
+2025-10-02 11:51:54,793 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-10-02 11:51:54,794 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-10-02 11:51:54,795 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-10-02 11:51:54,796 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-10-02 11:51:54,798 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-10-02 11:51:54,799 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-10-02 11:51:54,802 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-10-02 11:51:54,804 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-10-02 11:51:54,806 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-10-02 11:51:54,808 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-10-02 11:51:54,815 - views.main_view - INFO - Procesando archivo: LT 195.kml
+2025-10-02 11:51:54,826 - views.main_view - INFO - Usando formato: LT
+2025-10-02 11:51:57,831 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:52:02,874 - views.main_view - INFO - Botón 'img/b2.png' encontrado en (1388, 595) - Confianza: 1.00
+2025-10-02 11:52:07,900 - views.main_view - INFO - Botón 'img/b3.png' encontrado en (1412, 634) - Confianza: 0.89
+2025-10-02 11:52:11,741 - views.main_view - INFO - Botón 'img/b4.png' no encontrado. Mejor coincidencia: 0.48 (Intento 2)
+2025-10-02 11:52:14,802 - views.main_view - INFO - Botón 'img/b4.png' encontrado en (1115, 654) - Confianza: 1.00
+2025-10-02 11:52:18,071 - controllers.image_search_controller - INFO - Ventana encontrada con confianza: 1.00
+2025-10-02 11:52:18,073 - controllers.image_search_controller - INFO - Coordenadas ventana: x=1040, y=330
+2025-10-02 11:52:18,073 - controllers.image_search_controller - INFO - Coordenadas campo texto: x=1334, y=830
+2025-10-02 11:52:20,083 - utils.ahk_manager - INFO - AutoHotkey iniciado correctamente
+2025-10-02 11:52:20,089 - utils.ahk_manager - INFO - Comando enviado a AHK: 1334,830,LT 195.kml
+2025-10-02 11:52:35,127 - views.main_view - INFO - Botón 'img/b1.png' encontrado en (319, 220) - Confianza: 1.00
+2025-10-02 11:52:40,167 - views.main_view - INFO - Botón 'img/b6.png' encontrado en (1397, 665) - Confianza: 1.00
+2025-10-02 11:52:40,181 - views.main_view - INFO - Botón 6 presionado - verificando ventana de error...
+2025-10-02 11:52:43,184 - controllers.image_search_controller - ERROR - No se pudo cargar la imagen 'b9.png'
+2025-10-02 11:52:46,221 - views.main_view - INFO - Botón 'img/b7.png' encontrado en (1251, 186) - Confianza: 0.86
+2025-10-02 11:52:50,029 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 2)
+2025-10-02 11:52:51,837 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 3)
+2025-10-02 11:52:53,649 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.60 (Intento 4)
+2025-10-02 11:52:55,506 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.34 (Intento 5)
+2025-10-02 11:52:57,300 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.34 (Intento 6)
+2025-10-02 11:52:59,114 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.34 (Intento 7)
+2025-10-02 11:53:00,926 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.34 (Intento 8)
+2025-10-02 11:53:02,727 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.34 (Intento 9)
+2025-10-02 11:53:04,530 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.34 (Intento 10)
+2025-10-02 11:53:04,811 - models.image_search_model - INFO - Intento 10: Mejor coincidencia: 0.34
+2025-10-02 11:53:14,818 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.34 (Intento 11)
+2025-10-02 11:53:16,662 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.34 (Intento 12)
+2025-10-02 11:53:18,471 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.34 (Intento 13)
+2025-10-02 11:53:19,814 - views.main_view - INFO - Búsqueda pausada (Presione ESC para reanudar)
+2025-10-02 11:53:20,343 - views.main_view - INFO - Botón 'img/b8.png' no encontrado. Mejor coincidencia: 0.34 (Intento 14)
+2025-10-02 11:53:21,576 - utils.ahk_manager - INFO - AutoHotkey detenido correctamente
+2025-10-02 11:53:21,580 - views.main_view - INFO - Proceso detenido
+2025-10-02 11:53:21,583 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b8.png'
+2025-10-02 11:53:21,591 - views.main_view - INFO - Pasando al siguiente lote después de errores en lote 195
+2025-10-02 11:53:21,597 - views.main_view - INFO - Proceso completado
+2025-10-02 11:53:23,352 - utils.ahk_manager - INFO - AutoHotkey detenido correctamente
+2025-10-02 11:53:23,356 - views.main_view - INFO - Proceso detenido
