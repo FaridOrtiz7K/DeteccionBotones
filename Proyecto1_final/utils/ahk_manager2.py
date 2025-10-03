@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class AHKManager2:
+class EnterAHKManager:
     def __init__(self):
         self.ahk_process = None
         self.script_path = "ahk_script2.ahk"
