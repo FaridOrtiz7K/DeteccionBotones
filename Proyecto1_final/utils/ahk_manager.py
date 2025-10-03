@@ -11,7 +11,7 @@ class AHKManager:
         self.script_path = "ahk_script.ahk"
         
     def crear_script_ahk(self):
-        """Crea automáticamente el script de AutoHotkey"""
+        """Crea automáticamente el script de AutoHotkey para acciones de UI"""
         ahk_script = """
 #Persistent
 #SingleInstance force
@@ -49,7 +49,6 @@ Loop {
         
         ; Confirmación para Python
         FileAppend, done, ahk_done.txt
-        FileDelete, ahk_done.txt
     }
     Sleep, 500  ; Revisar cada medio segundo
 }

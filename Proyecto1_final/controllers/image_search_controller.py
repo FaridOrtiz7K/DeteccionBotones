@@ -4,12 +4,11 @@ import pyautogui
 import cv2
 import numpy as np
 import os
-import subprocess
 import keyboard
 import logging
-from utils.keyboard_manager import KeyboardManager
 from models.image_search_model import ImageSearchModel
 from utils.ahk_manager import AHKManager
+from utils.keyboard_manager import KeyboardManager
 import tkinter.messagebox as messagebox
 
 logger = logging.getLogger(__name__)
@@ -23,7 +22,7 @@ class ImageSearchController:
         self.authenticated = False
         self.search_thread = None
         self.ahk_manager = AHKManager()
-        self.keyboard_manager = KeyboardManager()  # Nueva instancia
+        self.keyboard_manager = KeyboardManager()
         self.nombre_archivo = ""
         
         # Configurar tecla ESC para pausar
@@ -36,7 +35,6 @@ class ImageSearchController:
         """Valida todas las entradas antes de iniciar"""
         errors = []
         
-        # Validación simplificada - ya no se requiere distrito
         if self.model.lote_inicial > self.model.lote_final:
             errors.append("El lote inicial no puede ser mayor al lote final")
         
@@ -80,7 +78,6 @@ class ImageSearchController:
         elif event == "paused_changed":
             self.view.update_button_states(self.model.is_running, data)
             if data:  # Si está en pausa
-                # Mostrar ventana de pausa con la información actual
                 self.view.show_pause_window(self.model.current_lote, self.model.lote_final)
         elif event == "image_found":
             self.view.log_message(f"Botón '{data['image']}' encontrado en ({data['x']}, {data['y']}) - Confianza: {data['confidence']:.2f}")
@@ -133,14 +130,12 @@ class ImageSearchController:
         tiempo_espera_base = 1
         tiempo_espera_largo = 10
         
-        # Cargar template una sola vez fuera del bucle
         template = cv2.imread('img/cargarArchivo.png')
         if template is None:
             logger.error("No se pudo cargar la imagen 'cargarArchivo.png'")
             return None
         
         while self.model.is_running: 
-            # Verificar si está pausado
             if self.model.is_paused:
                 with self.model.pause_condition:
                     while self.model.is_paused and self.model.is_running:
@@ -149,20 +144,16 @@ class ImageSearchController:
                     return False
             
             try:
-                # Capturar pantalla completa
                 screenshot = pyautogui.screenshot()
                 pantalla = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
                 
-                # Realizar template matching
                 result = cv2.matchTemplate(pantalla, template, cv2.TM_CCOEFF_NORMED)
                 _, max_val, _, max_loc = cv2.minMaxLoc(result)
                 
                 if max_val >= confianza_minima:
                     logger.info(f"Ventana encontrada con confianza: {max_val:.2f}")
-                    # Devolver tupla (x, y)
                     return max_loc
                 else:
-                    # Estrategia de espera progresiva
                     if intentos % 10 == 0 and intentos > 0:
                         logger.info(f"Intento {intentos}: Mejor coincidencia: {max_val:.2f}")
                         logger.info("Esperando 10 segundos...")
@@ -178,73 +169,28 @@ class ImageSearchController:
 
         return None
 
-    def detectar_ventana_error(self):
-        """
-        Detecta la ventana de error y presiona Enter para cerrarla
-        Returns:
-            bool: True si encontró la ventana de error, False en caso contrario
-        """
-        try:
-            # Cargar template de la ventana de error - VERIFICAR QUE ESTA RUTA SEA CORRECTA
-            template = cv2.imread('img/b9.png') 
-            if template is None:
-                logger.error("No se pudo cargar la imagen 'b9.png' - Verifica que el archivo existe en la carpeta 'img'")
-                return False
-            
-            # Capturar pantalla completa
-            screenshot = pyautogui.screenshot()
-            pantalla = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
-            
-            # Realizar template matching
-            result = cv2.matchTemplate(pantalla, template, cv2.TM_CCOEFF_NORMED)
-            _, max_val, _, max_loc = cv2.minMaxLoc(result)
-            
-            confianza_minima = 0.6  # Puedes ajustar este valor
-            
-            if max_val >= confianza_minima:
-                logger.info(f"Ventana de error detectada con confianza: {max_val:.2f}")
-                
-                # Presionar Enter para cerrar la ventana de error
-                pyautogui.press('enter')
-                time.sleep(1.5)  # Esperar a que se cierre la ventana
-                
-                self.view.log_message("Ventana de error detectada y cerrada")
-                return True
-            else:
-                return False
-                
-        except Exception as e:
-            logger.error(f"Error al detectar ventana de error: {e}")
-            return False
-
     def handle_b4_special_behavior(self, imagen, clicks, confianza):
         """Maneja el comportamiento especial para la imagen b4"""
-        # Precionamos el boton b4 (Documentos)
         success = self.model.click_button(imagen, clicks, confianza)
         
-        # Esperar despues de precionar el boton
         time.sleep(3)
 
-        # Buscar la ventana de archivo
         coordenadas_ventana = self.encontrar_ventana_archivo()
 
         if coordenadas_ventana:
             x_ventana, y_ventana = coordenadas_ventana
             logger.info(f"Coordenadas ventana: x={x_ventana}, y={y_ventana}")
             
-            # Calcular coordenadas del campo de texto
             x_campo = x_ventana + 294
             y_campo = y_ventana + 500
             logger.info(f"Coordenadas campo texto: x={x_campo}, y={y_campo}")
             
-            # Iniciar AHK si no está corriendo
             if not self.ahk_manager.start_ahk():
                 logger.error("No se pudo iniciar AutoHotkey")
                 return False
             
-            # Enviar comandos a AHK
             if self.ahk_manager.ejecutar_acciones_ahk(x_campo, y_campo, self.nombre_archivo):
-                time.sleep(10)  # Esperar a que AHK complete la acción
+                time.sleep(10)
             else:
                 logger.error("Error enviando comando a AHK")
                 return False
@@ -255,47 +201,11 @@ class ImageSearchController:
             self.model.alt_n_used = True
         return success
         
-    def start_search(self):
-        """Inicia la búsqueda en un hilo separado"""
-        if not self.authenticated:
-            self.view.log_message("Error: Debe iniciar sesión primero.")
-            return
-            
-        # Validar inputs (validación simplificada sin distrito)
-        errors = self.validate_inputs()
-        if errors:
-            for error in errors:
-                self.view.log_message(f"Error: {error}")
-            return
-            
-        if not self.model.is_running:
-            self.model.set_running(True)
-            self.model.set_paused(False)
-            
-            # Iniciar monitoreo de errores
-            self.keyboard_manager.start_error_monitoring()
-            
-            with self.model.pause_condition:
-                self.model.pause_condition.notify_all()
-            self.view.log_message("Iniciando proceso de búsqueda...")
-            self.view.log_message(f"Formato para el texto: {self.model.formato_texto}")
-            self.view.log_message(f"Lotes: {self.model.lote_inicial} a {self.model.lote_final}")
-            self.view.log_message(f"Tiempo de espera entre lotes: {self.model.delay_time} segundos")
-            
-            # Mostrar la secuencia a ejecutar
-            self.view.log_message("Secuencia predefinida a ejecutar:")
-            for i, (imagen, clicks, confianza) in enumerate(self.model.image_sequence, 1):
-                self.view.log_message(f"  {i}. {imagen} (clics: {clicks}, confianza: {confianza})")
-            
-            # Iniciar el hilo para ejecutar los lotes
-            self.search_thread = threading.Thread(target=self.run_lotes)
-            self.search_thread.daemon = True
-            self.search_thread.start()
-    
     def run_sequence(self):
         """Ejecuta la secuencia completa de imágenes"""
+        intentos_error = 0
+        
         for i, (imagen, clicks, confianza) in enumerate(self.model.image_sequence):
-            # Verificar si está pausado
             if self.model.is_paused:
                 with self.model.pause_condition:
                     while self.model.is_paused and self.model.is_running:
@@ -303,57 +213,49 @@ class ImageSearchController:
                 if not self.model.is_running:
                     return False
             
-            # Manejar comportamiento especial para b4
             if "b4.png" in imagen:
                 success = self.handle_b4_special_behavior(imagen, clicks, confianza)
             else:
-                # Realizar la búsqueda y clic normal para otras imágenes
                 success = self.model.click_button(imagen, clicks, confianza)
             
             if not success:
                 self.view.log_message(f"Error: No se pudo encontrar el botón '{imagen}'")
                 return False
             
-            # DETECCIÓN DE ERROR ESPECÍFICAMENTE DESPUÉS DEL BOTÓN 6
+            # Verificar si KeyboardManager detectó errores
+            if self.keyboard_manager.check_error_status():
+                self.view.log_message("Keyboard Manager detectó y cerró una ventana de error")
+            
             if "b6.png" in imagen:
                 self.view.log_message("Botón 6 presionado - verificando ventana de error...")
-                
-                # Esperar un momento para que aparezca la ventana de error si va a aparecer
                 time.sleep(3)
                 
-                # Verificar ventana de error manualmente (como respaldo)
-                if self.keyboard_manager.detectar_y_cerrar_error():
-                    self.view.log_message("Ventana de error detectada y cerrada")
+                while intentos_error < self.model.max_intentos_error and self.model.is_running:
+                    if self.keyboard_manager.check_error_status():
+                        intentos_error += 1
+                        self.view.log_message(f"Intento de error {intentos_error}/{self.model.max_intentos_error}")
+                        
+                        if intentos_error >= self.model.max_intentos_error:
+                            self.view.log_message("Máximo de intentos de error alcanzado. Pasando al siguiente lote.")
+                            return False
+                        
+                        self.view.log_message("Reiniciando secuencia desde el inicio...")
+                        return self.run_sequence()
+                    else:
+                        break
             
-            # Esperar 2 segundos entre imágenes (excepto después de b6 donde ya esperamos)
             if imagen != self.model.image_sequence[-1][0] and "b6.png" not in imagen and self.model.is_running:
                 time.sleep(2)
         
         # USAR KEYBOARD MANAGER PARA LOS 3 ENTER FINALES
-        self.view.log_message("Presionando Enter 3 veces al final del ciclo")
-        if self.keyboard_manager.presionar_enter_final(2):
-            self.view.log_message("Enter final ejecutado exitosamente")
+        self.view.log_message("Solicitando a Keyboard Manager presionar Enter 3 veces")
+        if self.keyboard_manager.presionar_enter_final(3):
+            self.view.log_message("Keyboard Manager ejecutó los 3 Enter exitosamente")
         else:
-            self.view.log_message("Error en Enter final")
+            self.view.log_message("Error: Keyboard Manager no pudo ejecutar los Enter")
         time.sleep(1)
         
         return True
-    
-    def stop_search(self):
-        """Detiene la búsqueda"""
-        if not self.authenticated:
-            return
-            
-        self.model.set_running(False)
-        self.model.set_paused(False)
-        
-        # Detener monitoreo de errores
-        self.keyboard_manager.stop_error_monitoring()
-        
-        with self.model.pause_condition:
-            self.model.pause_condition.notify_all()
-        self.ahk_manager.stop_ahk()
-        self.view.log_message("Proceso detenido")
     
     def run_lotes(self):
         """Ejecuta los lotes de búsqueda con mejor manejo de estado"""
@@ -361,11 +263,9 @@ class ImageSearchController:
             current_lote = self.model.lote_inicial
             lote_final = self.model.lote_final
             
-            # Actualizar el current_lote en el modelo
             self.model.current_lote = current_lote
             
             while current_lote <= lote_final and self.model.is_running:
-                # Verificar pausa de manera más eficiente
                 with self.model.pause_condition:
                     while self.model.is_paused and self.model.is_running:
                         self.model.pause_condition.wait()
@@ -374,39 +274,31 @@ class ImageSearchController:
                     break
                     
                 self.model.current_lote = current_lote
-                
-                # Reiniciar flag de Alt+N para cada lote
                 self.model.alt_n_used = False
                 
-                # Generar nombre de archivo usando el patrón configurado
                 formato_texto = self.model.formato_texto
                 self.nombre_archivo = f"{formato_texto} {current_lote}.kml"
                 
                 self.view.log_message(f"Procesando archivo: {self.nombre_archivo}")
                 self.view.log_message(f"Usando formato: {formato_texto}")
                 
-                # Realizar la secuencia completa
                 success = self.run_sequence()
                 
                 if success:
-                    # Cada 10 lotes, presionar 'S' para guardar
                     if current_lote % 10 == 0:
                         self.view.log_message("Presionando 'S' para guardar cambios")
                         pyautogui.press('s')
-                        time.sleep(1)  # Pequeña espera después de guardar
+                        time.sleep(1)
                     
                     self.view.log_message(f"Secuencia completada para lote {current_lote} de {lote_final}")
-                    current_lote += 1  # Solo incrementar si fue exitoso
+                    current_lote += 1
                 else:
-                    # Si falló por errores, pasar al siguiente lote
                     self.view.log_message(f"Pasando al siguiente lote después de errores en lote {current_lote}")
                     current_lote += 1
                 
-                # Esperar el tiempo configurado entre lotes (si no es el último lote)
                 if current_lote <= lote_final and self.model.is_running:
                     self.view.log_message(f"Esperando {self.model.delay_time} segundos antes del próximo lote...")
                     
-                    # Contar el tiempo de espera mostrando el progreso
                     for i in range(self.model.delay_time, 0, -1):
                         if not self.model.is_running:
                             break
@@ -416,19 +308,14 @@ class ImageSearchController:
                                     self.model.pause_condition.wait()
                             if not self.model.is_running:
                                 break
-                        # Actualizar el mensaje cada segundo
                         self.view.log_message(f"Tiempo restante: {i} segundos")
                         time.sleep(1)
-                        # Eliminar el mensaje anterior
                         self.view.status_text.delete("end-2l", "end-1l")
             
-            # Después de completar todos los lotes
-            if self.model.is_running:  # Solo si se completó naturalmente (no detenido)
+            if self.model.is_running:
                 self.view.log_message("Presionando Ctrl+S para guardar todos los cambios")
                 pyautogui.hotkey('ctrl', 's')
-                time.sleep(1)  # Esperar un momento después de guardar
-                
-                # Mostrar mensaje emergente
+                time.sleep(1)
                 messagebox.showinfo("Proceso Completado", "El proceso ha terminado exitosamente.")
             
             self.model.set_running(False)
@@ -445,7 +332,6 @@ class ImageSearchController:
             self.view.log_message("Error: Debe iniciar sesión primero.")
             return
             
-        # Validar inputs (validación simplificada sin distrito)
         errors = self.validate_inputs()
         if errors:
             for error in errors:
@@ -455,19 +341,23 @@ class ImageSearchController:
         if not self.model.is_running:
             self.model.set_running(True)
             self.model.set_paused(False)
+            
+            # Iniciar Keyboard Manager para detección de errores
+            if not self.keyboard_manager.start_ahk():
+                self.view.log_message("Advertencia: No se pudo iniciar Keyboard Manager")
+            
             with self.model.pause_condition:
                 self.model.pause_condition.notify_all()
+            
             self.view.log_message("Iniciando proceso de búsqueda...")
             self.view.log_message(f"Formato para el texto: {self.model.formato_texto}")
             self.view.log_message(f"Lotes: {self.model.lote_inicial} a {self.model.lote_final}")
             self.view.log_message(f"Tiempo de espera entre lotes: {self.model.delay_time} segundos")
             
-            # Mostrar la secuencia a ejecutar
             self.view.log_message("Secuencia predefinida a ejecutar:")
             for i, (imagen, clicks, confianza) in enumerate(self.model.image_sequence, 1):
                 self.view.log_message(f"  {i}. {imagen} (clics: {clicks}, confianza: {confianza})")
             
-            # Iniciar el hilo para ejecutar los lotes
             self.search_thread = threading.Thread(target=self.run_lotes)
             self.search_thread.daemon = True
             self.search_thread.start()
@@ -499,7 +389,11 @@ class ImageSearchController:
             
         self.model.set_running(False)
         self.model.set_paused(False)
+        
+        # Detener ambos managers
+        self.ahk_manager.stop_ahk()
+        self.keyboard_manager.stop_ahk()
+        
         with self.model.pause_condition:
             self.model.pause_condition.notify_all()
-        self.ahk_manager.stop_ahk()
         self.view.log_message("Proceso detenido")
