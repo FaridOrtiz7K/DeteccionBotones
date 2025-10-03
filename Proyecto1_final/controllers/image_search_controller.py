@@ -211,7 +211,7 @@ class ImageSearchController:
                     return False
                     
                 # Enviar comandos a AHK
-                if self.ahk_manager2.presionar_enter_veces(1):
+                if self.ahk_manager2.presionar_enter(1):
                     time.sleep(5)  # Esperar a que AHK complete la acción
                 else:
                     logger.error("Error enviando comando a AHK")
@@ -328,7 +328,7 @@ class ImageSearchController:
             return False
             
         # Enviar comandos a AHK
-        if self.ahk_manager2.presionar_enter_veces(3):
+        if self.ahk_manager2.presionar_enter(3):
             time.sleep(10)  # Esperar a que AHK complete la acción
         else:
             logger.error("Error enviando comando a AHK")
