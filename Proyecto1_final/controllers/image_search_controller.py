@@ -9,7 +9,7 @@ import keyboard
 import logging
 from models.image_search_model import ImageSearchModel
 from utils.ahk_manager import AHKManager
-from utils.ahk_manager2 import EnterAHKManager
+from utils.ahk_manager2 import AHKManager2
 import tkinter.messagebox as messagebox
 
 logger = logging.getLogger(__name__)
@@ -23,7 +23,7 @@ class ImageSearchController:
         self.authenticated = False
         self.search_thread = None
         self.ahk_manager = AHKManager()
-        self.enter = EnterAHKManager()
+        self.ahk_manager2 = AHKManager2()
         self.nombre_archivo = ""
         
         # Configurar tecla ESC para pausar
@@ -206,12 +206,12 @@ class ImageSearchController:
                 
                 # Presionar Enter para cerrar la ventana de error
                 # Iniciar AHK si no está corriendo
-                if not self.enter.start_ahk():
+                if not self.ahk_manager2.start_ahk():
                     logger.error("No se pudo iniciar AutoHotkey")
                     return False
                     
                 # Enviar comandos a AHK
-                if self.enter.presionar_enter(1):
+                if self.ahk_manager2.presionar_enter(1):
                     time.sleep(5)  # Esperar a que AHK complete la acción
                 else:
                     logger.error("Error enviando comando a AHK")
@@ -220,7 +220,7 @@ class ImageSearchController:
 
                 time.sleep(1.5)  # Esperar a que se cierre la ventana
                 
-                self.view.log_message("Ventana de error detectada y cerrada")
+                self.view.log_message("Ventana de error B9 detectada y cerrada")
                 return True
             else:
                 return False
@@ -266,12 +266,13 @@ class ImageSearchController:
         if success:
             self.model.alt_n_used = True
         return success
-   #Deteccion de boton 9     
+
     def run_sequence(self):
-        """Ejecuta la secuencia completa de imágenes con detección de error DESPUÉS del botón 6"""
-        intentos_error = 0
+        """Ejecuta la secuencia completa de imágenes con reintentos por error B9"""
+        max_reintentos = 3  # Máximo de reintentos por error B9
+        reintentos = 0
         
-        for i, (imagen, clicks, confianza) in enumerate(self.model.image_sequence):
+        while reintentos <= max_reintentos and self.model.is_running:
             # Verificar si está pausado
             if self.model.is_paused:
                 with self.model.pause_condition:
@@ -280,62 +281,69 @@ class ImageSearchController:
                 if not self.model.is_running:
                     return False
             
-            # Manejar comportamiento especial para b4
-            if "b4.png" in imagen:
-                success = self.handle_b4_special_behavior(imagen, clicks, confianza)
-            else:
-                # Realizar la búsqueda y clic normal para otras imágenes
-                success = self.model.click_button(imagen, clicks, confianza)
+            # Bandera para controlar si se completó la secuencia sin errores B9
+            secuencia_completada = True
             
-            if not success:
-                self.view.log_message(f"Error: No se pudo encontrar el botón '{imagen}'")
+            for i, (imagen, clicks, confianza) in enumerate(self.model.image_sequence):
+                # Verificar si está pausado dentro del bucle de imágenes
+                if self.model.is_paused:
+                    with self.model.pause_condition:
+                        while self.model.is_paused and self.model.is_running:
+                            self.model.pause_condition.wait()
+                    if not self.model.is_running:
+                        return False
+                
+                # Manejar comportamiento especial para b4
+                if "b4.png" in imagen:
+                    success = self.handle_b4_special_behavior(imagen, clicks, confianza)
+                else:
+                    # Realizar la búsqueda y clic normal para otras imágenes
+                    success = self.model.click_button(imagen, clicks, confianza)
+                
+                if not success:
+                    self.view.log_message(f"Error: No se pudo encontrar el botón '{imagen}'")
+                    return False
+                
+                # DETECCIÓN DE ERROR B9 DESPUÉS DE CADA ACCIÓN
+                if self.detectar_ventana_error():
+                    self.view.log_message(f"Error B9 detectado - Reiniciando secuencia (Reintento {reintentos + 1}/{max_reintentos})")
+                    secuencia_completada = False
+                    reintentos += 1
+                    break  # Romper el bucle de imágenes y reiniciar la secuencia
+                
+                # Esperar 2 segundos entre imágenes (excepto después de b6 donde ya esperamos)
+                if imagen != self.model.image_sequence[-1][0] and "b6.png" not in imagen and self.model.is_running:
+                    time.sleep(2)
+            
+            # Si se completó toda la secuencia sin errores B9, salir del bucle de reintentos
+            if secuencia_completada:
+                break
+            
+            # Si superamos el máximo de reintentos, retornar False
+            if reintentos > max_reintentos:
+                self.view.log_message("Máximo de reintentos por error B9 alcanzado. Pasando al siguiente lote.")
                 return False
-            
-            # DETECCIÓN DE ERROR ESPECÍFICAMENTE DESPUÉS DEL BOTÓN 6
-            if "b6.png" in imagen:
-                self.view.log_message("Botón 6 presionado - verificando ventana de error...")
-                
-                # Esperar un momento para que aparezca la ventana de error si va a aparecer
-                time.sleep(3)
-                
-                # Verificar ventana de error hasta 30 intentos
-                while intentos_error < self.model.max_intentos_error and self.model.is_running:
-                    if self.detectar_ventana_error():
-                        intentos_error += 1
-                        self.view.log_message(f"Intento de error {intentos_error}/{self.model.max_intentos_error}")
-                        
-                        # Si supera los intentos máximos, pasar al siguiente lote
-                        if intentos_error >= self.model.max_intentos_error:
-                            self.view.log_message("Máximo de intentos de error alcanzado. Pasando al siguiente lote.")
-                            return False
-                        
-                        # Volver al inicio del ciclo para el mismo lote
-                        self.view.log_message("Reiniciando secuencia desde el inicio...")
-                        return self.run_sequence()  # Reiniciar la secuencia
-                    else:
-                        # No se detectó error, continuar con la secuencia normal
-                        break
-            
-            # Esperar 2 segundos entre imágenes (excepto después de b6 donde ya esperamos)
-            if imagen != self.model.image_sequence[-1][0] and "b6.png" not in imagen and self.model.is_running:
-                time.sleep(2)
         
-        # CORRECCIÓN: Presionar Enter 3 veces al final de cada ciclo (como solicitas)
-        self.view.log_message("Presionando Enter 3 veces al final del ciclo")
-        # Iniciar AHK si no está corriendo
-        if not self.enter.start_ahk():
-            logger.error("No se pudo iniciar AutoHotkey")
-            return False
+        # Solo ejecutar esto si la secuencia se completó exitosamente
+        if secuencia_completada:
+            # CORRECCIÓN: Presionar Enter 3 veces al final de cada ciclo
+            self.view.log_message("Presionando Enter 3 veces al final del ciclo")
+            # Iniciar AHK si no está corriendo
+            if not self.ahk_manager2.start_ahk():
+                logger.error("No se pudo iniciar AutoHotkey")
+                return False
+                
+            # Enviar comandos a AHK
+            if self.ahk_manager2.presionar_enter(3):
+                time.sleep(10)  # Esperar a que AHK complete la acción
+            else:
+                logger.error("Error enviando comando a AHK")
+                return False
+            time.sleep(1.5)
             
-        # Enviar comandos a AHK
-        if self.enter.presionar_enter(3):
-            time.sleep(10)  # Esperar a que AHK complete la acción
+            return True
         else:
-            logger.error("Error enviando comando a AHK")
             return False
-        time.sleep(1.5)
-        
-        return True
     
     def run_lotes(self):
         """Ejecuta los lotes de búsqueda con mejor manejo de estado"""
@@ -367,7 +375,7 @@ class ImageSearchController:
                 self.view.log_message(f"Procesando archivo: {self.nombre_archivo}")
                 self.view.log_message(f"Usando formato: {formato_texto}")
                 
-                # Realizar la secuencia completa
+                # Realizar la secuencia completa con manejo de errores B9
                 success = self.run_sequence()
                 
                 if success:
@@ -380,8 +388,8 @@ class ImageSearchController:
                     self.view.log_message(f"Secuencia completada para lote {current_lote} de {lote_final}")
                     current_lote += 1  # Solo incrementar si fue exitoso
                 else:
-                    # Si falló por errores, pasar al siguiente lote
-                    self.view.log_message(f"Pasando al siguiente lote después de errores en lote {current_lote}")
+                    # Si falló por errores B9 persistentes, pasar al siguiente lote
+                    self.view.log_message(f"Pasando al siguiente lote después de errores B9 persistentes en lote {current_lote}")
                     current_lote += 1
                 
                 # Esperar el tiempo configurado entre lotes (si no es el último lote)
