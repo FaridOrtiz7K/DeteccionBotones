@@ -183,10 +183,10 @@ class ImageSearchController:
             bool: True si encontró la ventana de error, False en caso contrario
         """
         try:
-            # Cargar template de la ventana de error
+            # Cargar template de la ventana de error - VERIFICAR QUE ESTA RUTA SEA CORRECTA
             template = cv2.imread('img/b9.png') 
             if template is None:
-                logger.error("No se pudo cargar la imagen 'b9.png'")
+                logger.error("No se pudo cargar la imagen 'b9.png' - Verifica que el archivo existe en la carpeta 'img'")
                 return False
             
             # Capturar pantalla completa
@@ -204,7 +204,7 @@ class ImageSearchController:
                 
                 # Presionar Enter para cerrar la ventana de error
                 pyautogui.press('enter')
-                time.sleep(1)  # Esperar a que se cierre la ventana
+                time.sleep(1.5)  # Esperar a que se cierre la ventana
                 
                 self.view.log_message("Ventana de error detectada y cerrada")
                 return True
@@ -305,10 +305,11 @@ class ImageSearchController:
             # Esperar 2 segundos entre imágenes (excepto después de b6 donde ya esperamos)
             if imagen != self.model.image_sequence[-1][0] and "b6.png" not in imagen and self.model.is_running:
                 time.sleep(2)
-        # Presionar Enter 2 veces al final de la secuencia   
-        self.view.log_message("Presionando Enter 2 veces")
-        pyautogui.press('enter', presses=2, interval=0.5)
-        time.sleep(1)
+        
+        # CORRECCIÓN: Presionar Enter 3 veces al final de cada ciclo (como solicitas)
+        self.view.log_message("Presionando Enter 3 veces al final del ciclo")
+        pyautogui.press('enter', presses=3, interval=0.8)
+        time.sleep(1.5)
         
         return True
     
@@ -346,12 +347,6 @@ class ImageSearchController:
                 success = self.run_sequence()
                 
                 if success:
-                    # Presionar Enter 3 veces después de cada secuencia
-                    """
-                    self.view.log_message("Presionando Enter 3 veces")
-                    pyautogui.press('enter', presses=3, interval=0.5)
-                    time.sleep(1)
-                    """
                     # Cada 10 lotes, presionar 'S' para guardar
                     if current_lote % 10 == 0:
                         self.view.log_message("Presionando 'S' para guardar cambios")
