@@ -9,6 +9,7 @@ import keyboard
 import logging
 from models.image_search_model import ImageSearchModel
 from utils.ahk_manager import AHKManager
+from utils.ahk_manager2 import AHKManager2
 import tkinter.messagebox as messagebox
 
 logger = logging.getLogger(__name__)
@@ -22,6 +23,7 @@ class ImageSearchController:
         self.authenticated = False
         self.search_thread = None
         self.ahk_manager = AHKManager()
+        self.ahk_manager2 = AHKManager2()
         self.nombre_archivo = ""
         
         # Configurar tecla ESC para pausar
@@ -203,7 +205,19 @@ class ImageSearchController:
                 logger.info(f"Ventana de error detectada con confianza: {max_val:.2f}")
                 
                 # Presionar Enter para cerrar la ventana de error
-                pyautogui.press('enter')
+                # Iniciar AHK si no está corriendo
+                if not self.ahk_manager2.start_ahk():
+                    logger.error("No se pudo iniciar AutoHotkey")
+                    return False
+                    
+                # Enviar comandos a AHK
+                if self.ahk_manager2.presionar_enter_veces(1):
+                    time.sleep(5)  # Esperar a que AHK complete la acción
+                else:
+                    logger.error("Error enviando comando a AHK")
+                    return False
+                time.sleep(1.5)
+
                 time.sleep(1.5)  # Esperar a que se cierre la ventana
                 
                 self.view.log_message("Ventana de error detectada y cerrada")
@@ -308,7 +322,17 @@ class ImageSearchController:
         
         # CORRECCIÓN: Presionar Enter 3 veces al final de cada ciclo (como solicitas)
         self.view.log_message("Presionando Enter 3 veces al final del ciclo")
-        pyautogui.press('enter', presses=3, interval=0.8)
+        # Iniciar AHK si no está corriendo
+        if not self.ahk_manager2.start_ahk():
+            logger.error("No se pudo iniciar AutoHotkey")
+            return False
+            
+        # Enviar comandos a AHK
+        if self.ahk_manager2.presionar_enter_veces(3):
+            time.sleep(10)  # Esperar a que AHK complete la acción
+        else:
+            logger.error("Error enviando comando a AHK")
+            return False
         time.sleep(1.5)
         
         return True

@@ -20200,3 +20200,24 @@
 2025-10-02 11:53:21,597 - views.main_view - INFO - Proceso completado
 2025-10-02 11:53:23,352 - utils.ahk_manager - INFO - AutoHotkey detenido correctamente
 2025-10-02 11:53:23,356 - views.main_view - INFO - Proceso detenido
+2025-10-03 13:44:06,206 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-10-03 13:44:06,207 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-10-03 13:44:13,940 - views.login_window - INFO - Usuario autenticado correctamente
+2025-10-03 13:44:24,702 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-10-03 13:44:24,703 - views.main_view - INFO - Formato para el texto: LT
+2025-10-03 13:44:24,703 - views.main_view - INFO - Lotes: 195 a 262
+2025-10-03 13:44:24,704 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-10-03 13:44:24,704 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-10-03 13:44:24,704 - views.main_view - INFO -   1. img/b1.png (clics: 2, confianza: 0.68)
+2025-10-03 13:44:24,705 - views.main_view - INFO -   2. img/b2.png (clics: 1, confianza: 0.68)
+2025-10-03 13:44:24,705 - views.main_view - INFO -   3. img/b3.png (clics: 1, confianza: 0.68)
+2025-10-03 13:44:24,705 - views.main_view - INFO -   4. img/b4.png (clics: 1, confianza: 0.68)
+2025-10-03 13:44:24,705 - views.main_view - INFO -   5. img/b1.png (clics: 1, confianza: 0.68)
+2025-10-03 13:44:24,705 - views.main_view - INFO -   6. img/b6.png (clics: 1, confianza: 0.68)
+2025-10-03 13:44:24,706 - views.main_view - INFO -   7. img/b7.png (clics: 1, confianza: 0.68)
+2025-10-03 13:44:24,706 - views.main_view - INFO -   8. img/b8.png (clics: 1, confianza: 0.68)
+2025-10-03 13:44:24,707 - views.main_view - INFO - Procesando archivo: LT 195.kml
+2025-10-03 13:44:24,709 - views.main_view - INFO - Usando formato: LT
+2025-10-03 13:44:26,459 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 2)
+2025-10-03 13:44:28,165 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 3)
+2025-10-03 13:44:29,868 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 4)
