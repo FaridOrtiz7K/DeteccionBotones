@@ -9,7 +9,7 @@ import keyboard
 import logging
 from models.image_search_model import ImageSearchModel
 from utils.ahk_manager import AHKManager
-from utils.ahk_manager2 import AHKManager2
+from utils.ahk_manager2 import EnterAHKManager
 import tkinter.messagebox as messagebox
 
 logger = logging.getLogger(__name__)
@@ -23,7 +23,7 @@ class ImageSearchController:
         self.authenticated = False
         self.search_thread = None
         self.ahk_manager = AHKManager()
-        self.ahk_manager2 = AHKManager2()
+        self.enter = EnterAHKManager()
         self.nombre_archivo = ""
         
         # Configurar tecla ESC para pausar
@@ -206,12 +206,12 @@ class ImageSearchController:
                 
                 # Presionar Enter para cerrar la ventana de error
                 # Iniciar AHK si no está corriendo
-                if not self.ahk_manager2.start_ahk():
+                if not self.enter.start_ahk():
                     logger.error("No se pudo iniciar AutoHotkey")
                     return False
                     
                 # Enviar comandos a AHK
-                if self.ahk_manager2.presionar_enter(1):
+                if self.enter.presionar_enter(1):
                     time.sleep(5)  # Esperar a que AHK complete la acción
                 else:
                     logger.error("Error enviando comando a AHK")
@@ -329,12 +329,12 @@ class ImageSearchController:
             # CORRECCIÓN: Presionar Enter 3 veces al final de cada ciclo
             self.view.log_message("Presionando Enter 3 veces al final del ciclo")
             # Iniciar AHK si no está corriendo
-            if not self.ahk_manager2.start_ahk():
+            if not self.enter.start_ahk():
                 logger.error("No se pudo iniciar AutoHotkey")
                 return False
                 
             # Enviar comandos a AHK
-            if self.ahk_manager2.presionar_enter(3):
+            if self.enter.presionar_enter(3):
                 time.sleep(10)  # Esperar a que AHK complete la acción
             else:
                 logger.error("Error enviando comando a AHK")
