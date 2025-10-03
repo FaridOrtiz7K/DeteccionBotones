@@ -7,6 +7,7 @@ import os
 import subprocess
 import keyboard
 import logging
+from utils.keyboard_manager import KeyboardManager
 from models.image_search_model import ImageSearchModel
 from utils.ahk_manager import AHKManager
 import tkinter.messagebox as messagebox
@@ -22,6 +23,7 @@ class ImageSearchController:
         self.authenticated = False
         self.search_thread = None
         self.ahk_manager = AHKManager()
+        self.keyboard_manager = KeyboardManager()  # Nueva instancia
         self.nombre_archivo = ""
         
         # Configurar tecla ESC para pausar
@@ -253,10 +255,45 @@ class ImageSearchController:
             self.model.alt_n_used = True
         return success
         
+    def start_search(self):
+        """Inicia la búsqueda en un hilo separado"""
+        if not self.authenticated:
+            self.view.log_message("Error: Debe iniciar sesión primero.")
+            return
+            
+        # Validar inputs (validación simplificada sin distrito)
+        errors = self.validate_inputs()
+        if errors:
+            for error in errors:
+                self.view.log_message(f"Error: {error}")
+            return
+            
+        if not self.model.is_running:
+            self.model.set_running(True)
+            self.model.set_paused(False)
+            
+            # Iniciar monitoreo de errores
+            self.keyboard_manager.start_error_monitoring()
+            
+            with self.model.pause_condition:
+                self.model.pause_condition.notify_all()
+            self.view.log_message("Iniciando proceso de búsqueda...")
+            self.view.log_message(f"Formato para el texto: {self.model.formato_texto}")
+            self.view.log_message(f"Lotes: {self.model.lote_inicial} a {self.model.lote_final}")
+            self.view.log_message(f"Tiempo de espera entre lotes: {self.model.delay_time} segundos")
+            
+            # Mostrar la secuencia a ejecutar
+            self.view.log_message("Secuencia predefinida a ejecutar:")
+            for i, (imagen, clicks, confianza) in enumerate(self.model.image_sequence, 1):
+                self.view.log_message(f"  {i}. {imagen} (clics: {clicks}, confianza: {confianza})")
+            
+            # Iniciar el hilo para ejecutar los lotes
+            self.search_thread = threading.Thread(target=self.run_lotes)
+            self.search_thread.daemon = True
+            self.search_thread.start()
+    
     def run_sequence(self):
-        """Ejecuta la secuencia completa de imágenes con detección de error DESPUÉS del botón 6"""
-        intentos_error = 0
-        
+        """Ejecuta la secuencia completa de imágenes"""
         for i, (imagen, clicks, confianza) in enumerate(self.model.image_sequence):
             # Verificar si está pausado
             if self.model.is_paused:
@@ -284,34 +321,39 @@ class ImageSearchController:
                 # Esperar un momento para que aparezca la ventana de error si va a aparecer
                 time.sleep(3)
                 
-                # Verificar ventana de error hasta 30 intentos
-                while intentos_error < self.model.max_intentos_error and self.model.is_running:
-                    if self.detectar_ventana_error():
-                        intentos_error += 1
-                        self.view.log_message(f"Intento de error {intentos_error}/{self.model.max_intentos_error}")
-                        
-                        # Si supera los intentos máximos, pasar al siguiente lote
-                        if intentos_error >= self.model.max_intentos_error:
-                            self.view.log_message("Máximo de intentos de error alcanzado. Pasando al siguiente lote.")
-                            return False
-                        
-                        # Volver al inicio del ciclo para el mismo lote
-                        self.view.log_message("Reiniciando secuencia desde el inicio...")
-                        return self.run_sequence()  # Reiniciar la secuencia
-                    else:
-                        # No se detectó error, continuar con la secuencia normal
-                        break
+                # Verificar ventana de error manualmente (como respaldo)
+                if self.keyboard_manager.detectar_y_cerrar_error():
+                    self.view.log_message("Ventana de error detectada y cerrada")
             
             # Esperar 2 segundos entre imágenes (excepto después de b6 donde ya esperamos)
             if imagen != self.model.image_sequence[-1][0] and "b6.png" not in imagen and self.model.is_running:
                 time.sleep(2)
         
-        # CORRECCIÓN: Presionar Enter 3 veces al final de cada ciclo (como solicitas)
+        # USAR KEYBOARD MANAGER PARA LOS 3 ENTER FINALES
         self.view.log_message("Presionando Enter 3 veces al final del ciclo")
-        pyautogui.press('enter', presses=3, interval=0.8)
-        time.sleep(1.5)
+        if self.keyboard_manager.presionar_enter_final(2):
+            self.view.log_message("Enter final ejecutado exitosamente")
+        else:
+            self.view.log_message("Error en Enter final")
+        time.sleep(1)
         
         return True
+    
+    def stop_search(self):
+        """Detiene la búsqueda"""
+        if not self.authenticated:
+            return
+            
+        self.model.set_running(False)
+        self.model.set_paused(False)
+        
+        # Detener monitoreo de errores
+        self.keyboard_manager.stop_error_monitoring()
+        
+        with self.model.pause_condition:
+            self.model.pause_condition.notify_all()
+        self.ahk_manager.stop_ahk()
+        self.view.log_message("Proceso detenido")
     
     def run_lotes(self):
         """Ejecuta los lotes de búsqueda con mejor manejo de estado"""
