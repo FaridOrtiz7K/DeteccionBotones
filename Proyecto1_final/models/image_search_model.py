@@ -35,7 +35,7 @@ class ImageSearchModel:
         ]
         
         # Configuración para manejo de errores
-        self.max_intentos_error = 30
+        self.max_intentos_error = 5
     
     def add_observer(self, observer):
         self.observers.append(observer)

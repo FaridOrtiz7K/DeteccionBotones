@@ -301,20 +301,16 @@ class ImageSearchController:
                 # Verificar ventana de error hasta 30 intentos
                 while intentos_error < self.model.max_intentos_error and self.model.is_running:
                     if self.detectar_ventana_error():
-                        intentos_error += 1
-                        self.view.log_message(f"Intento de error {intentos_error}/{self.model.max_intentos_error}")
-                        
-                        # Si supera los intentos máximos, pasar al siguiente lote
-                        if intentos_error >= self.model.max_intentos_error:
-                            self.view.log_message("Máximo de intentos de error alcanzado. Pasando al siguiente lote.")
-                            return False
-                        
-                        # Volver al inicio del ciclo para el mismo lote
-                        self.view.log_message("Reiniciando secuencia desde el inicio...")
-                        return self.run_sequence()  # Reiniciar la secuencia
+                        self.view.log_message(f"Ventana de error detectada y cerrada (Intento {intentos_error})")
+                        self.view.log_message("Pasando al siguiente lote...")
+                        return False   # Salir de la secuencia para pasar al siguiente lote
                     else:
-                        # No se detectó error, continuar con la secuencia normal
-                        break
+                        intentos_error += 1
+                        time.sleep(2)  # Esperar antes del siguiente intento
+                if intentos_error >= self.model.max_intentos_error:
+                    self.view.log_message("No se detectó ninguna ventana de error después de múltiples intentos.")
+                    intentos_error = 0  # Reiniciar contador para futuros lotes
+                        
             
             # Esperar 2 segundos entre imágenes (excepto después de b6 donde ya esperamos)
             if imagen != self.model.image_sequence[-1][0] and "b6.png" not in imagen and self.model.is_running:
@@ -378,10 +374,10 @@ class ImageSearchController:
                         time.sleep(1)  # Pequeña espera después de guardar
                     
                     self.view.log_message(f"Secuencia completada para lote {current_lote} de {lote_final}")
-                    current_lote += 1  # Solo incrementar si fue exitoso
+                    current_lote += 1 
                 else:
                     # Si falló por errores, pasar al siguiente lote
-                    self.view.log_message(f"Pasando al siguiente lote después de errores en lote {current_lote}")
+                    self.view.log_message(f"Pasando al siguiente lote debido a errores en el lote {current_lote}")
                     current_lote += 1
                 
                 # Esperar el tiempo configurado entre lotes (si no es el último lote)
