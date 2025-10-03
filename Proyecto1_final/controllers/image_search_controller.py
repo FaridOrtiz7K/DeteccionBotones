@@ -221,6 +221,7 @@ class ImageSearchController:
                 time.sleep(1.5)  # Esperar a que se cierre la ventana
                 
                 self.view.log_message("Ventana de error B9 detectada y cerrada")
+                self.enter.stop_ahk()
                 return True
             else:
                 return False
@@ -260,6 +261,8 @@ class ImageSearchController:
             else:
                 logger.error("Error enviando comando a AHK")
                 return False
+            time.sleep(1.5)
+            self.ahk_manager.stop_ahk()
         else:
             logger.error("No se pudo encontrar la ventana de archivo.")
             
@@ -340,6 +343,8 @@ class ImageSearchController:
                 logger.error("Error enviando comando a AHK")
                 return False
             time.sleep(1.5)
+
+            self.enter.stop_ahk()
             
             return True
         else:
@@ -491,5 +496,6 @@ class ImageSearchController:
         self.model.set_paused(False)
         with self.model.pause_condition:
             self.model.pause_condition.notify_all()
+        self.enter.stop_ahk()
         self.ahk_manager.stop_ahk()
         self.view.log_message("Proceso detenido")
