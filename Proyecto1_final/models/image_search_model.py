@@ -126,7 +126,7 @@ class ImageSearchModel:
     def confianza_minima(self):
         return self.config_manager.get("confianza_minima", 0.68)
     
-    def click_button(self, imagen, clicks=1, confianza_minima=None):
+    def click_button(self, imagen, clicks=1, confianza_minima=None, max_intentos=None):
         """
         Busca un botón en pantalla y hace clic en él
         
@@ -134,6 +134,7 @@ class ImageSearchModel:
             imagen (str): Ruta de la imagen del botón a buscar
             clicks (int): Número de clics a realizar
             confianza_minima (float): Umbral de confianza para la detección (0-1)
+            max_intentos (int): Número máximo de intentos (None para intentar indefinidamente)
         
         Returns:
             bool: True si encontró el botón, False en caso contrario
@@ -141,11 +142,14 @@ class ImageSearchModel:
         if confianza_minima is None:
             confianza_minima = self.confianza_minima
             
+        if max_intentos is None:
+            max_intentos = float('inf')  # Intentar indefinidamente por defecto
+            
         intentos = 1
         tiempo_entre_intentos = 1.5
         tiempo_entre_lotes = 10
         
-        while self.is_running:
+        while self.is_running and intentos <= max_intentos:
             # Verificar si está pausado
             if self.is_paused:
                 with self.pause_condition:
@@ -207,4 +211,15 @@ class ImageSearchModel:
                     "intento": intentos
                 })
         
+        # Si llegamos aquí es porque se agotaron los intentos
+        if intentos > max_intentos:
+            logger.info(f"Máximo de intentos ({max_intentos}) alcanzado para {imagen}")
+            return False
+            
         return False
+
+    def buscar_boton_limite(self, imagen, clicks=1, confianza_minima=None, max_intentos=10):
+        """
+        Versión de click_button con límite de intentos por defecto
+        """
+        return self.click_button(imagen, clicks, confianza_minima, max_intentos)
