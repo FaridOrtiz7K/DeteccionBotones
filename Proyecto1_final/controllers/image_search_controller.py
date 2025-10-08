@@ -316,7 +316,7 @@ class ImageSearchController:
 
     def run_sequence(self):
         """Ejecuta la secuencia completa de imágenes con manejo mejorado de errores"""
-        max_reintentos_b9 = 2  # Máximo de reintentos por error B9
+        max_reintentos_b9 = 1  # Máximo de reintentos por error B9
         reintentos_b9 = 0
         
         # Reiniciar bandera b6_processed al inicio de cada secuencia
