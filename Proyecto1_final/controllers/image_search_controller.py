@@ -211,13 +211,13 @@ class ImageSearchController:
                     
                 # Enviar comandos a AHK
                 if self.enter.presionar_enter(1):
-                    time.sleep(5)
+                    time.sleep(2.5)
                 else:
                     logger.error("Error enviando comando a AHK")
                     return False
-                time.sleep(1.5)
+                time.sleep(1)
 
-                time.sleep(1.5)
+                time.sleep(1)
                 
                 self.view.log_message("Ventana de error B9 detectada y cerrada")
                 self.enter.stop_ahk()
@@ -393,11 +393,11 @@ class ImageSearchController:
                 return False
                 
             if self.enter.presionar_enter(3):
-                time.sleep(10)
+                time.sleep(4)
             else:
                 logger.error("Error enviando comando a AHK")
                 return False
-            time.sleep(1.5)
+            time.sleep(1)
 
             self.enter.stop_ahk()
             
