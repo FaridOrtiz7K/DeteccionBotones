@@ -301,11 +301,11 @@ class ImageSearchController:
             
             # Enviar comandos a AHK
             if self.ahk_manager.ejecutar_acciones_ahk(x_campo, y_campo, self.nombre_archivo):
-                time.sleep(10)
+                time.sleep(1.5)   # Esperar a que AHK termine
             else:
                 logger.error("Error enviando comando a AHK")
                 return False
-            time.sleep(1.5)
+            time.sleep(1)
             self.ahk_manager.stop_ahk()
         else:
             logger.error("No se pudo encontrar la ventana de archivo.")

@@ -31,7 +31,7 @@ Loop {
         
         ; Ejecutar acciones
         Click, %x_campo% %y_campo%
-        Sleep, 300
+        Sleep, 200
         
         ; Limpiar campo
         Send, ^a
@@ -45,7 +45,7 @@ Loop {
         
         ; Presionar Enter
         Send, {Enter}
-        Sleep, 600
+        Sleep, 200
         
         ; Confirmación para Python
         FileAppend, done, ahk_done.txt
@@ -89,11 +89,11 @@ Loop {
         """Detiene AutoHotkey correctamente"""
         if self.ahk_process:
             try:
-                self.ahk_process.terminate()
-                self.ahk_process.wait(timeout=5)
+                self.ahk_process.terminate() 
+                self.ahk_process.wait(timeout=5) 
                 logger.info("AutoHotkey detenido correctamente")
             except subprocess.TimeoutExpired:
-                self.ahk_process.kill()
+                self.ahk_process.kill() 
                 logger.warning("AutoHotkey fue forzado a detenerse")
             except Exception as e:
                 logger.error(f"Error deteniendo AutoHotkey: {e}")
