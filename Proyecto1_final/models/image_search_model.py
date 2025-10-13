@@ -25,7 +25,7 @@ class ImageSearchModel:
         # Secuencia predefinida de imágenes
         self.image_sequence = [
             #("img/b1.png", 2, self.config_manager.get("confianza_minima", 0.68)),
-            ("img/b2.png", 1, self.config_manager.get("confianza_minima", 0.68)),
+            ("img/b2.png", 2, self.config_manager.get("confianza_minima", 0.68)),
             ("img/b3.png", 1, self.config_manager.get("confianza_minima", 0.68)),
             ("img/b4.png", 1, self.config_manager.get("confianza_minima", 0.68)),
             ("img/b1.png", 1, self.config_manager.get("confianza_minima", 0.68)),
