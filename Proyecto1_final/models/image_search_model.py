@@ -146,8 +146,8 @@ class ImageSearchModel:
             max_intentos = float('inf')  # Intentar indefinidamente por defecto
             
         intentos = 1
-        tiempo_entre_intentos = 1.5
-        tiempo_entre_lotes = 10
+        tiempo_entre_intentos = 1
+        tiempo_entre_lotes = 5
         
         while self.is_running and intentos <= max_intentos:
             # Verificar si está pausado
