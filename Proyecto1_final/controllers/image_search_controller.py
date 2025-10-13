@@ -26,6 +26,7 @@ class ImageSearchController:
         self.enter = EnterAHKManager()
         self.nombre_archivo = ""
         self.b6_processed = False  # Nueva bandera para controlar b9 después de b6
+        self.b2_fallback_used = False 
         
         # Configurar tecla ESC para pausar
         keyboard.on_press_key("esc", lambda e: self.pause_search())
@@ -372,6 +373,7 @@ class ImageSearchController:
         """Ejecuta la secuencia completa de imágenes con manejo mejorado de errores"""
         max_reintentos_b9 = 1  # Máximo de reintentos por error B9
         reintentos_b9 = 0
+        self.b2_fallback_used = False  # Bandera para controlar si se usó el fallback de b2
         
         # Reiniciar bandera b6_processed al inicio de cada secuencia
         self.b6_processed = False
