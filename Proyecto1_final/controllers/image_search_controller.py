@@ -292,7 +292,7 @@ class ImageSearchController:
                     return False
             
             # Intentar encontrar b2
-            success = self.model.buscar_boton_limite(imagen, clicks, confianza, max_intentos=1)
+            success = self.model.buscar_boton_limite(imagen, clicks, 0.90, max_intentos=1)
             
             if success:
                 self.view.log_message("b2 encontrado exitosamente")
