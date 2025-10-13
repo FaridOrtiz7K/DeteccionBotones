@@ -273,6 +273,60 @@ class ImageSearchController:
                     return False
         
         return False
+    def handle_b2_with_fallback(self, imagen, clicks, confianza):
+        """
+        Maneja b2 con fallback a b1 si no se encuentra después de intentos
+        """
+        max_intentos_b2 = 5  # Intentos máximos para b2 antes de probar b1
+        intentos_b2 = 0
+        
+        self.view.log_message("Buscando botón b2...")
+        
+        while self.model.is_running and intentos_b2 < max_intentos_b2:
+            if self.model.is_paused:
+                with self.model.pause_condition:
+                    while self.model.is_paused and self.model.is_running:
+                        self.model.pause_condition.wait()
+                if not self.model.is_running:
+                    return False
+            
+            # Intentar encontrar b2
+            success = self.model.buscar_boton_limite(imagen, clicks, confianza, max_intentos=1)
+            
+            if success:
+                self.view.log_message("b2 encontrado exitosamente")
+                self.b2_fallback_used = False
+                return True
+            else:
+                intentos_b2 += 1
+                self.view.log_message(f"b2 no encontrado - Intento {intentos_b2}/{max_intentos_b2}")
+                
+                # Si llegamos al máximo de intentos para b2, probar con b1
+                if intentos_b2 >= max_intentos_b2 and not self.b2_fallback_used:
+                    self.view.log_message("b2 no encontrado después de múltiples intentos. Buscando b1...")
+                    
+                    # Buscar b1 como fallback
+                    b1_success = self.model.click_button("img/b1.png", 1, confianza, max_intentos=3)
+                    
+                    if b1_success:
+                        self.view.log_message("b1 encontrado. Reintentando b2...")
+                        self.b2_fallback_used = True
+                        
+                        # Esperar un momento y reintentar b2
+                        time.sleep(2)
+                        success_after_fallback = self.model.buscar_boton_limite(imagen, clicks, confianza, max_intentos=3)
+                        
+                        if success_after_fallback:
+                            self.view.log_message("b2 encontrado después del fallback con b1")
+                            return True
+                        else:
+                            self.view.log_message("b2 no encontrado incluso después del fallback con b1")
+                            return False
+                    else:
+                        self.view.log_message("b1 tampoco pudo ser encontrado")
+                        return False
+        
+        return False
 
     def handle_b4_special_behavior(self, imagen, clicks, confianza):
         """Maneja el comportamiento especial para la imagen b4"""
@@ -342,9 +396,11 @@ class ImageSearchController:
                             self.model.pause_condition.wait()
                     if not self.model.is_running:
                         return False
-                
+                # Manejar comportamiento especial para b2
+                if "b2.png" in imagen and i == 0:  # Solo para el primer b2
+                    success = self.handle_b2_with_fallback(imagen, clicks, confianza)
                 # Manejar comportamiento especial para b3
-                if "b3.png" in imagen:
+                elif "b3.png" in imagen:
                     success = self.handle_b3_with_retry(imagen, clicks, confianza)
                 # Manejar comportamiento especial para b4
                 elif "b4.png" in imagen:
