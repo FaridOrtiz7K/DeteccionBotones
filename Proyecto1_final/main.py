@@ -19,7 +19,7 @@ if __name__ == "__main__":
     
     # Intentar cargar el icono
     try:
-        root.iconbitmap("icon.ico")
+        root.iconbitmap("img/icon.ico")
     except:
         logger.warning("No se pudo cargar el icono de la aplicación")
         

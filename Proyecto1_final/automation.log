@@ -20721,3 +20721,7 @@
 2025-10-06 14:15:17,972 - utils.config_manager - INFO - Configuración guardada correctamente
 2025-10-06 14:15:17,974 - views.main_view - INFO - Procesando lote 3 de 262
 2025-10-06 14:15:17,977 - views.main_view - INFO - Proceso completado
+2025-11-02 16:03:39,529 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-11-02 16:03:39,529 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-11-02 16:04:22,367 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-11-02 16:04:33,889 - views.login_window - INFO - Usuario autenticado correctamente

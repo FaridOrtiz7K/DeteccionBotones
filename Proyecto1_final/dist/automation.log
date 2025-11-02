@@ -1,0 +1,45 @@
+2025-11-02 16:36:17,140 - __main__ - WARNING - No se pudo cargar el icono de la aplicación
+2025-11-02 16:36:30,172 - views.login_window - INFO - Usuario autenticado correctamente
+2025-11-02 16:39:11,855 - utils.config_manager - INFO - Configuración cargada correctamente
+2025-11-02 16:39:18,635 - views.login_window - INFO - Usuario autenticado correctamente
+2025-11-02 16:39:29,540 - views.main_view - INFO - Iniciando proceso de búsqueda...
+2025-11-02 16:39:29,540 - views.main_view - INFO - Formato para el texto: LT
+2025-11-02 16:39:29,540 - views.main_view - INFO - Lotes: 1 a 262
+2025-11-02 16:39:29,541 - views.main_view - INFO - Tiempo de espera entre lotes: 1 segundos
+2025-11-02 16:39:29,542 - views.main_view - INFO - Secuencia predefinida a ejecutar:
+2025-11-02 16:39:29,543 - views.main_view - INFO -   1. img/b2.png (clics: 2, confianza: 0.68)
+2025-11-02 16:39:29,543 - views.main_view - INFO -   2. img/b3.png (clics: 1, confianza: 0.68)
+2025-11-02 16:39:29,543 - views.main_view - INFO -   3. img/b4.png (clics: 1, confianza: 0.68)
+2025-11-02 16:39:29,543 - views.main_view - INFO -   4. img/b1.png (clics: 1, confianza: 0.68)
+2025-11-02 16:39:29,544 - views.main_view - INFO -   5. img/b6.png (clics: 1, confianza: 0.68)
+2025-11-02 16:39:29,544 - views.main_view - INFO -   6. img/b7.png (clics: 1, confianza: 0.68)
+2025-11-02 16:39:29,544 - views.main_view - INFO -   7. img/b8.png (clics: 1, confianza: 0.68)
+2025-11-02 16:39:29,545 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-11-02 16:39:29,551 - views.main_view - INFO - Procesando lote 1 de 262
+2025-11-02 16:39:29,552 - views.main_view - INFO - Procesando archivo: LT 1.kml
+2025-11-02 16:39:29,553 - views.main_view - INFO - Usando formato: LT
+2025-11-02 16:39:29,555 - views.main_view - INFO - Buscando botón b2...
+2025-11-02 16:39:30,741 - views.main_view - INFO - Botón 'img/b2.png' no encontrado. Mejor coincidencia: 0.77 (Intento 2)
+2025-11-02 16:39:30,741 - models.image_search_model - INFO - Máximo de intentos (1) alcanzado para img/b2.png
+2025-11-02 16:39:30,745 - views.main_view - INFO - b2 no encontrado - Intento 1/5
+2025-11-02 16:39:31,930 - views.main_view - INFO - Botón 'img/b2.png' no encontrado. Mejor coincidencia: 0.77 (Intento 2)
+2025-11-02 16:39:31,930 - models.image_search_model - INFO - Máximo de intentos (1) alcanzado para img/b2.png
+2025-11-02 16:39:31,932 - views.main_view - INFO - b2 no encontrado - Intento 2/5
+2025-11-02 16:39:33,094 - views.main_view - INFO - Botón 'img/b2.png' no encontrado. Mejor coincidencia: 0.77 (Intento 2)
+2025-11-02 16:39:33,094 - models.image_search_model - INFO - Máximo de intentos (1) alcanzado para img/b2.png
+2025-11-02 16:39:33,097 - views.main_view - INFO - b2 no encontrado - Intento 3/5
+2025-11-02 16:39:34,256 - views.main_view - INFO - Botón 'img/b2.png' no encontrado. Mejor coincidencia: 0.77 (Intento 2)
+2025-11-02 16:39:34,256 - models.image_search_model - INFO - Máximo de intentos (1) alcanzado para img/b2.png
+2025-11-02 16:39:34,259 - views.main_view - INFO - b2 no encontrado - Intento 4/5
+2025-11-02 16:39:35,427 - views.main_view - INFO - Botón 'img/b2.png' no encontrado. Mejor coincidencia: 0.77 (Intento 2)
+2025-11-02 16:39:35,428 - models.image_search_model - INFO - Máximo de intentos (1) alcanzado para img/b2.png
+2025-11-02 16:39:35,430 - views.main_view - INFO - b2 no encontrado - Intento 5/5
+2025-11-02 16:39:35,432 - views.main_view - INFO - b2 no encontrado después de múltiples intentos. Buscando b1...
+2025-11-02 16:39:36,392 - views.main_view - INFO - Proceso detenido
+2025-11-02 16:39:36,603 - views.main_view - INFO - Botón 'img/b1.png' no encontrado. Mejor coincidencia: 0.36 (Intento 2)
+2025-11-02 16:39:36,606 - views.main_view - INFO - b1 tampoco pudo ser encontrado
+2025-11-02 16:39:36,607 - views.main_view - INFO - Error: No se pudo encontrar el botón 'img/b2.png'
+2025-11-02 16:39:36,608 - views.main_view - INFO - Pasando al siguiente lote después de errores en lote 1
+2025-11-02 16:39:36,609 - utils.config_manager - INFO - Configuración guardada correctamente
+2025-11-02 16:39:36,611 - views.main_view - INFO - Procesando lote 2 de 262
+2025-11-02 16:39:36,613 - views.main_view - INFO - Proceso completado
