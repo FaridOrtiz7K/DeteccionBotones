@@ -10,6 +10,7 @@ import logging
 from models.image_search_model import ImageSearchModel
 from utils.ahk_manager import AHKManager
 from utils.ahk_manager2 import EnterAHKManager
+from utils.ahk_manager_save import AHKSaveManager 
 import tkinter.messagebox as messagebox
 
 logger = logging.getLogger(__name__)
@@ -24,8 +25,9 @@ class ImageSearchController:
         self.search_thread = None
         self.ahk_manager = AHKManager()
         self.enter = EnterAHKManager()
+        self.save_manager = AHKSaveManager()  
         self.nombre_archivo = ""
-        self.b6_processed = False  # Nueva bandera para controlar b9 después de b6
+        self.b6_processed = False
         self.b2_fallback_used = False 
         
         # Configurar tecla ESC para pausar
@@ -469,6 +471,11 @@ class ImageSearchController:
             current_lote = self.model.lote_inicial
             lote_final = self.model.lote_final
             
+            # Iniciar el manager de guardado AHK
+            if not self.save_manager.start_ahk():
+                logger.error("No se pudo iniciar AutoHotkey para guardar")
+                # Continuamos de todos modos, pero sin funcionalidad de guardado
+            
             # Actualizar el current_lote en el modelo
             self.model.current_lote = current_lote
             
@@ -497,11 +504,11 @@ class ImageSearchController:
                 success = self.run_sequence()
                 
                 if success:
-                    # Cada 10 lotes, presionar 'S' para guardar
-                    if current_lote % 10 == 0:
-                        self.view.log_message("Presionando 'S' para guardar cambios")
-                        pyautogui.press('s')
-                        time.sleep(1)
+                    # GUARDAR CADA 2 LOTES CON AHK
+                    if current_lote % 2 == 0 and self.save_manager.is_running:
+                        self.view.log_message(f"Guardando cambios (cada 2 lotes)... Lote {current_lote}")
+                        if not self.save_manager.trigger_save():
+                            self.view.log_message("Advertencia: No se pudo guardar con AHK")
                     
                     self.view.log_message(f"Secuencia completada para lote {current_lote} de {lote_final}")
                     current_lote += 1
@@ -532,20 +539,25 @@ class ImageSearchController:
                         # Eliminar el mensaje anterior
                         self.view.status_text.delete("end-2l", "end-1l")
             
-            # Después de completar todos los lotes
-            if self.model.is_running:
-                self.view.log_message("Presionando Ctrl+S para guardar todos los cambios")
-                pyautogui.hotkey('ctrl', 's')
+            # GUARDADO FINAL DESPUÉS DE COMPLETAR TODOS LOS LOTES CON AHK
+            if self.model.is_running and self.save_manager.is_running:
+                self.view.log_message("Guardando todos los cambios al final del proceso...")
+                if not self.save_manager.trigger_save():
+                    self.view.log_message("Advertencia: No se pudo guardar los cambios finales")
                 time.sleep(1)
                 
                 # Mostrar mensaje emergente
                 messagebox.showinfo("Proceso Completado", "El proceso ha terminado exitosamente.")
+            
+            # Detener el manager de guardado AHK
+            self.save_manager.stop_ahk()
             
             self.model.set_running(False)
             self.view.log_message("Proceso completado")
             
         except Exception as e:
             logger.error(f"Error inesperado en run_lotes: {str(e)}")
+            self.save_manager.stop_ahk()
             self.model.set_running(False)
             self.view.log_message(f"Error inesperado: {str(e)}")
     
@@ -612,4 +624,5 @@ class ImageSearchController:
             self.model.pause_condition.notify_all()
         self.enter.stop_ahk()
         self.ahk_manager.stop_ahk()
+        self.save_manager.stop_ahk()  # Detener también el manager de guardado
         self.view.log_message("Proceso detenido")
