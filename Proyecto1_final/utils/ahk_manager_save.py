@@ -7,9 +7,10 @@ import threading
 logger = logging.getLogger(__name__)
 
 class AHKSaveManager:
-    def __init__(self):
+    def __init__(self, ahk_path="AutoHotkey_1.1.37.02/AutoHotkeyU64.exe"):
         self.ahk_process = None
         self.script_path = "ahk_save.ahk"
+        self.ahk_path = ahk_path
         self.batch_counter = 0
         self.save_lock = threading.Lock()
         
