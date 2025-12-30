@@ -465,110 +465,102 @@ class ImageSearchController:
         else:
             return False
 
-def run_lotes(self):
-    """Ejecuta los lotes de búsqueda con mejor manejo de estado"""
-    try:
-        current_lote = self.model.lote_inicial
-        lote_final = self.model.lote_final
-        
-        # Iniciar el manager de guardado AHK
-        logger.info("Iniciando manager de guardado AHK...")
-        if not self.save_manager.start_ahk():
-            logger.error("No se pudo iniciar AutoHotkey para guardar")
-            self.view.log_message("Advertencia: No se pudo iniciar AutoHotkey para guardar")
-            # Continuamos sin funcionalidad de guardado
-        
-        # Actualizar el current_lote en el modelo
-        self.model.current_lote = current_lote
-        
-        while current_lote <= lote_final and self.model.is_running:
-            # Verificar pausa de manera más eficiente
-            with self.model.pause_condition:
-                while self.model.is_paused and self.model.is_running:
-                    self.model.pause_condition.wait()
+    def run_lotes(self):
+        """Ejecuta los lotes de búsqueda con mejor manejo de estado"""
+        try:
+            current_lote = self.model.lote_inicial
+            lote_final = self.model.lote_final
             
-            if not self.model.is_running:
-                break
-                
+            # Iniciar el manager de guardado AHK
+            if not self.save_manager.start_ahk():
+                logger.error("No se pudo iniciar AutoHotkey para guardar")
+                # Continuamos de todos modos, pero sin funcionalidad de guardado
+            
+            # Actualizar el current_lote en el modelo
             self.model.current_lote = current_lote
             
-            # Reiniciar flag de Alt+N para cada lote
-            self.model.alt_n_used = False
-            
-            # Generar nombre de archivo usando el patrón configurado
-            formato_texto = self.model.formato_texto
-            self.nombre_archivo = f"{formato_texto} {current_lote}.kml"
-            
-            self.view.log_message(f"Procesando archivo: {self.nombre_archivo}")
-            self.view.log_message(f"Usando formato: {formato_texto}")
-            
-            # Realizar la secuencia completa con manejo de errores B9
-            success = self.run_sequence()
-            
-            if success:
-                # GUARDAR CADA 2 LOTES CON AHK - CORREGIDO
-                if current_lote % 2 == 0:
-                    self.view.log_message(f"Guardando cambios (cada 2 lotes)... Lote {current_lote}")
-                    if self.save_manager.is_running:
+            while current_lote <= lote_final and self.model.is_running:
+                # Verificar pausa de manera más eficiente
+                with self.model.pause_condition:
+                    while self.model.is_paused and self.model.is_running:
+                        self.model.pause_condition.wait()
+                
+                if not self.model.is_running:
+                    break
+                    
+                self.model.current_lote = current_lote
+                
+                # Reiniciar flag de Alt+N para cada lote
+                self.model.alt_n_used = False
+                
+                # Generar nombre de archivo usando el patrón configurado
+                formato_texto = self.model.formato_texto
+                self.nombre_archivo = f"{formato_texto} {current_lote}.kml"
+                
+                self.view.log_message(f"Procesando archivo: {self.nombre_archivo}")
+                self.view.log_message(f"Usando formato: {formato_texto}")
+                
+                # Realizar la secuencia completa con manejo de errores B9
+                success = self.run_sequence()
+                
+                if success:
+                    # GUARDAR CADA 2 LOTES CON AHK
+                    if current_lote % 2 == 0 and self.save_manager.is_running:
+                        self.view.log_message(f"Guardando cambios (cada 2 lotes)... Lote {current_lote}")
                         if not self.save_manager.trigger_save():
                             self.view.log_message("Advertencia: No se pudo guardar con AHK")
-                    else:
-                        self.view.log_message("Advertencia: AHK no está corriendo, no se guarda")
+                    
+                    self.view.log_message(f"Secuencia completada para lote {current_lote} de {lote_final}")
+                    current_lote += 1
+                else:
+                    # Si falló por errores B9 persistentes, pasar al siguiente lote
+                    self.view.log_message(f"Pasando al siguiente lote después de errores en lote {current_lote}")
+                    current_lote += 1
+                    
+                self.model.current_lote = current_lote
                 
-                self.view.log_message(f"Secuencia completada para lote {current_lote} de {lote_final}")
-                current_lote += 1
-            else:
-                # Si falló por errores B9 persistentes, pasar al siguiente lote
-                self.view.log_message(f"Pasando al siguiente lote después de errores en lote {current_lote}")
-                current_lote += 1
-                
-            self.model.current_lote = current_lote
-            
-            # Esperar el tiempo configurado entre lotes (si no es el último lote)
-            if current_lote <= lote_final and self.model.is_running:
-                self.view.log_message(f"Esperando {self.model.delay_time} segundos antes del próximo lote...")
-                
-                # Contar el tiempo de espera mostrando el progreso
-                for i in range(self.model.delay_time, 0, -1):
-                    if not self.model.is_running:
-                        break
-                    if self.model.is_paused:
-                        with self.model.pause_condition:
-                            while self.model.is_paused and self.model.is_running:
-                                self.model.pause_condition.wait()
+                # Esperar el tiempo configurado entre lotes (si no es el último lote)
+                if current_lote <= lote_final and self.model.is_running:
+                    self.view.log_message(f"Esperando {self.model.delay_time} segundos antes del próximo lote...")
+                    
+                    # Contar el tiempo de espera mostrando el progreso
+                    for i in range(self.model.delay_time, 0, -1):
                         if not self.model.is_running:
                             break
-                    # Actualizar el mensaje cada segundo
-                    self.view.log_message(f"Tiempo restante: {i} segundos")
-                    time.sleep(1)
-                    # Eliminar el mensaje anterior
-                    self.view.status_text.delete("end-2l", "end-1l")
-        
-        # GUARDADO FINAL DESPUÉS DE COMPLETAR TODOS LOS LOTES CON AHK
-        if self.model.is_running:
-            self.view.log_message("Guardando todos los cambios al final del proceso...")
-            if self.save_manager.is_running:
+                        if self.model.is_paused:
+                            with self.model.pause_condition:
+                                while self.model.is_paused and self.model.is_running:
+                                    self.model.pause_condition.wait()
+                            if not self.model.is_running:
+                                break
+                        # Actualizar el mensaje cada segundo
+                        self.view.log_message(f"Tiempo restante: {i} segundos")
+                        time.sleep(1)
+                        # Eliminar el mensaje anterior
+                        self.view.status_text.delete("end-2l", "end-1l")
+            
+            # GUARDADO FINAL DESPUÉS DE COMPLETAR TODOS LOS LOTES CON AHK
+            if self.model.is_running and self.save_manager.is_running:
+                self.view.log_message("Guardando todos los cambios al final del proceso...")
                 if not self.save_manager.trigger_save():
                     self.view.log_message("Advertencia: No se pudo guardar los cambios finales")
-            else:
-                self.view.log_message("Advertencia: AHK no está corriendo, no se guarda al final")
-            time.sleep(1)
+                time.sleep(1)
+                
+                # Mostrar mensaje emergente
+                messagebox.showinfo("Proceso Completado", "El proceso ha terminado exitosamente.")
             
-            # Mostrar mensaje emergente
-            messagebox.showinfo("Proceso Completado", "El proceso ha terminado exitosamente.")
-        
-        # Detener el manager de guardado AHK
-        self.save_manager.stop_ahk()
-        
-        self.model.set_running(False)
-        self.view.log_message("Proceso completado")
-        
-    except Exception as e:
-        logger.error(f"Error inesperado en run_lotes: {str(e)}")
-        self.save_manager.stop_ahk()
-        self.model.set_running(False)
-        self.view.log_message(f"Error inesperado: {str(e)}")
-        
+            # Detener el manager de guardado AHK
+            self.save_manager.stop_ahk()
+            
+            self.model.set_running(False)
+            self.view.log_message("Proceso completado")
+            
+        except Exception as e:
+            logger.error(f"Error inesperado en run_lotes: {str(e)}")
+            self.save_manager.stop_ahk()
+            self.model.set_running(False)
+            self.view.log_message(f"Error inesperado: {str(e)}")
+    
     def start_search(self):
         """Inicia la búsqueda en un hilo separado"""
         if not self.authenticated:
