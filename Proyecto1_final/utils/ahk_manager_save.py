@@ -165,3 +165,17 @@ Loop {
             except Exception as e:
                 logger.error(f"Error enviando comando de guardar a AHK: {e}")
                 return False
+    
+    def check_ahk_status(self):
+        """Verifica el estado de AHK y archivos"""
+        status = {
+            "ahk_running": self.is_running,
+            "ahk_process_exists": self.ahk_process is not None,
+            "ahk_process_alive": self.ahk_process and self.ahk_process.poll() is None,
+            "script_exists": os.path.exists(self.script_path),
+            "ahk_executable_exists": os.path.exists(self.ahk_path),
+            "command_file_exists": os.path.exists("ahk_save_command.txt"),
+            "done_file_exists": os.path.exists("ahk_savedone.txt")
+        }
+        logger.info(f"Estado AHK: {status}")
+        return status
