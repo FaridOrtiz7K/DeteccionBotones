@@ -15,12 +15,13 @@ Loop {
         if (accion = "SAVE") {
             ; Enviar Ctrl+S para guardar
             Send, ^s
-            Sleep, 500
+            Sleep, 1000
             
             ; Confirmación para Python
-            FileAppend, saved, ahk_save_done.txt
-            Sleep, 100
-            FileDelete, ahk_save_done.txt
+            FileDelete, ahk_savedone.txt  ; <<< CAMBIÉ EL NOMBRE AQUÍ
+            FileAppend, saved, ahk_savedone.txt  ; <<< Y AQUÍ
+            Sleep, 300
+            ; No borramos aquí, Python lo hará
         }
     }
     Sleep, 500  ; Revisar cada medio segundo
