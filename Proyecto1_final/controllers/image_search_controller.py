@@ -505,7 +505,7 @@ class ImageSearchController:
                 
                 if success:
                     # GUARDAR CADA 2 LOTES CON AHK
-                    if current_lote % 2 == 0 and self.save_manager.is_running:
+                    if current_lote % 2 == 0 and self.save_manager.ahk_process and self.save_manager.ahk_process.poll() is None:
                         self.view.log_message(f"Guardando cambios (cada 2 lotes)... Lote {current_lote}")
                         if not self.save_manager.trigger_save():
                             self.view.log_message("Advertencia: No se pudo guardar con AHK")
@@ -540,7 +540,7 @@ class ImageSearchController:
                         self.view.status_text.delete("end-2l", "end-1l")
             
             # GUARDADO FINAL DESPUÉS DE COMPLETAR TODOS LOS LOTES CON AHK
-            if self.model.is_running and self.save_manager.is_running:
+            if self.model.is_running and self.save_manager.ahk_process and self.save_manager.ahk_process.poll() is None:
                 self.view.log_message("Guardando todos los cambios al final del proceso...")
                 if not self.save_manager.trigger_save():
                     self.view.log_message("Advertencia: No se pudo guardar los cambios finales")
