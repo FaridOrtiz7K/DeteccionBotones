@@ -505,7 +505,7 @@ class ImageSearchController:
                 
                 if success:
                     # GUARDAR CADA 2 LOTES CON AHK
-                    if current_lote % 2 == 0 and self.save_manager.is_running:
+                    if current_lote % 10 == 0 and self.save_manager.is_running:
                         self.view.log_message(f"Guardando cambios (cada 2 lotes)... Lote {current_lote}")
                         if not self.save_manager.trigger_save():
                             self.view.log_message("Advertencia: No se pudo guardar con AHK")
