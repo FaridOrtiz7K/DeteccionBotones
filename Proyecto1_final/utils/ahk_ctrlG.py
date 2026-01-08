@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class CtrlSAHKManager:
+class CtrlGAHKManager:
     def __init__(self):
         self.ahk_process = None
         self.script_path = "ahk_ctrl_g.ahk"  # Cambiado el nombre del archivo
@@ -28,7 +28,7 @@ Loop {
         
         ; Presionar Ctrl+G el número de veces especificado
         Loop, %veces% {
-            Send, ^{s}  ;
+            Send, ^{g}  ;
             Sleep, 600  ; Pequeña pausa entre cada pulsación
         }
         
@@ -83,7 +83,7 @@ Loop {
             except Exception as e:
                 logger.error(f"Error deteniendo AutoHotkey: {e}")
                 
-    def presionar_ctrl_s(self, veces):  # Cambiado el nombre del método
+    def presionar_ctrl_g(self, veces):  # Cambiado el nombre del método
         """Envía comando a AutoHotkey para presionar Ctrl+G N veces"""
         try:
             with open("ahk_command.txt", "w", encoding="utf-8") as f:
